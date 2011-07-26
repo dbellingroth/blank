@@ -14,15 +14,17 @@ public class Main {
 			con.sendMessage(new Message());
 			Thread.sleep(1000);
 			con.sendMessage(new Message());
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			con.sendMessage(new Message());
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			con.sendMessage(new Message());
-			Thread.sleep(4000);
+			Thread.sleep(1000);
 			con.sendMessage(new Message());
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 			con.sendMessage(new Message());
-			Thread.sleep(6000);
+			Thread.sleep(1000);
+			con.disconnect();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

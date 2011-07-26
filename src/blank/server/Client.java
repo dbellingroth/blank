@@ -1,5 +1,6 @@
 package blank.server;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -48,11 +49,9 @@ public class Client implements Runnable{
 		} catch (IOException e) {
 			System.out.println("Client getrennt...");
 			stop = true;
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			System.err.println("fehlerhafte Nachricht");
 		}
 		}
 	}
-
 }

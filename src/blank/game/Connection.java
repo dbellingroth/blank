@@ -26,6 +26,15 @@ public class Connection {
 		in = new ObjectInputStream(socket.getInputStream());
 	}
 	
+	public void disconnect() {
+		try {
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void sendMessage(Message msg) {
 		try {
 			out.writeObject(msg);
