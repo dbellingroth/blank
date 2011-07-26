@@ -1,5 +1,5 @@
 package blank.shared;
 
 public enum MessageType {
-	empty,playerpos
+	empty,playerPos,createEnemy
 }
