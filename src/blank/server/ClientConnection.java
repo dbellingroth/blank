@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import blank.shared.Message;
@@ -17,9 +18,11 @@ public class ClientConnection implements Runnable{
 	private ObjectInputStream in;
 	private Queue<Message> queue;
 	private volatile boolean stop = false;
+	private volatile boolean inactive = false;
 	
 	public ClientConnection(Socket socket) {
 		this.socket = socket;
+		this.queue = new LinkedList<Message>();
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
@@ -34,12 +37,8 @@ public class ClientConnection implements Runnable{
 	
 
 	private void handleMessage(Message msg) {
-		System.out.println("Nachricht empfangen: " + ((TestMessage)msg).getI());
-	}
-
-	
-	private void handleDisconnect() {
-		System.out.println("Client disconnected");
+		//System.out.println("Nachricht empfangen: " + ((TestMessage)msg).getI());
+		sendMessage(msg);
 	}
 	
 
@@ -54,12 +53,7 @@ public class ClientConnection implements Runnable{
 	}
 		
 	public void disconnect() {
-		try {
-			socket.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		stop = true;
 	}
 	
 	private class sendingThread implements Runnable {
@@ -75,9 +69,27 @@ public class ClientConnection implements Runnable{
 				} catch (IOException e) {
 					
 				}
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
+	}
+	
+	public void reset(Socket socket) { //Client hat sich neu verbunden
+		try {
+			this.socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		this.socket = socket;
+		inactive = false;
 	}
 	
 	
@@ -86,14 +98,30 @@ public class ClientConnection implements Runnable{
 		boolean stop = false;
 		while (!stop) {
 		try {
-			Message msg = (Message)in.readObject();
-			handleMessage(msg);
+			if (!inactive) {
+				Message msg = (Message)in.readObject();
+				handleMessage(msg);
+			}
 		} catch (IOException e) {
-			handleDisconnect();
-			stop = true;
+			//Client getrennt Verbindung wird auf inaktiv gesetzt aber nicht gelšscht...
+			if (!socket.isConnected()) {
+				inactive = true;
+			}
 		} catch (ClassNotFoundException e) {
 			System.err.println("fehlerhafte Nachricht");
 		}
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		try {
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

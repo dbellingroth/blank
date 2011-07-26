@@ -10,6 +10,7 @@ import java.util.Queue;
 
 import blank.shared.Message;
 import blank.shared.MessagePriority;
+import blank.shared.TestMessage;
 
 public class ServerConnection implements Runnable {
 
@@ -52,7 +53,7 @@ public class ServerConnection implements Runnable {
 	}
 
 	private void handleMessage(Message msg) {
-		System.out.println("Nachricht empfangen: " + msg.getType());
+		System.out.println("Nachricht empfangen: " + ((TestMessage)msg).getI());
 	}
 	
 	
@@ -85,6 +86,12 @@ public class ServerConnection implements Runnable {
 				} catch (IOException e) {
 					reconnect();
 				}
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -101,6 +108,12 @@ public class ServerConnection implements Runnable {
 				} catch (IOException e) {
 					reconnect();
 				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
