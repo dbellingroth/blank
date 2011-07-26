@@ -1,8 +1,6 @@
 package blank.game;
 
-import java.io.IOException;
-
-import blank.shared.Message;
+import blank.shared.TestMessage;
 
 public class Main {
 
@@ -10,24 +8,14 @@ public class Main {
 		
 		try {
 			ServerConnection con = new ServerConnection("localhost",1234);
-			con.sendMessage(new Message());
+			int i = 0;
+			while(true) {
+			System.out.println("Versuche Nachricht zu schicken...");
+			con.sendMessage(new TestMessage(i++));
 			Thread.sleep(1000);
-			con.sendMessage(new Message());
-			Thread.sleep(1000);
-			con.sendMessage(new Message());
-			Thread.sleep(1000);
-			con.sendMessage(new Message());
-			Thread.sleep(1000);
-			con.sendMessage(new Message());
-			Thread.sleep(1000);
-			con.sendMessage(new Message());
-			Thread.sleep(1000);
-			con.disconnect();
+			}
 			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 	    catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

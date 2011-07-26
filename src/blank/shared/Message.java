@@ -13,6 +13,6 @@ public class Message implements Serializable{
 	}
 	
 	public MessagePriority getPriority(){
-		return MessagePriority.low;
+		return MessagePriority.high;
 	}
 }
