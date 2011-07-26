@@ -11,4 +11,8 @@ public class Message implements Serializable{
 	public MessageType getType() {
 		return MessageType.empty;
 	}
+	
+	public MessagePriority getPriority(){
+		return MessagePriority.low;
+	}
 }
