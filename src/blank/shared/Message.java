@@ -1,6 +1,13 @@
 package blank.shared;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3112007862809655657L;
+
 	public MessageType getType() {
 		return MessageType.empty;
 	}
