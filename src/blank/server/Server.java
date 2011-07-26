@@ -3,7 +3,6 @@ package blank.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.LinkedList;
 
 public class Server implements Runnable{
 	
@@ -30,7 +29,7 @@ public class Server implements Runnable{
 		while (true) {
 			try {
 				Socket socket = server.accept();
-				new Client(socket);
+				new ClientConnection(socket);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

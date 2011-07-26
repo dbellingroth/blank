@@ -1,16 +1,15 @@
 package blank.game;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 import blank.shared.Message;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Connection con = new Connection("localhost",1234);
+		
 		try {
-			con.connect();
+			ServerConnection con = new ServerConnection("localhost",1234);
 			con.sendMessage(new Message());
 			Thread.sleep(1000);
 			con.sendMessage(new Message());
