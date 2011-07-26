@@ -40,14 +40,18 @@ public class Client implements Runnable{
 	
 	@Override
 	public void run() {
+		boolean stop = false;
+		while (!stop) {
 		try {
 			Message msg = (Message)in.readObject();
 			handleMessage(msg);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Client getrennt...");
+			stop = true;
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			System.err.println("fehlerhafte Nachricht");
+		}
 		}
 	}
 

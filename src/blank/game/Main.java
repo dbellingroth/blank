@@ -12,10 +12,22 @@ public class Main {
 		try {
 			con.connect();
 			con.sendMessage(new Message());
-		} catch (UnknownHostException e) {
+			Thread.sleep(1000);
+			con.sendMessage(new Message());
+			Thread.sleep(2000);
+			con.sendMessage(new Message());
+			Thread.sleep(3000);
+			con.sendMessage(new Message());
+			Thread.sleep(4000);
+			con.sendMessage(new Message());
+			Thread.sleep(5000);
+			con.sendMessage(new Message());
+			Thread.sleep(6000);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		}
+	    catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

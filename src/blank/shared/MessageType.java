@@ -1,5 +1,7 @@
 package blank.shared;
 
 public enum MessageType {
-	empty,playerPos,createEnemy
+	empty, //leere Nachricht nur zu Testzwecken
+	playerPos,
+	createEnemy
 }

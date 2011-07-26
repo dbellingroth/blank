@@ -5,30 +5,42 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
 
-public class Server {
+public class Server implements Runnable{
 	
 	private int port;
 	private ServerSocket server;
-	private LinkedList<Client> clients;
 	
 	public Server(int port) {
 		this.port = port;
-		this.clients = new LinkedList<Client>();
 	}
 	
 	public void listen() {
 		try {
 			server = new ServerSocket(port);
-			
-			while (true) {
-				Socket socket = server.accept();
-				Client c = new Client(socket);
-				clients.add(c);
-			}
-			
+			Thread thread = new Thread(this);
+			thread.start();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				Socket socket = server.accept();
+				new Client(socket);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
