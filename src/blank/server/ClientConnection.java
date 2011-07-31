@@ -103,12 +103,12 @@ public class ClientConnection implements Runnable{
 				handleMessage(msg);
 			}
 		} catch (IOException e) {
-			//Client getrennt Verbindung wird auf inaktiv gesetzt aber nicht gelšscht...
+			//Client getrennt Verbindung wird auf inaktiv gesetzt aber nicht geloescht...
 			if (!socket.isConnected()) {
 				inactive = true;
 			}
 		} catch (ClassNotFoundException e) {
-			System.err.println("fehlerhafte Nachricht");
+			System.err.println("Fehlerhafte Nachricht!");
 		}
 		try {
 			Thread.sleep(10);

@@ -42,7 +42,7 @@ public class ServerConnection implements Runnable {
 		
 		//Neue Verbindung
 		try {
-			socket = new Socket(host,port);
+			socket = new Socket(host, port);
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
 		} catch (UnknownHostException e1) {
@@ -102,7 +102,7 @@ public class ServerConnection implements Runnable {
 		while (!stop) {
 			
 				try {
-					Message msg = (Message)in.readObject();
+					Message msg = (Message) in.readObject();
 					handleMessage(msg);
 
 				} catch (IOException e) {
