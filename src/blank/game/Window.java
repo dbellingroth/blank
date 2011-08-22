@@ -37,8 +37,8 @@ public class Window {
 		
 		lastFPS = getTime();
 		
-		while (!Display.isCloseRequested()) {
 		
+		while (!Display.isCloseRequested()) {
 		    // render OpenGL here
 			// clear screen
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -67,7 +67,7 @@ public class Window {
 		    GL11.glVertex2f(i+100+200,100+200);
 		    GL11.glVertex2f(i+100,100+200);
 		GL11.glEnd();
-		i+=getDelta();
+		i++;
 		updateFPS();
 	}
 	
