@@ -19,8 +19,8 @@ public class Window {
 	private String title;
 	private int delta;
 	
-	private Texture megaman;
-	
+	Sprite megaman;
+		
 	public Window(String title, int width, int height) {
 		this.title = title;
 		try {
@@ -35,14 +35,7 @@ public class Window {
 		}
 
 		
-		
-		try {
-			megaman = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/megaman.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		megaman = new Sprite("res/megaman.png");
 		
 		// init OpenGL here
 		
@@ -95,27 +88,9 @@ public class Window {
 	
 	private void render() {
 		
-		Color.white.bind();
-		megaman.bind(); // or GL11.glBind(texture.getTextureID());
-
-		i = (i + 0.3*delta)%500;
+		megaman.draw(300, 250, (float)i);
 		
-		GL11.glPushMatrix();
-		GL11.glTranslated(400,i,0);
-		GL11.glRotatef((float) i, 0f, 0f, 1f);
-		
-		GL11.glBegin(GL11.GL_QUADS);
-			GL11.glTexCoord2f(0,0);
-			GL11.glVertex2f(0,0);
-			GL11.glTexCoord2f(1,0);
-			GL11.glVertex2f(megaman.getTextureWidth(),0);
-			GL11.glTexCoord2f(1,1);
-			GL11.glVertex2f(megaman.getTextureWidth(),megaman.getTextureHeight());
-			GL11.glTexCoord2f(0,1);
-			GL11.glVertex2f(0,megaman.getTextureHeight());
-		GL11.glEnd();
-		
-		GL11.glPopMatrix();
+		i = (i+0.1*delta)%360;
 		
 	}
 	
