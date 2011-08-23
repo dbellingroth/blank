@@ -19,6 +19,8 @@ public class Window {
 	private String title;
 	private int delta;
 	
+	private Camera camera;
+	
 	Sprite megaman;
 	Sprite sonic;
 	Sprite kreuz;
@@ -35,6 +37,8 @@ public class Window {
 		    e.printStackTrace();
 		    System.exit(0);
 		}
+		
+		camera = new Camera(width/2,height/2);
 
 		
 		 kreuz = new Sprite("res/kreuz.png");
@@ -74,7 +78,9 @@ public class Window {
 			// clear screen
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
-			GL11.glLoadIdentity();	
+			GL11.glLoadIdentity();
+			
+			camera.apply();
 			
 			render();
 			
@@ -119,6 +125,10 @@ public class Window {
 		
 		i = (i+0.1*delta)%360;
 		
+		/*
+		camera.setX(400+Math.sin((i/360)*Math.PI*2)*100);
+		camera.setY(300+Math.cos((i/360)*Math.PI*2)*100);
+		*/
 	}
 	
 	public void updateFPS() {
