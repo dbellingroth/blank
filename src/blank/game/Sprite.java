@@ -92,11 +92,11 @@ public class Sprite {
 	}
 	
 	public int getWidth() {
-		return texture.getTextureWidth();
+		return texture.getImageWidth();
 	}
 	
 	public int getHeight() {
-		return texture.getTextureHeight();
+		return texture.getImageHeight();
 	}
 	
 }

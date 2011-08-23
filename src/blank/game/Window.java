@@ -1,5 +1,7 @@
 package blank.game;
 
+
+
 import java.io.IOException;
 
 import org.lwjgl.LWJGLException;
@@ -7,7 +9,6 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
@@ -38,13 +39,14 @@ public class Window {
 		    System.exit(0);
 		}
 		
+		//Kameraziel auf die Mitte setzen
 		camera = new Camera(width/2,height/2);
 
 		
 		 kreuz = new Sprite("res/kreuz.png");
 		 sonic = new Sprite("res/sonic.png");
 		 megaman = new Sprite("res/megaman.png");
-		
+		 
 		// init OpenGL here
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);               
@@ -75,20 +77,24 @@ public class Window {
 			delta = getDelta();
 			
 		    // render OpenGL here
+			
 			// clear screen
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glLoadIdentity();
 			
+			//Kameraeinstellungen Ÿbernehmen
 			camera.apply();
 			
+			//anderen Kram rendern
 			render();
 			
+			//FPS in die Titelzeile schreiben
 			updateFPS();
 			
 		    Display.update();
 
-		    Display.sync(200); // cap fps to 200fps
+		    Display.sync(80); // FPS begrenzen
 
 
 		}
@@ -98,6 +104,7 @@ public class Window {
 	
 	private void render() {
 		
+		//Kreuzhintergrund erzeugen der sich dreht
 		int z = 1;
 		for (int x = 0; x<20; x++) {
 			for (int y = 0; y<15; y++) {
@@ -123,6 +130,7 @@ public class Window {
 		megaman.draw(-100+2.6*i, 100+150*Math.sin(i/360*2*Math.PI));
 		megaman.draw(-500+5*i, 400+150*Math.tan(i/360*2*Math.PI),(float)i*2);
 		
+				
 		i = (i+0.1*delta)%360;
 		
 		/*
@@ -149,6 +157,10 @@ public class Window {
 	    return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
 	
+	/**
+	 * 
+	 * @return gibt das aktuelle Delta zurŸck
+	 */
 	public int getDelta() {
 	    long time = getTime();
 	    int delta = (int) (time - lastFrame);
