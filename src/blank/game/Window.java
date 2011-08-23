@@ -20,6 +20,7 @@ public class Window {
 	private int delta;
 	
 	Sprite megaman;
+	Sprite sonic;
 	Sprite kreuz;
 		
 	public Window(String title, int width, int height) {
@@ -37,6 +38,7 @@ public class Window {
 
 		
 		 kreuz = new Sprite("res/kreuz.png");
+		 sonic = new Sprite("res/sonic.png");
 		 megaman = new Sprite("res/megaman.png");
 		
 		// init OpenGL here
@@ -90,11 +92,30 @@ public class Window {
 	
 	private void render() {
 		
-		kreuz.draw(0, 0, (float)i);
-		kreuz.draw(64, 64, -(float)i);
-		kreuz.draw(128, 128, (float)i);
+		int z = 1;
+		for (int x = 0; x<20; x++) {
+			for (int y = 0; y<15; y++) {
+				kreuz.draw(64*x, 64*y, z*(float)i);
+				z = -z;
+			}
+		}
 		
-		megaman.draw(2*i, 300+50*Math.sin(i/360*2*Math.PI));
+		sonic.draw(-100+i*3,100);
+		sonic.draw(-100+i*2.5,200);
+		sonic.draw(-100+i*3.2,300);
+		sonic.draw(-100+i*2.3,400);
+		sonic.draw(-100+i*3.1,500);
+		sonic.draw(-100+i*2.4,600);
+		
+		sonic.draw(100, -100+i*2);
+		sonic.draw(200, -100+i*2.1);
+		sonic.draw(300, -100+i*2.2);
+		sonic.draw(400, -100+i*2.3);
+		sonic.draw(500, -100+i*2.4);
+		sonic.draw(600, -100+i*2.5);
+		
+		megaman.draw(-100+2.6*i, 100+150*Math.sin(i/360*2*Math.PI));
+		megaman.draw(-500+5*i, 400+150*Math.tan(i/360*2*Math.PI),(float)i*2);
 		
 		i = (i+0.1*delta)%360;
 		
