@@ -19,7 +19,7 @@ public class Sprite {
 		}
 	}
 	
-	public void draw(double x, double y, float rot) {
+	public void draw(double x, double y, float rot, double rotx, double roty) {
 		
 		Color.white.bind();
 		texture.bind();
@@ -28,13 +28,13 @@ public class Sprite {
 		GL11.glPushMatrix();
 		
 		GL11.glTranslated(x,y,0);
+
 		
 		if (rot != 0f) {
-			GL11.glTranslated(getWidth()/2,getHeight()/2,0);
+			GL11.glTranslated(rotx,roty,0);
 			GL11.glRotatef(rot, 0f, 0f, 1f);
-			GL11.glTranslated(-getWidth()/2,-getHeight()/2,0);
+			GL11.glTranslated(-rotx,-roty,0);
 		}
-		
 		
 		
 		GL11.glBegin(GL11.GL_QUADS);
@@ -51,6 +51,10 @@ public class Sprite {
 		
 		GL11.glPopMatrix();
 		
+	}
+	
+	public void draw(double x, double y, float rot) {
+		draw(x,y,rot,getWidth()/2,getHeight()/2);
 	}
 	
 	public void draw(double x, double y) {

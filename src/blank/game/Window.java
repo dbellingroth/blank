@@ -20,6 +20,7 @@ public class Window {
 	private int delta;
 	
 	Sprite megaman;
+	Sprite kreuz;
 		
 	public Window(String title, int width, int height) {
 		this.title = title;
@@ -35,7 +36,8 @@ public class Window {
 		}
 
 		
-		megaman = new Sprite("res/megaman.png");
+		 kreuz = new Sprite("res/kreuz.png");
+		 megaman = new Sprite("res/megaman.png");
 		
 		// init OpenGL here
 		
@@ -78,7 +80,7 @@ public class Window {
 			
 		    Display.update();
 
-		    Display.sync(200); // cap fps to 60fps
+		    Display.sync(200); // cap fps to 200fps
 
 
 		}
@@ -88,7 +90,11 @@ public class Window {
 	
 	private void render() {
 		
-		megaman.draw(300, 250, (float)i);
+		kreuz.draw(0, 0, (float)i);
+		kreuz.draw(64, 64, -(float)i);
+		kreuz.draw(128, 128, (float)i);
+		
+		megaman.draw(2*i, 300+50*Math.sin(i/360*2*Math.PI));
 		
 		i = (i+0.1*delta)%360;
 		
