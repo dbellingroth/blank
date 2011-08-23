@@ -17,6 +17,7 @@ public class Window {
 	private double i = 0;
 	private long fps,lastFPS,lastFrame;
 	private String title;
+	private int delta;
 	
 	private Texture megaman;
 	
@@ -65,6 +66,9 @@ public class Window {
 		
 		
 		while (!Display.isCloseRequested()) {
+			
+			delta = getDelta();
+			
 		    // render OpenGL here
 			// clear screen
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -89,7 +93,7 @@ public class Window {
 		Color.white.bind();
 		megaman.bind(); // or GL11.glBind(texture.getTextureID());
 		
-		
+		System.out.println(delta);
 		i+=0.01;
 		
 		GL11.glBegin(GL11.GL_QUADS);
