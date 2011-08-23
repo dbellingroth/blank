@@ -80,7 +80,7 @@ public class Window {
 			updateFPS();
 			
 		    Display.update();
-		    Display.sync(100); // cap fps to 60fps
+		    //Display.sync(60); // cap fps to 60fps
 
 
 		}
@@ -94,7 +94,7 @@ public class Window {
 		megaman.bind(); // or GL11.glBind(texture.getTextureID());
 		
 		System.out.println(delta);
-		i+=0.01;
+		i+=0.001*delta;
 		
 		GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2f(0,0);
