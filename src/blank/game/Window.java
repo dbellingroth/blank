@@ -2,16 +2,13 @@ package blank.game;
 
 
 
-import java.io.IOException;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
+
 
 public class Window {
 	
@@ -113,12 +110,12 @@ public class Window {
 			}
 		}
 		
-		sonic.draw(-100+i*3,100);
-		sonic.draw(-100+i*2.5,200);
-		sonic.draw(-100+i*3.2,300);
-		sonic.draw(-100+i*2.3,400);
-		sonic.draw(-100+i*3.1,500);
-		sonic.draw(-100+i*2.4,600);
+		sonic.draw(-100+i*3,100,i/50,i/50);
+		sonic.draw(-100+i*2.5,200,1,i/50);
+		sonic.draw(-100+i*3.2,300,i/50,1);
+		sonic.draw(-100+i*2.3,400,1,i/50);
+		sonic.draw(-100+i*3.1,500,i/50,1);
+		sonic.draw(-100+i*2.4,600,1,i/50);
 		
 		sonic.draw(100, -100+i*2);
 		sonic.draw(200, -100+i*2.1);

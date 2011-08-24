@@ -37,7 +37,7 @@ public class Sprite {
 	 * @param rotx x Koordinate Rotationspunktes Relativ zur oberen Linken Ecke des Sprites
 	 * @param roty y Koordinate Rotationspunktes Relativ zur oberen Linken Ecke des Sprites
 	 */
-	public void draw(double x, double y, float rot, double rotx, double roty) {
+	public void draw(double x, double y, float rot, double rotx, double roty, double scalex, double scaley) {
 		
 		Color.white.bind();
 		texture.bind(); //Textur binden
@@ -46,13 +46,15 @@ public class Sprite {
 		GL11.glPushMatrix();
 		
 		GL11.glTranslated(x,y,0);
-
+		GL11.glScaled(scalex, scaley, 1);
 		
 		if (rot != 0f) { //falls Rotation gewünscht
 			GL11.glTranslated(rotx,roty,0);
 			GL11.glRotatef(rot, 0f, 0f, 1f);
 			GL11.glTranslated(-rotx,-roty,0);
 		}
+		
+		
 		
 		
 		GL11.glBegin(GL11.GL_QUADS);
@@ -66,7 +68,6 @@ public class Sprite {
 			GL11.glVertex2f(0,texture.getTextureHeight());
 		GL11.glEnd();
 		
-		
 		GL11.glPopMatrix();
 		
 	}
@@ -79,7 +80,19 @@ public class Sprite {
 	 */
 	
 	public void draw(double x, double y, float rot) {
-		draw(x,y,rot,getWidth()/2,getHeight()/2);
+		draw(x,y,rot,getWidth()/2,getHeight()/2,1,1);
+	}
+	
+	/**
+	 * 
+	 * @param x x-Position
+	 * @param y y-Position
+	 * @param scalex Skalierungsfaktor X
+	 * @param scalex Skalierungsfaktor Y
+	 */
+	
+	public void draw(double x, double y, double scalex, double scaley) {
+		draw(x,y,0,0,0,scalex,scaley);
 	}
 	
 	/**
