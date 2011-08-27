@@ -14,7 +14,7 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public class Sprite {
 	
-	Texture texture;
+	protected Texture texture;
 	
 	/**
 	 * 

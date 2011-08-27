@@ -81,6 +81,7 @@ public class Window {
 			GL11.glLoadIdentity();
 			
 			//Kameraeinstellungen Ÿbernehmen
+			//camera.setRotation(30);
 			camera.apply();
 			
 			//anderen Kram rendern
@@ -114,8 +115,7 @@ public class Window {
 		sonic.draw(-100+i*2.5,200,1,i/50);
 		sonic.draw(-100+i*3.2,300,i/50,1);
 		sonic.draw(-100+i*2.3,400,1,i/50);
-		sonic.draw(-100+i*3.1,500,i/50,1);
-		sonic.draw(-100+i*2.4,600,1,i/50);
+		sonic.draw(-100+i*3.1,500-i*2,i/10,i/10);
 		
 		sonic.draw(100, -100+i*2);
 		sonic.draw(200, -100+i*2.1);
@@ -127,13 +127,11 @@ public class Window {
 		megaman.draw(-100+2.6*i, 100+150*Math.sin(i/360*2*Math.PI));
 		megaman.draw(-500+5*i, 400+150*Math.tan(i/360*2*Math.PI),(float)i*2);
 		
+		camera.setZoom(5-Math.sin(i/360*Math.PI)*4);
+		camera.setRotation((float)i);
 				
 		i = (i+0.1*delta)%360;
 		
-		/*
-		camera.setX(400+Math.sin((i/360)*Math.PI*2)*100);
-		camera.setY(300+Math.cos((i/360)*Math.PI*2)*100);
-		*/
 	}
 	
 	public void updateFPS() {

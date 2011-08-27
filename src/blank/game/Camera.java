@@ -12,6 +12,7 @@ public class Camera {
 	
 	private double x,y;
 	private float rotation = 0f;
+	private double zoomfactor = 1;
 	
 	public Camera(int x, int y) {
 		setX(x);
@@ -22,13 +23,24 @@ public class Camera {
 	
 	public void apply() {
 		
-		GL11.glTranslated(-x+Display.getDisplayMode().getWidth()/2, -y+Display.getDisplayMode().getHeight()/2, 0);
+		
 		
 		if (rotation != 0f) { //falls Rotation gewünscht
 			GL11.glTranslated(Display.getDisplayMode().getWidth()/2,Display.getDisplayMode().getHeight()/2,0);
-			GL11.glRotatef(rotation, 0f, 0f, 1f);
+			GL11.glRotatef(-rotation, 0f, 0f, 1f);
 			GL11.glTranslated(-Display.getDisplayMode().getWidth()/2,-Display.getDisplayMode().getHeight()/2,0);
 		}
+		
+		if (zoomfactor != 1) { //falls Rotation gewünscht
+			GL11.glTranslated(Display.getDisplayMode().getWidth()/2,Display.getDisplayMode().getHeight()/2,0);
+			GL11.glScaled(zoomfactor, zoomfactor, 1);
+			GL11.glTranslated(-Display.getDisplayMode().getWidth()/2,-Display.getDisplayMode().getHeight()/2,0);
+		}
+		
+		GL11.glTranslated(-x+Display.getDisplayMode().getWidth()/2, -y+Display.getDisplayMode().getHeight()/2, 0);
+		
+		
+		
 	}
 
 
@@ -65,6 +77,14 @@ public class Camera {
 
 	public void setRotation(float rotation) {
 		this.rotation = rotation;
+	}
+	
+	public void setZoom (double zoomfactor) {
+		this.zoomfactor = zoomfactor;
+	}
+	
+	public double getZoom() {
+		return this.zoomfactor;
 	}
 	
 }
