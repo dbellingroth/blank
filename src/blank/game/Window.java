@@ -19,9 +19,8 @@ public class Window {
 	
 	private Camera camera;
 	
-	Sprite megaman;
-	Sprite sonic;
-	Sprite kreuz;
+	SpriteLib sLib;
+
 		
 	public Window(String title, int width, int height) {
 		this.title = title;
@@ -31,6 +30,10 @@ public class Window {
 		    //Display.setVSyncEnabled(true);
 		    Display.setTitle(title);
 		    Display.create();
+		    
+		    
+		    
+		    
 		} catch (LWJGLException e) {
 		    e.printStackTrace();
 		    System.exit(0);
@@ -39,11 +42,11 @@ public class Window {
 		//Kameraziel auf die Mitte setzen
 		camera = new Camera(width/2,height/2);
 
-		
-		 kreuz = new Sprite("res/kreuz.png");
-		 sonic = new Sprite("res/sonic.png");
-		 megaman = new Sprite("res/megaman.png");
-		 
+		sLib = new SpriteLib();
+		sLib.add("kreuz", "res/kreuz.png");
+		sLib.add("sonic", "res/sonic.png");
+		sLib.add("megaman", "res/megaman.png");
+			 
 		// init OpenGL here
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);               
@@ -106,26 +109,26 @@ public class Window {
 		int z = 1;
 		for (int x = 0; x<20; x++) {
 			for (int y = 0; y<15; y++) {
-				kreuz.draw(64*x, 64*y, z*(float)i);
+				sLib.get("kreuz").draw(64*x, 64*y, z*(float)i);
 				z = -z;
 			}
 		}
 		
-		sonic.draw(-100+i*3,100,i/50,i/50);
-		sonic.draw(-100+i*2.5,200,1,i/50);
-		sonic.draw(-100+i*3.2,300,i/50,1);
-		sonic.draw(-100+i*2.3,400,1,i/50);
-		sonic.draw(-100+i*3.1,500-i*2,i/10,i/10);
+		sLib.get("sonic").draw(-100+i*3,100,i/50,i/50);
+		sLib.get("sonic").draw(-100+i*2.5,200,1,i/50);
+		sLib.get("sonic").draw(-100+i*3.2,300,i/50,1);
+		sLib.get("sonic").draw(-100+i*2.3,400,1,i/50);
+		sLib.get("sonic").draw(-100+i*3.1,500-i*2,i/10,i/10);
 		
-		sonic.draw(100, -100+i*2);
-		sonic.draw(200, -100+i*2.1);
-		sonic.draw(300, -100+i*2.2);
-		sonic.draw(400, -100+i*2.3);
-		sonic.draw(500, -100+i*2.4);
-		sonic.draw(600, -100+i*2.5);
+		sLib.get("sonic").draw(100, -100+i*2);
+		sLib.get("sonic").draw(200, -100+i*2.1);
+		sLib.get("sonic").draw(300, -100+i*2.2);
+		sLib.get("sonic").draw(400, -100+i*2.3);
+		sLib.get("sonic").draw(500, -100+i*2.4);
+		sLib.get("sonic").draw(600, -100+i*2.5);
 		
-		megaman.draw(-100+2.6*i, 100+150*Math.sin(i/360*2*Math.PI));
-		megaman.draw(-500+5*i, 400+150*Math.tan(i/360*2*Math.PI),(float)i*2);
+		sLib.get("megaman").draw(-100+2.6*i, 100+150*Math.sin(i/360*2*Math.PI));
+		sLib.get("megaman").draw(-500+5*i, 400+150*Math.tan(i/360*2*Math.PI),(float)i*2);
 		
 		camera.setZoom(5-Math.sin(i/360*Math.PI)*4);
 		camera.setRotation((float)i);
