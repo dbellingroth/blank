@@ -80,7 +80,7 @@ public class Window {
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glLoadIdentity();
 			
-			//Kameraeinstellungen Ÿbernehmen
+			//Kameraeinstellungen ï¿½bernehmen
 			//camera.setRotation(30);
 			camera.apply();
 			
@@ -92,7 +92,7 @@ public class Window {
 			
 		    Display.update();
 
-		    Display.sync(80); // FPS begrenzen
+		    Display.sync(120); // FPS begrenzen
 
 
 		}
@@ -154,7 +154,7 @@ public class Window {
 	
 	/**
 	 * 
-	 * @return gibt das aktuelle Delta zurŸck
+	 * @return gibt das aktuelle Delta zurï¿½ck
 	 */
 	public int getDelta() {
 	    long time = getTime();
