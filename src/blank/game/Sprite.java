@@ -41,7 +41,6 @@ public class Sprite {
 		
 		Color.white.bind();
 		texture.bind(); //Textur binden
-
 		
 		GL11.glPushMatrix();
 		

@@ -3,6 +3,8 @@ package blank.game;
 
 
 
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
@@ -11,6 +13,9 @@ import org.lwjgl.opengl.GL11;
 
 
 public class Window {
+	
+	private PhysicsWorld physics;
+	private Body testbody;
 	
 	private double i = 0;
 	private long fps,lastFPS,lastFrame;
@@ -23,7 +28,13 @@ public class Window {
 
 		
 	public Window(String title, int width, int height) {
+		
 		this.title = title;
+		
+		physics = new PhysicsWorld();
+		testbody = physics.addBody();
+		physics.addStaticBody();
+		
 		try {
 		    Display.setDisplayMode(new DisplayMode(width, height));
 		    //Display.setFullscreen(true);
@@ -76,12 +87,19 @@ public class Window {
 			
 			delta = getDelta();
 			
+			
+			//Logik
+			
+			physics.update(delta);
+			
+			
 		    // render OpenGL here
 			
 			// clear screen
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glLoadIdentity();
+		
 			
 			//Kameraeinstellungen �bernehmen
 			//camera.setRotation(30);
@@ -127,11 +145,13 @@ public class Window {
 		sLib.get("sonic").draw(500, -100+i*2.4);
 		sLib.get("sonic").draw(600, -100+i*2.5);
 		
+		sLib.get("sonic").draw(testbody.getPosition().x,testbody.getPosition().y,(float)(testbody.getAngle()));
+		
 		sLib.get("megaman").draw(-100+2.6*i, 100+150*Math.sin(i/360*2*Math.PI));
 		sLib.get("megaman").draw(-500+5*i, 400+150*Math.tan(i/360*2*Math.PI),(float)i*2);
 		
-		camera.setZoom(5-Math.sin(i/360*Math.PI)*4);
-		camera.setRotation((float)i);
+		//camera.setZoom(5-Math.sin(i/360*Math.PI)*4);
+		//camera.setRotation((float)i);
 				
 		i = (i+0.1*delta)%360;
 		
