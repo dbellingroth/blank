@@ -56,7 +56,7 @@ public class PhysicsWorld {
 		fd.friction = 0.5f;
 		fd.density = 0.5f;
 		body.createFixture(fd);
-		//body.m_mass = 10;
+		body.m_mass = 10;
 		return body;
 	}
 	
