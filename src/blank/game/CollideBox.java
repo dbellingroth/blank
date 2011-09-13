@@ -4,7 +4,9 @@ import java.awt.geom.Point2D;
 
 import org.lwjgl.opengl.GL11;
 
-
+/**
+ * @deprecated  Nicht mehr notwendig
+ */
 public class CollideBox implements WantDraw {
 
 	
