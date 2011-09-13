@@ -13,5 +13,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/blank/lib/jbox2d-library-2.1.2.0-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/slick-util.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
