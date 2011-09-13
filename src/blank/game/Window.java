@@ -3,13 +3,18 @@ package blank.game;
 
 
 
-import org.jbox2d.common.Vec2;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 import org.jbox2d.dynamics.Body;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.util.BufferedImageUtil;
 
 
 public class Window {
@@ -25,7 +30,8 @@ public class Window {
 	private Camera camera;
 	
 	SpriteLib sLib;
-
+	
+	private BufferedImage test = new BufferedImage(256, 256, BufferedImage.TYPE_INT_ARGB);
 		
 	public Window(String title, int width, int height) {
 		
@@ -81,7 +87,6 @@ public class Window {
 		
 		lastFPS = getTime();
 		delta = getDelta();
-		
 		
 		while (!Display.isCloseRequested()) {
 			
@@ -150,10 +155,44 @@ public class Window {
 		sLib.get("megaman").draw(-100+2.6*i, 100+150*Math.sin(i/360*2*Math.PI));
 		sLib.get("megaman").draw(-500+5*i, 400+150*Math.tan(i/360*2*Math.PI),(float)i*2);
 		
-		//camera.setZoom(5-Math.sin(i/360*Math.PI)*4);
-		//camera.setRotation((float)i);
-				
+		camera.setZoom(5-Math.sin(i/360*Math.PI)*4);
+		camera.setRotation((float)i);
+		
+
 		i = (i+0.1*delta)%360;
+		
+		//Canvas Test
+		GL11.glPushMatrix();	
+		GL11.glTranslated(300,250,0);
+		
+		Graphics2D g = (Graphics2D)test.createGraphics();
+		g.setColor(new java.awt.Color(255,0,0));
+		g.fillRect(0, 0, 200, 100);
+		g.setColor(new java.awt.Color(0,255,0));
+		g.fillOval(0, 0, 200, 100);
+		g.setColor(new java.awt.Color(0,0,255));
+		g.drawString("Time: "+System.currentTimeMillis(), 10, 55);
+		
+		try {
+			Texture texture = BufferedImageUtil.getTexture("", test, GL11.GL_NEAREST);
+			texture.bind();
+			GL11.glBegin(GL11.GL_QUADS);
+			GL11.glTexCoord2f(0,0);
+			GL11.glVertex2f(0,0);
+			GL11.glTexCoord2f(1,0);
+			GL11.glVertex2f(256,0);
+			GL11.glTexCoord2f(1,1);
+			GL11.glVertex2f(256,256);
+			GL11.glTexCoord2f(0,1);
+			GL11.glVertex2f(0,256);
+			GL11.glEnd();
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		GL11.glPopMatrix();
 		
 	}
 	
