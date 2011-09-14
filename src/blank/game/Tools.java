@@ -1,4 +1,4 @@
-package blank.trash;
+package blank.game;
 
 import java.awt.Color;
 import java.awt.Graphics;

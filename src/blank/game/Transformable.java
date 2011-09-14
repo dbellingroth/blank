@@ -17,7 +17,7 @@ public abstract class Transformable implements Drawable{
 	
 	
 	/**
-	 * Transformiert die aktuelle Matrix so wie gewünscht. Vorher bitte GL11.glMatrixPush() und nachher GL11.glMatrixPush() aufrufen
+	 * Transformiert die aktuelle Matrix so wie gewünscht. Vorher bitte GL11.glPushMatrix() und nachher GL11.glPopMatrix() aufrufen
 	 */
 	protected void transform() {
 		GL11.glTranslated(translate.getX(),translate.getY(),0);
