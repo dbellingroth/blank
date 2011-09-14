@@ -19,10 +19,13 @@ public class Sprite extends Transformable{
 		IntBuffer textureIDBuffer;
 		textureIDBuffer = BufferUtils.createIntBuffer(1);
 		textureID = textureIDBuffer.get(0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		update();
 	}
 	
 	public void update() {
+		System.out.println("Test123");
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
 		ByteBuffer buf = Tools.convertImageData(image);	
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR); 

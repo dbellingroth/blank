@@ -24,6 +24,7 @@ public class Window {
 			Display.setTitle("Misery Block");
 		    Display.create();
 		    initGL();
+		    parent.init();
 		    lastFPS = getTime();
 			delta = getDelta();
 		    renderLoop();

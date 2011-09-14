@@ -15,10 +15,15 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Hashtable;
 
+/**
+ * 
+ * @author David Bellingroth + Code von anderen
+ *
+ */
 public class Tools {
 
 	/**
-	 * Convert the buffered image to a texture
+	 * Macht aus einem BufferedImage einen ByteBuffer um es als OpenGL Textur zu laden.
 	 */
 	public static ByteBuffer convertImageData(BufferedImage bufferedImage) {
 	    ByteBuffer imageBuffer;
