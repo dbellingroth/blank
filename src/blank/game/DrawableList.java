@@ -62,8 +62,7 @@ public class DrawableList implements Drawable {
 		
 	}
 	
-	
-	
+
 	
 	/**
 	 * ruft auf alle Objekete der Liste die draw()-Methode auf

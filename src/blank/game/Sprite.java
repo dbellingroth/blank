@@ -6,12 +6,8 @@ import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
 
 
-public class Sprite extends Transformable {
 	
 	private int zIndex = 0;
 	private int textureID;
@@ -68,4 +64,15 @@ public class Sprite extends Transformable {
 		return zIndex;
 	}
 
+	
+	public int getZIndex() {
+		return zIndex;
+	}
+	
+	public void setZIndex(int zIndex) {
+		this.zIndex = zIndex;
+	}
+	
+	
+	
 }
