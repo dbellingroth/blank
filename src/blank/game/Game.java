@@ -29,6 +29,7 @@ public class Game {
 		test.setRotationAngle((System.currentTimeMillis() / 10) % 360);
 		test.setRotationPoint(new Point2D.Double(50, 100));
 		test.setTranslate(new Point2D.Double(200, 200));
+		test.setScaleFactor(new Point2D.Double(2,1));
 		test.draw();
 	}
 
