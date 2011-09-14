@@ -1,13 +1,15 @@
 package blank.game;
 
-
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
 
 
+public class Sprite extends Transformable{
 	
 	private int zIndex = 0;
 	private int textureID;
@@ -30,7 +32,7 @@ import java.nio.IntBuffer;
 	
 	@Override
 	public void draw() {
-		Color.white.bind();	
+			
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
 		
 		GL11.glPushMatrix();
@@ -63,16 +65,5 @@ import java.nio.IntBuffer;
 	public int getZIndex() {
 		return zIndex;
 	}
-
-	
-	public int getZIndex() {
-		return zIndex;
-	}
-	
-	public void setZIndex(int zIndex) {
-		this.zIndex = zIndex;
-	}
-	
-	
-	
+		
 }
