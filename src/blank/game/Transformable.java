@@ -3,7 +3,11 @@ package blank.game;
 import java.awt.geom.Point2D;
 
 import org.lwjgl.opengl.GL11;
-
+/**
+ * Erlaubt das beliebige Verschieben, Drehen und Skalieren seiner Unterklassen...
+ * @author David Bellingroth
+ *
+ */
 public abstract class Transformable implements Drawable{
 
 	private Point2D translate = new Point2D.Double(0,0);
@@ -12,6 +16,9 @@ public abstract class Transformable implements Drawable{
 	private Point2D scaleFactor = new Point2D.Double(1,1);
 	
 	
+	/**
+	 * Transformiert die aktuelle Matrix so wie gewünscht. Vorher bitte GL11.glMatrixPush() und nachher GL11.glMatrixPush() aufrufen
+	 */
 	protected void transform() {
 		GL11.glTranslated(translate.getX(),translate.getY(),0);
 		GL11.glScaled(scaleFactor.getX(), scaleFactor.getY(), 1);
