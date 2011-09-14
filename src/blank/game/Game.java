@@ -5,8 +5,9 @@ public class Game {
 		new Window(new Game(),800,600);
 	}
 	
+	//Einmal pro Frame:
 	protected void update(int delta) {
-		
+
 	}
 	
 }
