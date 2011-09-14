@@ -1,4 +1,4 @@
-package blank.game;
+package blank.trash;
 
 import java.io.IOException;
 import java.util.ArrayList;

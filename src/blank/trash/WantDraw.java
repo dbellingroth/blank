@@ -1,4 +1,4 @@
-package blank.game;
+package blank.trash;
 
 public interface WantDraw {
 

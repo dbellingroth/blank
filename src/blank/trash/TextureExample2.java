@@ -1,5 +1,11 @@
-package blank;
+package blank.trash;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+
+import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.ARBTextureRectangle;
 import org.lwjgl.opengl.Display;
@@ -13,11 +19,11 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
-public class TextureExample {
+
+public class TextureExample2 {
 	
 	/** The texture that will hold the image details */
-	private Texture texture;
-	
+	private IntBuffer textureIDBuffer;
 	
 	/**
 	 * Start the example
@@ -78,23 +84,26 @@ public class TextureExample {
 	 */
 	public void init() {
 		
-		try {
-			// load texture from PNG file
-			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/megaman.png"),GL11.GL_LINEAR_MIPMAP_LINEAR);
-			texture.bind();
-			GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
-			
-			System.out.println("Texture loaded: "+texture);
-			System.out.println(">> Image width: "+texture.getImageWidth());
-			System.out.println(">> Image height: "+texture.getImageHeight());
-			System.out.println(">> Texture width: "+texture.getTextureWidth());
-			System.out.println(">> Texture height: "+texture.getTextureHeight());
-			System.out.println(">> Texture ID: "+texture.getTextureID());
-			System.out.println(texture.getWidth());
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		textureIDBuffer = BufferUtils.createIntBuffer(1);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureIDBuffer.get(0));
+		
+		
+		BufferedImage image = new BufferedImage(200, 100, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = (Graphics2D)image.createGraphics();
+		g.setColor(new java.awt.Color(255,0,0));
+		g.fillRect(0, 0, 200, 100);
+		g.setColor(new java.awt.Color(0,255,0));
+		g.fillOval(0, 0, 200, 100);
+		g.setColor(new java.awt.Color(0,0,255));
+		g.drawString("Time: "+System.currentTimeMillis(), 10, 55);
+		
+	
+		ByteBuffer buf = Tools.convertImageData(image);
+		
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR); 
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR); 
+		
+		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, 200, 100, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buf);
 	}
 
 	/**
@@ -102,25 +111,27 @@ public class TextureExample {
 	 */
 	public void render() {
 		Color.white.bind();
-		texture.bind(); // or GL11.glBind(texture.getTextureID());
+		//texture.bind(); // or GL11.glBind(texture.getTextureID());
+		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureIDBuffer.get(0));
+		
 		GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2f(0,0);
 			GL11.glVertex2f(100,100);
 			GL11.glTexCoord2f(1,0);
-			GL11.glVertex2f(100+texture.getTextureWidth(),100);
+			GL11.glVertex2f(100+200,100);
 			GL11.glTexCoord2f(1,1);
-			GL11.glVertex2f(100+texture.getTextureWidth(),100+texture.getTextureHeight());
+			GL11.glVertex2f(100+200,100+100);
 			GL11.glTexCoord2f(0,1);
-			GL11.glVertex2f(100,100+texture.getTextureHeight());
+			GL11.glVertex2f(100,100+100);
 		GL11.glEnd();
-		
 	}
 	
 	/**
 	 * Main Class
 	 */
 	public static void main(String[] argv) {
-		TextureExample textureExample = new TextureExample();
+		TextureExample2 textureExample = new TextureExample2();
 		textureExample.start();
 	}
 }

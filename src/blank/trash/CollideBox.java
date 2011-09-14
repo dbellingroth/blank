@@ -1,8 +1,9 @@
-package blank.game;
+package blank.trash;
 
 import java.awt.geom.Point2D;
 
 import org.lwjgl.opengl.GL11;
+
 
 /**
  * @deprecated  Nicht mehr notwendig

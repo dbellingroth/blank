@@ -1,6 +1,7 @@
-package blank.game;
+package blank.trash;
 
 import org.lwjgl.LWJGLException;
+
 /**
  * 
  * @author Kilian Helmenstein, David Bellingroth

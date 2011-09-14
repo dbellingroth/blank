@@ -1,4 +1,4 @@
-package blank.game;
+package blank.trash;
 
 
 import org.jbox2d.collision.shapes.CircleShape;

@@ -1,4 +1,4 @@
-package blank.game;
+package blank.trash;
 
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
