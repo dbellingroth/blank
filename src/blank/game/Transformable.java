@@ -11,6 +11,46 @@ import org.lwjgl.opengl.GL11;
 public abstract class Transformable implements Drawable{
 
 	private Point2D translate = new Point2D.Double(0,0);
+	public Point2D getTranslate() {
+		return translate;
+	}
+
+
+	public void setTranslate(Point2D translate) {
+		this.translate = translate;
+	}
+
+
+	public Point2D getRotationPoint() {
+		return rotationPoint;
+	}
+
+
+	public void setRotationPoint(Point2D rotationPoint) {
+		this.rotationPoint = rotationPoint;
+	}
+
+
+	public double getRotationAngle() {
+		return rotationAngle;
+	}
+
+
+	public void setRotationAngle(double rotationAngle) {
+		this.rotationAngle = rotationAngle;
+	}
+
+
+	public Point2D getScaleFactor() {
+		return scaleFactor;
+	}
+
+
+	public void setScaleFactor(Point2D scaleFactor) {
+		this.scaleFactor = scaleFactor;
+	}
+
+
 	private Point2D rotationPoint = new Point2D.Double(0,0);
 	private double rotationAngle = 0;
 	private Point2D scaleFactor = new Point2D.Double(1,1);

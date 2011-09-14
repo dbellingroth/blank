@@ -2,6 +2,7 @@ package blank.game;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Point2D;
 
 public class Game {
 	
@@ -25,6 +26,9 @@ public class Game {
 	
 	//Einmal pro Frame:
 	protected void update(int delta) {
+		test.setRotationAngle((System.currentTimeMillis()/10)%360);
+		test.setRotationPoint(new Point2D.Double(50,100));
+		test.setTranslate(new Point2D.Double(200,200));
 		test.draw();
 	}
 	
