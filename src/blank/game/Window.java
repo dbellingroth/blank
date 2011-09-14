@@ -31,7 +31,9 @@ public class Window {
 	
 	SpriteLib sLib;
 	
-	private BufferedImage test = new BufferedImage(256, 256, BufferedImage.TYPE_INT_ARGB);
+	private BufferedImage test = new BufferedImage(200, 100, BufferedImage.TYPE_INT_ARGB);
+	private int testdings = 9;
+	private Texture texture;
 		
 	public Window(String title, int width, int height) {
 		
@@ -161,30 +163,34 @@ public class Window {
 
 		i = (i+0.1*delta)%360;
 		
-		//Canvas Test
-		GL11.glPushMatrix();	
-		GL11.glTranslated(300,250,0);
 		
-		Graphics2D g = (Graphics2D)test.createGraphics();
-		g.setColor(new java.awt.Color(255,0,0));
-		g.fillRect(0, 0, 200, 100);
-		g.setColor(new java.awt.Color(0,255,0));
-		g.fillOval(0, 0, 200, 100);
-		g.setColor(new java.awt.Color(0,0,255));
-		g.drawString("Time: "+System.currentTimeMillis(), 10, 55);
 		
 		try {
-			Texture texture = BufferedImageUtil.getTexture("", test, GL11.GL_NEAREST);
+			if ((testdings = (testdings + 1)%10) == 0) {
+			//Canvas Test
+			
+			
+			Graphics2D g = (Graphics2D)test.createGraphics();
+			g.setColor(new java.awt.Color(0,255,0));
+			g.fillOval(0, 0, 200, 100);
+			g.setColor(new java.awt.Color(0,0,255));
+			g.drawString("Time: "+System.currentTimeMillis(), 25, 56);
+			
+			texture = BufferedImageUtil.getTexture("", test);
+			}
+			
+			GL11.glPushMatrix();	
+			GL11.glTranslated(300,250,0);
 			texture.bind();
 			GL11.glBegin(GL11.GL_QUADS);
 			GL11.glTexCoord2f(0,0);
 			GL11.glVertex2f(0,0);
-			GL11.glTexCoord2f(1,0);
-			GL11.glVertex2f(256,0);
-			GL11.glTexCoord2f(1,1);
-			GL11.glVertex2f(256,256);
-			GL11.glTexCoord2f(0,1);
-			GL11.glVertex2f(0,256);
+			GL11.glTexCoord2f(texture.getWidth(),0);
+			GL11.glVertex2f(texture.getImageWidth(),0);
+			GL11.glTexCoord2f(texture.getWidth(),texture.getHeight());
+			GL11.glVertex2f(texture.getImageWidth(),texture.getImageHeight());
+			GL11.glTexCoord2f(0,texture.getHeight());
+			GL11.glVertex2f(0,texture.getImageHeight());
 			GL11.glEnd();
 		
 		} catch (IOException e) {
