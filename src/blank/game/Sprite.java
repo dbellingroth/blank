@@ -22,7 +22,15 @@ public class Sprite extends Transformable {
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		update();
 	}
-
+	
+	//TODO Konstruktor zum Bilder laden möglicherweise gemeinsamen Kontruktorcode in einen privaten Konstruktor packen
+	/*
+	 * public Sprite(String imagePath) {
+	 * 
+	 * }
+	 */
+	
+	
 	public void update() {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
 		GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
