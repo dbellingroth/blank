@@ -29,7 +29,7 @@ public class Window {
 			delta = getDelta();
 		    renderLoop();
 		} catch (LWJGLException e) {
-			System.err.printf("Display konnte nicht gešffnet werden :(");
+			System.err.printf("Display konnte nicht geï¿½ffnet werden :(");
 			e.printStackTrace();
 			System.exit(0);
 		}
@@ -65,7 +65,7 @@ public class Window {
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glLoadIdentity();
 			
-			//Spiel kŸmmert sich um den Rest
+			//Spiel kï¿½mmert sich um den Rest
 			parent.update(delta);
 			
 			Display.update();
@@ -98,7 +98,7 @@ public class Window {
 	
 	/**
 	 * 
-	 * @return gibt das aktuelle Delta zurŸck
+	 * @return gibt das aktuelle Delta zurï¿½ck
 	 */
 	public int getDelta() {
 	    long time = getTime();
