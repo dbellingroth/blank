@@ -52,8 +52,9 @@ public abstract class Transformable implements Drawable {
 	private Point2D scaleFactor = new Point2D.Double(1, 1);
 
 	/**
-	 * Transformiert die aktuelle Matrix so wie gewünscht. Vorher bitte
+	 * Transformiert die aktuelle Matrix so wie gew√ºnscht. Vorher bitte
 	 * GL11.glPushMatrix() und nachher GL11.glPopMatrix() aufrufen
+	 * Diese Methode muss von allen Klassen, die von Transformable erben in ihrer Draw-Methode aufgerufen werden!
 	 */
 	protected void transform() {
 		GL11.glTranslated(translate.getX(), translate.getY(), 0);
@@ -61,7 +62,7 @@ public abstract class Transformable implements Drawable {
 		
 		  
 			GL11.glTranslated(rotationPoint.getX(), rotationPoint.getY(), 0);
-			// falls Rotation gewünscht
+			// falls Rotation gew√ºnscht
 			if (rotationAngle != 0)GL11.glRotatef((float) rotationAngle, 0f, 0f, 1);
 			
 			GL11.glScaled(scaleFactor.getX(), scaleFactor.getY(), 1);

@@ -2,10 +2,16 @@ package blank.game;
 
 import java.util.LinkedList;
 
+/**
+ * Eine Liste von Drawables, die automatisch nach dem z-Index sortiert und sich selbst auch wieder zeichnen lässt.
+ * Gut für hierarschische Transformationen (Bäume, Pflanzen, Kram)
+ * @author Kilian Helmenstein
+ *
+ */
 public class DrawableList implements Drawable {
 
 	private LinkedList<Drawable> drawables;
-	private int zIndex;
+	private int zIndex = 0;
 
 	DrawableList() {
 
@@ -14,11 +20,15 @@ public class DrawableList implements Drawable {
 	}
 
 	/**
-	 * setzt das neue Drwbl auf den richtigen Index, sortiert nach dem ZIndex
+	 * setzt das neue Drawable auf den richtigen Index, sortiert nach dem ZIndex
+	 * @param drawable fögt ein Drawable der Liste hinzu
 	 */
 	public void addDrawable(Drawable drawable) {
-
-		for (int x = 0; x < drawables.size(); x++) {
+		
+		//Falls Liste noch leer
+		if (drawables.size() == 0) drawables.add(drawable);
+		//Sortiert einfügen
+		else for (int x = 0; x < drawables.size(); x++) {
 
 			if (drawable.getZIndex() < drawables.get(x).getZIndex()) {
 				drawables.add(x, drawable);
@@ -32,7 +42,7 @@ public class DrawableList implements Drawable {
 	/**
 	 * löscht das im Parameter angegebene Objekt aus der Liste
 	 * 
-	 * @param drawable
+	 * @param drawable löscht ein Drawable aus der Liste
 	 */
 	public void deleteDrawable(Drawable drawable) {
 

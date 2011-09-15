@@ -37,13 +37,16 @@ public class Window {
 			delta = getDelta();
 			renderLoop();
 		} catch (LWJGLException e) {
-			System.err.printf("Display konnte nicht geöffnet werden :(");
+			System.err.printf("Display konnte nicht ge√∂ffnet werden :(");
 			e.printStackTrace();
 			System.exit(0);
 		}
 
 	}
 
+	/**
+	 * initialisiert den OpenGL Kontext
+	 */
 	private void initGL() {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -58,6 +61,10 @@ public class Window {
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 	}
 
+	
+	/**
+	 * Die eigentliche renderloop, die das ganze Spiel hindurch l√§uft
+	 */
 	private void renderLoop() {
 
 		while (!Display.isCloseRequested()) {
@@ -70,7 +77,7 @@ public class Window {
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glLoadIdentity();
 
-			// Spiel kümmert sich um den Rest
+			// Spiel kÔøΩmmert sich um den Rest
 			parent.update(delta);
 
 			Display.update();
@@ -102,7 +109,7 @@ public class Window {
 
 	/**
 	 * 
-	 * @return gibt das aktuelle Delta zurück
+	 * @return gibt das aktuelle Delta zur√ºck
 	 */
 	public int getDelta() {
 		long time = getTime();

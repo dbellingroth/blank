@@ -4,9 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL30;
 
 public class Sprite extends Transformable {
 
@@ -24,8 +24,8 @@ public class Sprite extends Transformable {
 	}
 
 	public void update() {
-		System.out.println("Test123");
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
+		GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
 		ByteBuffer buf = Tools.convertImageData(image);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER,
 				GL11.GL_LINEAR);
@@ -34,6 +34,7 @@ public class Sprite extends Transformable {
 		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA,
 				image.getWidth(), image.getHeight(), 0, GL11.GL_RGBA,
 				GL11.GL_UNSIGNED_BYTE, buf);
+		
 	}
 
 	@Override
