@@ -77,7 +77,7 @@ public class DrawableList implements Drawable {
 		for (Drawable drawable : drawables) {
 
 			drawable.draw();
-			System.out.println(drawable);
+
 		}
 
 	}
