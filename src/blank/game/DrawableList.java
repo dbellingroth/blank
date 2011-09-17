@@ -55,7 +55,7 @@ public class DrawableList implements Drawable {
 	 * 
 	 * @param index
 	 */
-	public void deleteDrawable(int index) {
+	public void removeDrawable(int index) {
 
 		drawables.remove(index);
 
