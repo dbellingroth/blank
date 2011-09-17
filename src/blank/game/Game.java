@@ -11,6 +11,10 @@ import java.awt.geom.Point2D;
 public class Game {
 
 	Sprite test;
+	
+	Sprite trunk, branch;
+	
+	
 
 	public static void main(String args[]) {
 		new Window(new Game(), 800, 600);
@@ -26,9 +30,28 @@ public class Game {
 	public void init() {
 		test = new Sprite(100, 200);
 		Graphics2D g2d = test.getGraphics2D();
-		g2d.setColor(Color.GREEN);
+		g2d.setColor(Color.BLUE);
 		g2d.fillRect(0, 0, 100, 200);
 		test.update();
+		
+		
+		
+		//Stamm	
+		trunk = new Sprite(50, 200);
+		Graphics2D trunk_g2d = trunk.getGraphics2D();
+		trunk_g2d.setColor(Color.GREEN);
+		trunk_g2d.fillRect(0, 0, 50, 200);
+		trunk.setZIndex(0);
+		trunk.update();
+		//Ast
+		branch = new Sprite(20, 50);
+		Graphics2D branch_g2d = branch.getGraphics2D();
+		branch_g2d.setColor(Color.RED);
+		branch_g2d.fillRect(0, 0, 50, 200);
+		branch.setZIndex(1);
+		branch.update();
+	
+	
 	}
 
 	/**
@@ -50,6 +73,24 @@ public class Game {
 		testgroup.setRotationAngle((System.currentTimeMillis() / 20) % 360);
 		testgroup.setRotationPoint(new Point2D.Double(50,100));
 		testgroup.draw();
+		
+		
+		
+		trunk.setTranslate(new Point2D.Double(500, 350));
+		trunk.draw();
+		
+		TransformationGroup tree = new TransformationGroup();
+
+		tree.setTranslate(trunk.getTranslate());
+		
+		tree.addChild(branch);
+		branch.setRotationAngle((System.currentTimeMillis() / 20) % 20);
+		branch.setRotationPoint(new Point2D.Double(10, -25));
+
+		tree.draw();
+		
+		
+		
 	}
 
 }
