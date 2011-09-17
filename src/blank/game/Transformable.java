@@ -14,7 +14,11 @@ import org.lwjgl.opengl.GL11;
 public abstract class Transformable implements Drawable {
 
 	private Point2D translate = new Point2D.Double(0, 0);
-
+	private Point2D rotationPoint = new Point2D.Double(0, 0);
+	private double rotationAngle = 0;
+	private Point2D scaleFactor = new Point2D.Double(1, 1);
+	
+	
 	public Point2D getTranslate() {
 		return translate;
 	}
@@ -47,9 +51,7 @@ public abstract class Transformable implements Drawable {
 		this.scaleFactor = scaleFactor;
 	}
 
-	private Point2D rotationPoint = new Point2D.Double(0, 0);
-	private double rotationAngle = 0;
-	private Point2D scaleFactor = new Point2D.Double(1, 1);
+
 
 	/**
 	 * Transformiert die aktuelle Matrix so wie gewünscht. Vorher bitte
