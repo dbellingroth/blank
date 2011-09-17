@@ -21,7 +21,7 @@ public class DrawableList implements Drawable {
 
 	/**
 	 * setzt das neue Drawable auf den richtigen Index, sortiert nach dem ZIndex
-	 * @param drawable fögt ein Drawable der Liste hinzu
+	 * @param drawable fuegt ein Drawable der Liste hinzu
 	 */
 	public void addDrawable(Drawable drawable) {
 		
@@ -31,8 +31,16 @@ public class DrawableList implements Drawable {
 		else for (int x = 0; x < drawables.size(); x++) {
 
 			if (drawable.getZIndex() < drawables.get(x).getZIndex()) {
+				
 				drawables.add(x, drawable);
 				break;
+			//Falls die for-Schleife am Ende ankommt und drawable noch keinen Platz gefunden hat
+				//wird es ans Ende gesetzt
+			} else if(x == drawables.size()-1 && 
+						drawable.getZIndex() > drawables.get(x).getZIndex()) {
+				
+				drawables.add(drawable);
+				
 			}
 
 		}
@@ -40,9 +48,9 @@ public class DrawableList implements Drawable {
 	}
 
 	/**
-	 * löscht das im Parameter angegebene Objekt aus der Liste
+	 * loescht das im Parameter angegebene Objekt aus der Liste
 	 * 
-	 * @param drawable löscht ein Drawable aus der Liste
+	 * @param drawable loescht ein Drawable aus der Liste
 	 */
 	public void deleteDrawable(Drawable drawable) {
 
@@ -51,7 +59,7 @@ public class DrawableList implements Drawable {
 	}
 
 	/**
-	 * löscht den im Parameter angegebenen Index
+	 * loescht den im Parameter angegebenen Index
 	 * 
 	 * @param index
 	 */
@@ -66,10 +74,10 @@ public class DrawableList implements Drawable {
 	 */
 	public void draw() {
 
-		for (int i = 0; i < drawables.size(); i++) {
+		for (Drawable drawable : drawables) {
 
-			drawables.get(i).draw();
-
+			drawable.draw();
+			System.out.println(drawable);
 		}
 
 	}
