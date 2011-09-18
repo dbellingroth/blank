@@ -26,6 +26,7 @@ public class Tools {
 	 * Macht aus einem BufferedImage einen ByteBuffer um es als OpenGL Textur zu
 	 * laden.
 	 */
+	@SuppressWarnings("rawtypes")
 	public static ByteBuffer convertImageData(BufferedImage bufferedImage) {
 		ByteBuffer imageBuffer;
 		WritableRaster raster;

@@ -5,11 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-
 import javax.imageio.ImageIO;
-
-import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
 
@@ -35,7 +31,6 @@ public class Sprite extends Transformable {
 	}
 	
 	private void init(BufferedImage image) {
-		IntBuffer textureIDBuffer;
 		textureID = idCounter++;
 		this.image = image;
 		update();
