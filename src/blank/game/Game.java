@@ -3,6 +3,9 @@ package blank.game;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
+
+import blank.game.rendering.Sprite;
+import blank.game.rendering.TransformationGroup;
 /**
  * Die eigentliche Hauptklasse mit der Mainmethode.
  * @author Kilian Helmenstein, David Bellingroth
