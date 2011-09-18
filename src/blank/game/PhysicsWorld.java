@@ -1,20 +1,16 @@
 package blank.game;
 
-import org.jbox2d.collision.AABB;
+
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.World;
  
  
 public class PhysicsWorld {
     public int delta;
 
-    
-    
+        
     private World world;
  
-
     
     PhysicsWorld(Vec2 size, float gravity, boolean bounded) {
     	
