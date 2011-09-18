@@ -84,7 +84,7 @@ public class Window {
 			Display.sync(120); // FPS begrenzen
 
 		}
-
+		parent.stop();
 		Display.destroy();
 	}
 
