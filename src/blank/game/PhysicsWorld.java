@@ -24,7 +24,7 @@ public class PhysicsWorld {
     	
     	
     	//Physics-World initialisieren   
-        Vec2 gravity = new Vec2((float) 0.0, (float) -10.0);  
+        Vec2 gravity = new Vec2(0.0f, -9.81f);  
         boolean doSleep = true;  
         world = new World(gravity, doSleep);  
     	
