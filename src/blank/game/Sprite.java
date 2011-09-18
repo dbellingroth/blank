@@ -2,8 +2,13 @@ package blank.game;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+
+import javax.imageio.ImageIO;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL30;
@@ -13,23 +18,28 @@ public class Sprite extends Transformable {
 	private int zIndex = 0;
 	private int textureID;
 	private BufferedImage image;
+	private static int idCounter;
 
 	public Sprite(int width, int height) {
-		IntBuffer textureIDBuffer;
-		textureIDBuffer = BufferUtils.createIntBuffer(1);
-		textureID = textureIDBuffer.get(0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
-		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		update();
+		init(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
 	}
 	
-	//TODO Konstruktor zum Bilder laden möglicherweise gemeinsamen Kontruktorcode in einen privaten Konstruktor packen
-	/*
-	 * public Sprite(String imagePath) {
-	 * 
-	 * }
-	 */
 	
+	public Sprite(String imagePath) {
+		URL image_url = getClass().getClassLoader().getResource(imagePath);
+
+		try {
+			BufferedImage image = ImageIO.read(image_url);
+			init(image);
+		} catch (IOException e) {}			
+	}
+	
+	private void init(BufferedImage image) {
+		IntBuffer textureIDBuffer;
+		textureID = idCounter++;
+		this.image = image;
+		update();
+	}
 	
 	public void update() {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
