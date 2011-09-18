@@ -1,4 +1,4 @@
-package blank.game;
+package blank.game.rendering;
 
 import java.awt.geom.Point2D;
 

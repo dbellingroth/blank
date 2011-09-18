@@ -1,4 +1,4 @@
-package blank.game;
+package blank.game.rendering;
 
 public interface Drawable {
 

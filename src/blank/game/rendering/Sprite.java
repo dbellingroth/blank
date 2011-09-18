@@ -1,4 +1,4 @@
-package blank.game;
+package blank.game.rendering;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

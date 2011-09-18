@@ -1,4 +1,4 @@
-package blank.game;
+package blank.game.rendering;
 
 import org.lwjgl.opengl.GL11;
 
