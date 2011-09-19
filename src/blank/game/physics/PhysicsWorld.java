@@ -17,7 +17,7 @@ public class PhysicsWorld implements Runnable{
 	}
 	
 	public PhysicsWorld() {
-		this(new Vec2( 0.0f, 9.81f));
+		this(new Vec2( 0.0f, 10f));
 	}
 
 	@Override

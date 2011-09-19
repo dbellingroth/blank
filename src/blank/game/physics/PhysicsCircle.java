@@ -22,11 +22,10 @@ public class PhysicsCircle extends PhysicsObject {
 		
 		FixtureDef fd = new FixtureDef();
 		fd.shape = c;
-		fd.friction = 1f;
-		fd.density = 0.5f;
+		fd.friction = 0.1f;
+		fd.density = 10f;
 		body.createFixture(fd);
 		body.m_mass = 1000;
-		
 	}
 	
 }
