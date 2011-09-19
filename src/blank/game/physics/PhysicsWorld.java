@@ -1,6 +1,8 @@
 package blank.game.physics;
 
 
+import java.util.concurrent.Semaphore;
+
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
  
@@ -10,6 +12,8 @@ import org.jbox2d.dynamics.World;
 public class PhysicsWorld implements Runnable{
     private World world;
     private boolean stop;
+    private static Semaphore physicsSemaphore = new Semaphore(1);
+    public static int pixelsPerMeter = 30;
 	
 	public PhysicsWorld(Vec2 gravity) { 
         boolean doSleep = true;
@@ -17,13 +21,20 @@ public class PhysicsWorld implements Runnable{
 	}
 	
 	public PhysicsWorld() {
-		this(new Vec2( 0.0f, 9.81f));
+		this(new Vec2(0, 10f));
 	}
 
 	@Override
 	public void run() {
 		while (!stop) {
-			world.step(1000/60, 5, 5);
+			try {
+				physicsSemaphore.acquire();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			world.step(1f/60, 5, 5);
+			physicsSemaphore.release();
 			try {
 				Thread.sleep(1000/60);
 			} catch (InterruptedException e) {
@@ -50,6 +61,19 @@ public class PhysicsWorld implements Runnable{
 	
 	public void addObject(PhysicsObject obj) {
 		obj.init(world);
+	}
+	
+	public static void reservePhysics() {
+		try {
+			physicsSemaphore.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void releasePhysics() {
+		physicsSemaphore.release();
 	}
     
 }
