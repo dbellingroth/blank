@@ -40,7 +40,7 @@ public class Sprite extends Transformable {
 	
 	public void update() {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
-		 GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
+		//GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
 		ByteBuffer buf = Tools.convertImageData(image);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER,
 				GL11.GL_LINEAR);

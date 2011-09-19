@@ -41,13 +41,16 @@ public class Game {
 	public void init() {
 		
 		world = new PhysicsWorld();
-		circle = new PhysicsCircle(100,30);
+		circle = new PhysicsCircle(100,100);
 		world.addObject(circle);
 		
-		rect = new PhysicsBox(105,-20,60,60);
+		rect = new PhysicsBox(105,10,60,60);
 		world.addObject(rect);
 		
 		world.addObject(new PhysicsStaticBlock(0,600,800,100));
+		world.addObject(new PhysicsStaticBlock(100,0,800,100));
+		world.addObject(new PhysicsStaticBlock(-100,0,100,600));
+		world.addObject(new PhysicsStaticBlock(800,0,100,600));
 		
 		test = new Sprite(50, 50);
 		Graphics2D g2d = test.getGraphics2D();
@@ -83,7 +86,8 @@ public class Game {
 		test2.setRotationAngle(rect.getAngle());
 		
 		circle.applyAngularImpulse(0.1f);
-		rect.applyAngularImpulse(0.2f);
+		rect.applyAngularImpulse(-0.5f);
+		rect.applyAngularImpulse(0.3f);
 		test.draw();
 		test2.draw();
 		
