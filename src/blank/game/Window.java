@@ -77,7 +77,7 @@ public class Window {
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glLoadIdentity();
 
-			// Spiel k�mmert sich um den Rest
+			// Spiel kümmert sich um den Rest
 			parent.update(delta);
 
 			Display.update();

@@ -10,11 +10,22 @@ public abstract class PhysicsObject {
 	public abstract void init(World world);
 	
 	public Vec2 getPosition() {
-		return body.getPosition();
+		PhysicsWorld.reservePhysics();
+		Vec2 result = new Vec2(body.getPosition().x*PhysicsWorld.pixelsPerMeter,body.getPosition().y*PhysicsWorld.pixelsPerMeter);
+		PhysicsWorld.releasePhysics();
+		return result;
+		
 	}
 	
-	public float getAngle() {
-		return body.getAngle();
+	public double getAngle() {
+		PhysicsWorld.reservePhysics();
+		double result = (body.getAngle()/(2*Math.PI))*360;
+		PhysicsWorld.releasePhysics();
+		return result;
+	}
+	
+	public void applyAngularImpulse(float impulse) {
+		body.applyAngularImpulse(impulse);
 	}
 	
 }
