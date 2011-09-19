@@ -19,7 +19,7 @@ public class PhysicsCircle extends PhysicsObject {
 		c.m_radius = 25f/PhysicsWorld.pixelsPerMeter;
 		fdef = new FixtureDef();
 		fdef.shape = c;
-		fdef.friction = 1f;
+		fdef.friction = 3f;
 		fdef.density = 0.5f;
 	}
 	
