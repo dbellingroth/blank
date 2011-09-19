@@ -83,6 +83,7 @@ public class Game {
 		test2.setRotationAngle(rect.getAngle());
 		
 		circle.applyAngularImpulse(0.1f);
+		rect.applyAngularImpulse(0.2f);
 		test.draw();
 		test2.draw();
 		
