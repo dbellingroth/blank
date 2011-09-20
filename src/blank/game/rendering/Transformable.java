@@ -61,8 +61,7 @@ public abstract class Transformable implements Drawable {
 	protected void transform() {
 		GL11.glTranslated(translate.getX(), translate.getY(), 0);
 		
-		
-		  
+			
 			GL11.glTranslated(rotationPoint.getX(), rotationPoint.getY(), 0);
 			// falls Rotation gewünscht
 			if (rotationAngle != 0)GL11.glRotatef((float) rotationAngle, 0f, 0f, 1);
