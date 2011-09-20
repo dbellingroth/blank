@@ -9,7 +9,7 @@ import java.nio.ByteBuffer;
 import javax.imageio.ImageIO;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL30;
+//import org.lwjgl.opengl.GL30;
 
 public class Sprite extends Transformable {
 

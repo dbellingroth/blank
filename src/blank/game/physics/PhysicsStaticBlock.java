@@ -30,10 +30,8 @@ public class PhysicsStaticBlock extends PhysicsObject {
 	
 	@Override
 	public void init(World world) {
-		
 		body = world.createBody(def);
 		body.createFixture(fdef);
-		
 	}
 	
 }
