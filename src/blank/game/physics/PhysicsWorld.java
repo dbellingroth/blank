@@ -124,4 +124,8 @@ public class PhysicsWorld implements Runnable, ContactListener{
 		
 	}
 	
+	public void step() {
+		world.step(1f/60, 5, 5);
+	}
+	
 }

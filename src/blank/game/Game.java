@@ -5,9 +5,9 @@ import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
 
+import org.jbox2d.common.Vec2;
 
 import blank.game.physics.PhysicsBox;
-import blank.game.physics.PhysicsCircle;
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
 import blank.game.rendering.Sprite;
@@ -23,7 +23,6 @@ public class Game {
 	Sprite trunk, branch;
 	
 	private static PhysicsWorld world;
-	private PhysicsCircle circle;
 	private PhysicsBox rect;
 	private LinkedList<Ball> balls;
 
@@ -84,17 +83,24 @@ public class Game {
 		test2.setRotationPoint(new Point2D.Double(30,30));
 		test2.setRotationAngle(rect.getAngle());
 		
-		rect.applyAngularImpulse(3f);
+		//rect.applyAngularImpulse(3f);
+		rect.applyForce(new Vec2(-5000+(float)Math.random()*10000,-5000+(float)Math.random()*10000), new Vec2(25,25));
+		
+		//balls.get((int)(Math.random()*(balls.size()-1)+0.9999)).getPhysicsObject().applyForce(new Vec2(-100+(float)Math.random()*200,-100+(float)Math.random()*200), new Vec2(5,5));
+		
+		render();
+	}
+	
+	private void render() {
 		test2.draw();
 		
 		for (Ball b : balls) {
 			b.draw();
 		}
-		
 	}
 	
 	public void stop() {
 		world.stop();
-	}
-
+	}	
+	
 }

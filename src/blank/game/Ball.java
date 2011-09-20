@@ -15,7 +15,7 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	
 	private PhysicsObject phys;
 	private Sprite	sprite;
-	private float r;
+	private int r;
 	
 	public Ball(float x, float y, int r) {
 		this.r = r;
@@ -48,8 +48,13 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 
 	@Override
 	public void beginCollision(CollisionData collision) {
-		// TODO Auto-generated method stub
-		
+		/*Graphics2D g2d = sprite.getGraphics2D();
+		g2d.setColor(new Color((float)Math.random(), (float)Math.random(), (float)Math.random()));
+		g2d.fillOval(0, 0, r*2, r*2);
+		g2d.setColor(new Color((float)Math.random(), (float)Math.random(), (float)Math.random()));
+		g2d.drawLine(r, 0, r, r*2);
+		g2d.drawLine(0, r, r*2, r);
+		sprite.update();*/
 	}
 
 	@Override
@@ -64,6 +69,10 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	public int getZIndex() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public PhysicsObject getPhysicsObject() {
+		return phys;
 	}
 
 }
