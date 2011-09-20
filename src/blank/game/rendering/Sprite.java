@@ -16,11 +16,19 @@ public class Sprite extends Transformable {
 	private int zIndex = 0;
 	private int textureID;
 	private BufferedImage image;
+	private int sprite_edge;
 	private static int idCounter;
-
+	
+	
+	
 	public Sprite(int width, int height) {
-		init(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
+		
+		sprite_edge = Tools.next_powerOfTwo_square(width, height);
+		init(new BufferedImage(sprite_edge, sprite_edge, BufferedImage.TYPE_INT_ARGB));
+		
 	}
+	
+	
 	
 	
 	public Sprite(String imagePath) {
@@ -32,11 +40,17 @@ public class Sprite extends Transformable {
 		} catch (IOException e) {}			
 	}
 	
+	
+	
+	
 	private void init(BufferedImage image) {
 		textureID = idCounter++;
 		this.image = image;
 		update();
 	}
+	
+	
+	
 	
 	public void update() {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
