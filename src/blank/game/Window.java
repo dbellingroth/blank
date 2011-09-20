@@ -61,7 +61,6 @@ public class Window {
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 	}
 
-	
 	/**
 	 * Die eigentliche renderloop, die das ganze Spiel hindurch läuft
 	 */

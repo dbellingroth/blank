@@ -60,48 +60,48 @@ public class Tools {
 
 		return imageBuffer;
 	}
-	
-	
-	
-	
-	
+
 	/*
 	 * berechnet die nächstgrößer 2er-Potenz für die Seitenlänge eines Quadrats
-	 * @return nächstgrößere 2er-Potenz für den größten Wert der beiden Argumente
+	 * 
+	 * @return nächstgrößere 2er-Potenz für den größten Wert der beiden
+	 * Argumente
 	 */
 	public static int next_powerOfTwo_square(int width, int height) {
-		
-		/* 
-		 * die längste Kante der box wird ermittelt...
-		 * Test ? Ergebnis im true-Falle : Ergebnis im false-Falle
+
+		/*
+		 * die längste Kante der box wird ermittelt... Test ? Ergebnis im
+		 * true-Falle : Ergebnis im false-Falle
 		 */
 		int longest_edge = width > height ? width : height;
-		
-		
+
 		/*
-		 * ...und das nächstgrößere Quadrat mit einer Kantenlänge der nächsten Zweierpotenz
+		 * ...und das nächstgrößere Quadrat mit einer Kantenlänge der nächsten
+		 * Zweierpotenz
 		 */
-		int sprite_edge = (int) Math.pow(2,  Math.round((Math.log(longest_edge)/Math.log(2))+0.499999));
-		
+		int sprite_edge = (int) Math.pow(2,
+				Math.round((Math.log(longest_edge) / Math.log(2)) + 0.499999));
+
 		return sprite_edge;
-		
+
 	}
-	
-	
 
 	/*
 	 * berechnet die nächstgrößer 2er-Potenz für das Argument
+	 * 
 	 * @return nächstgrößere 2er-Potenz Argument
 	 */
 	public static int next_powerOfTwo_square(int longest_edge) {
-		
+
 		/*
-		 * ...und das nächstgrößere Quadrat mit einer Kantenlänge der nächsten Zweierpotenz
+		 * ...und das nächstgrößere Quadrat mit einer Kantenlänge der nächsten
+		 * Zweierpotenz
 		 */
-		int sprite_edge = (int) Math.pow(2,  Math.round((Math.log(longest_edge)/Math.log(2))+0.499999));
-		
+		int sprite_edge = (int) Math.pow(2,
+				Math.round((Math.log(longest_edge) / Math.log(2)) + 0.499999));
+
 		return sprite_edge;
-		
+
 	}
 
 }
