@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 
+import org.jbox2d.common.Vec2;
+
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsCircle;
 import blank.game.physics.PhysicsObject;
@@ -73,6 +75,24 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	
 	public PhysicsObject getPhysicsObject() {
 		return phys;
+	}
+
+	@Override
+	public void applyAngularImpulse(float impulse) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void applyForce(Vec2 force, Vec2 point) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void applyLinearImpulse(Vec2 impulse, Vec2 point) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
