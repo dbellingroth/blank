@@ -8,10 +8,4 @@ public interface PhysicsOwner {
 
 	public void beginCollision(CollisionData collision);
 
-	public void applyAngularImpulse(float impulse);
-
-	public void applyForce(Vec2 force, Vec2 point);
-
-	public void applyLinearImpulse(Vec2 impulse, Vec2 point);
-
 }
