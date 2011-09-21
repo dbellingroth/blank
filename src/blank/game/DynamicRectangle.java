@@ -14,7 +14,10 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 
 	private PhysicsObject phys;
 	private Sprite sprite;
+	private Sprite test;
 	public float width, height;
+	private int zIndex;
+	private boolean visible;
 
 	public DynamicRectangle(float x, float y, float width, float height) {
 		this.width = width;
@@ -28,21 +31,31 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 		g2d.setColor(Color.MAGENTA);
 		g2d.fillRect(0, 0, (int) width, (int) height);
 		sprite.update();
+		
+		
+		test = new Sprite("res/sonic.png");
 	}
 
 	@Override
 	public void draw() {
-		sprite.setTranslate(new Vec2(
+//		sprite.setTranslate(new Vec2(
+//				phys.getPosition().x - width / 2, phys.getPosition().y - height
+//						/ 2));
+//		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
+//		sprite.setRotationAngle(phys.getAngle());
+//		sprite.draw();
+		
+		test.setTranslate(new Vec2(
 				phys.getPosition().x - width / 2, phys.getPosition().y - height
 						/ 2));
-		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
-		sprite.setRotationAngle(phys.getAngle());
-		sprite.draw();
+		test.setRotationPoint(new Vec2(width / 2, height / 2));
+		test.setRotationAngle(phys.getAngle());
+		test.draw();
 	}
 
 	@Override
 	public void update(int delta) {
-
+		phys.applyForce(new Vec2(-5000+(float)Math.random()*10000,-5000+(float)Math.random()*10000), new Vec2(25,25));
 	}
 
 	@Override
@@ -53,12 +66,35 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 	@Override
 	public void endCollision(CollisionData collision) {
 
+	
+	}
+	
+	
+	
+	
+	public PhysicsObject getPhysicsObject() {
+		return phys;
+	}
+	
+	
+	@Override
+	public boolean getVisible() {
+		return visible;
 	}
 
 	@Override
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
+	@Override
 	public int getZIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return zIndex;
+	}
+	
+	@Override
+	public void setZIndex(int zIndex) {
+		this.zIndex = zIndex;
 	}
 
 
