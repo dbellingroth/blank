@@ -26,11 +26,11 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
 
-		sprite = new Sprite((int) width, (int) height);
-		Graphics2D g2d = sprite.getGraphics2D();
-		g2d.setColor(Color.MAGENTA);
-		g2d.fillRect(0, 0, (int) width, (int) height);
-		sprite.update();
+//		sprite = new Sprite((int) width, (int) height);
+//		Graphics2D g2d = sprite.getGraphics2D();
+//		g2d.setColor(Color.MAGENTA);
+//		g2d.fillRect(0, 0, (int) width, (int) height);
+//		sprite.update();
 		
 		
 		test = new Sprite("res/sonic.png");
