@@ -2,11 +2,8 @@ package blank.game;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-
 import org.jbox2d.common.Vec2;
-
 import blank.game.physics.CollisionData;
-import blank.game.physics.PhysicsBox;
 import blank.game.physics.PhysicsCircle;
 import blank.game.physics.PhysicsObject;
 import blank.game.physics.PhysicsOwner;
@@ -18,6 +15,8 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	private PhysicsObject phys;
 	private Sprite	sprite;
 	private int r;
+	private int zIndex;
+	private boolean visible;
 	
 	public Ball(float x, float y, int r) {
 		this.r = r;
@@ -65,16 +64,31 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 		
 	}
 
-	
 
-	@Override
-	public int getZIndex() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 	public PhysicsObject getPhysicsObject() {
 		return phys;
+	}
+	
+	
+	@Override
+	public boolean getVisible() {
+		return visible;
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
+	@Override
+	public int getZIndex() {
+		return zIndex;
+	}
+	
+	@Override
+	public void setZIndex(int zIndex) {
+		this.zIndex = zIndex;
 	}
 
 }
