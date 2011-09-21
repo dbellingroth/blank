@@ -2,10 +2,7 @@ package blank.game;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
-
 import org.jbox2d.common.Vec2;
-
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsBox;
 import blank.game.physics.PhysicsObject;
@@ -35,10 +32,10 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 
 	@Override
 	public void draw() {
-		sprite.setTranslate(new Point2D.Double(
+		sprite.setTranslate(new Vec2(
 				phys.getPosition().x - width / 2, phys.getPosition().y - height
 						/ 2));
-		sprite.setRotationPoint(new Point2D.Double(width / 2, height / 2));
+		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
 		sprite.setRotationAngle(phys.getAngle());
 		sprite.draw();
 	}
@@ -64,19 +61,6 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 		return 0;
 	}
 
-	@Override
-	public void applyAngularImpulse(float impulse) {
-		phys.applyAngularImpulse(impulse);
-	}
 
-	@Override
-	public void applyForce(Vec2 force, Vec2 point) {
-		phys.applyForce(force, point);
-	}
-
-	@Override
-	public void applyLinearImpulse(Vec2 impulse, Vec2 point) {
-		phys.applyLinearImpulse(impulse, point);
-	}
 
 }

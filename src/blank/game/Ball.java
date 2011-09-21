@@ -2,7 +2,8 @@ package blank.game;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
+
+import org.jbox2d.common.Vec2;
 
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsBox;
@@ -36,8 +37,8 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	
 	@Override
 	public void draw() {
-		sprite.setTranslate(new Point2D.Double(phys.getPosition().x-r,phys.getPosition().y-r));
-		sprite.setRotationPoint(new Point2D.Double(r,r));
+		sprite.setTranslate(new Vec2(phys.getPosition().x-r,phys.getPosition().y-r));
+		sprite.setRotationPoint(new Vec2(r,r));
 		sprite.setRotationAngle(phys.getAngle());
 		sprite.draw();
 	}

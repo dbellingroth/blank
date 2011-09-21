@@ -2,7 +2,6 @@ package blank.game;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
@@ -85,8 +84,8 @@ public class Game {
 		
 		executeActions();
 		
-		test2.setTranslate(new Point2D.Double(rect.getPosition().x-30,rect.getPosition().y-30));
-		test2.setRotationPoint(new Point2D.Double(30,30));
+		test2.setTranslate(new Vec2(rect.getPosition().x-30,rect.getPosition().y-30));
+		test2.setRotationPoint(new Vec2(30,30));
 		test2.setRotationAngle(rect.getAngle());
 		
 		//rect.applyAngularImpulse(3f);

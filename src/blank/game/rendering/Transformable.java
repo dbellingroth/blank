@@ -1,7 +1,6 @@
 package blank.game.rendering;
 
-import java.awt.geom.Point2D;
-
+import org.jbox2d.common.Vec2;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -13,24 +12,24 @@ import org.lwjgl.opengl.GL11;
  */
 public abstract class Transformable implements Drawable {
 
-	private Point2D translate = new Point2D.Double(0, 0);
-	private Point2D rotationPoint = new Point2D.Double(0, 0);
+	private Vec2 translate = new Vec2(0, 0);
+	private Vec2 rotationPoint = new Vec2(0, 0);
 	private double rotationAngle = 0;
-	private Point2D scaleFactor = new Point2D.Double(1, 1);
+	private Vec2 scaleFactor = new Vec2(1, 1);
 
-	public Point2D getTranslate() {
+	public Vec2 getTranslate() {
 		return translate;
 	}
 
-	public void setTranslate(Point2D translate) {
+	public void setTranslate(Vec2 translate) {
 		this.translate = translate;
 	}
 
-	public Point2D getRotationPoint() {
+	public Vec2 getRotationPoint() {
 		return rotationPoint;
 	}
 
-	public void setRotationPoint(Point2D rotationPoint) {
+	public void setRotationPoint(Vec2 rotationPoint) {
 		this.rotationPoint = rotationPoint;
 	}
 
@@ -42,11 +41,11 @@ public abstract class Transformable implements Drawable {
 		this.rotationAngle = rotationAngle;
 	}
 
-	public Point2D getScaleFactor() {
+	public Vec2 getScaleFactor() {
 		return scaleFactor;
 	}
 
-	public void setScaleFactor(Point2D scaleFactor) {
+	public void setScaleFactor(Vec2 scaleFactor) {
 		this.scaleFactor = scaleFactor;
 	}
 
@@ -57,16 +56,15 @@ public abstract class Transformable implements Drawable {
 	 * aufgerufen werden!
 	 */
 	protected void transform() {
-		GL11.glTranslated(translate.getX(), translate.getY(), 0);
-
-		GL11.glTranslated(rotationPoint.getX(), rotationPoint.getY(), 0);
+		GL11.glTranslated(translate.x, translate.y, 0);
+		GL11.glTranslated(rotationPoint.x, rotationPoint.y, 0);
 		// falls Rotation gewünscht
 		if (rotationAngle != 0)
 			GL11.glRotatef((float) rotationAngle, 0f, 0f, 1);
 
-		GL11.glScaled(scaleFactor.getX(), scaleFactor.getY(), 1);
+		GL11.glScaled(scaleFactor.x, scaleFactor.y, 1);
 
-		GL11.glTranslated(-rotationPoint.getX(), -rotationPoint.getY(), 0);
+		GL11.glTranslated(-rotationPoint.x, -rotationPoint.y, 0);
 
 	}
 
