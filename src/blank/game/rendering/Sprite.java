@@ -14,14 +14,18 @@ import org.lwjgl.opengl.GL11;
 
 public class Sprite extends Transformable {
 
+	private boolean visible;
 	private int zIndex = 0;
 	private int textureID;
 	private BufferedImage image;
 	private int sprite_edge;
 	private static int idCounter;
+	public int width, height;
 
 	public Sprite(int width, int height) {
 
+		this.width = width;
+		this.height = height;
 		sprite_edge = Tools.next_powerOfTwo_square(width, height);
 		init(new BufferedImage(sprite_edge, sprite_edge,
 				BufferedImage.TYPE_INT_ARGB));
@@ -38,9 +42,23 @@ public class Sprite extends Transformable {
 		}
 	}
 
+	
 	private void init(BufferedImage image) {
+		this.width = image.getWidth();
+		this.height = image.getHeight();
+		
 		textureID = idCounter++;
-		this.image = image;
+		
+		sprite_edge = Tools.next_powerOfTwo_square(width, height);
+		
+		/*
+		 * image wird zu einem neuen BufferedImage mit einer Seitenlänge einer 2er-Potenz in
+		 * das das eigentliche Bild gezeichnet wird.
+		 */
+		this.image = new BufferedImage(sprite_edge, sprite_edge,	
+				BufferedImage.TYPE_INT_ARGB); 
+		this.image.getGraphics().drawImage(image, 0, 0, null);
+		
 		update();
 	}
 
@@ -70,11 +88,11 @@ public class Sprite extends Transformable {
 		GL11.glTexCoord2f(0, 0);
 		GL11.glVertex2f(0, 0);
 		GL11.glTexCoord2f(1, 0);
-		GL11.glVertex2f(image.getWidth(), 0);
+		GL11.glVertex2f(width, 0);
 		GL11.glTexCoord2f(1, 1);
-		GL11.glVertex2f(image.getWidth(), image.getHeight());
+		GL11.glVertex2f(width, height);
 		GL11.glTexCoord2f(0, 1);
-		GL11.glVertex2f(0, image.getHeight());
+		GL11.glVertex2f(0, height);
 		GL11.glEnd();
 
 		GL11.glPopMatrix();
@@ -91,6 +109,16 @@ public class Sprite extends Transformable {
 	@Override
 	public int getZIndex() {
 		return zIndex;
+	}
+
+	@Override
+	public boolean getVisible() {
+		return visible;
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 
 }
