@@ -17,7 +17,7 @@ import java.util.Hashtable;
 
 /**
  * 
- * @author David Bellingroth + Code von anderen
+ * @author David Bellingroth & Kilian Helmenstein
  * 
  */
 public class Tools {
@@ -59,6 +59,49 @@ public class Tools {
 		imageBuffer.flip();
 
 		return imageBuffer;
+	}
+
+	/*
+	 * berechnet die nächstgrößer 2er-Potenz für die Seitenlänge eines Quadrats
+	 * 
+	 * @return nächstgrößere 2er-Potenz für den größten Wert der beiden
+	 * Argumente
+	 */
+	public static int next_powerOfTwo_square(int width, int height) {
+
+		/*
+		 * die längste Kante der box wird ermittelt... Test ? Ergebnis im
+		 * true-Falle : Ergebnis im false-Falle
+		 */
+		int longest_edge = width > height ? width : height;
+
+		/*
+		 * ...und das nächstgrößere Quadrat mit einer Kantenlänge der nächsten
+		 * Zweierpotenz
+		 */
+		int sprite_edge = (int) Math.pow(2,
+				Math.round((Math.log(longest_edge) / Math.log(2)) + 0.499999));
+
+		return sprite_edge;
+
+	}
+
+	/*
+	 * berechnet die nächstgrößer 2er-Potenz für das Argument
+	 * 
+	 * @return nächstgrößere 2er-Potenz Argument
+	 */
+	public static int next_powerOfTwo_square(int longest_edge) {
+
+		/*
+		 * ...und das nächstgrößere Quadrat mit einer Kantenlänge der nächsten
+		 * Zweierpotenz
+		 */
+		int sprite_edge = (int) Math.pow(2,
+				Math.round((Math.log(longest_edge) / Math.log(2)) + 0.499999));
+
+		return sprite_edge;
+
 	}
 
 }

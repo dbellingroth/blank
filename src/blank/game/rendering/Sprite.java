@@ -9,6 +9,7 @@ import java.nio.ByteBuffer;
 import javax.imageio.ImageIO;
 
 import org.lwjgl.opengl.GL11;
+
 //import org.lwjgl.opengl.GL30;
 
 public class Sprite extends Transformable {
@@ -16,31 +17,36 @@ public class Sprite extends Transformable {
 	private int zIndex = 0;
 	private int textureID;
 	private BufferedImage image;
+	private int sprite_edge;
 	private static int idCounter;
 
 	public Sprite(int width, int height) {
-		init(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
+
+		sprite_edge = Tools.next_powerOfTwo_square(width, height);
+		init(new BufferedImage(sprite_edge, sprite_edge,
+				BufferedImage.TYPE_INT_ARGB));
+
 	}
-	
-	
+
 	public Sprite(String imagePath) {
 		URL image_url = getClass().getClassLoader().getResource(imagePath);
 
 		try {
 			BufferedImage image = ImageIO.read(image_url);
 			init(image);
-		} catch (IOException e) {}			
+		} catch (IOException e) {
+		}
 	}
-	
+
 	private void init(BufferedImage image) {
 		textureID = idCounter++;
 		this.image = image;
 		update();
 	}
-	
+
 	public void update() {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
-		//GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
+		// GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
 		ByteBuffer buf = Tools.convertImageData(image);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER,
 				GL11.GL_LINEAR);
@@ -49,10 +55,9 @@ public class Sprite extends Transformable {
 		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA,
 				image.getWidth(), image.getHeight(), 0, GL11.GL_RGBA,
 				GL11.GL_UNSIGNED_BYTE, buf);
-		
+
 	}
 
-	
 	public void draw() {
 
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);

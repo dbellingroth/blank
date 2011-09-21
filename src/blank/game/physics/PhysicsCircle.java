@@ -7,28 +7,28 @@ import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 
 public class PhysicsCircle extends PhysicsObject {
-	
+
 	private BodyDef def;
 	private FixtureDef fdef;
-	
+
 	public PhysicsCircle(float x, float y, float r) {
 		def = new BodyDef();
-		def.position.set(x/30, y/30);
+		def.position.set(x / 30, y / 30);
 		def.type = BodyType.DYNAMIC;
 		CircleShape c = new CircleShape();
-		c.m_radius = r/PhysicsWorld.pixelsPerMeter;
+		c.m_radius = r / PhysicsWorld.pixelsPerMeter;
 		fdef = new FixtureDef();
 		fdef.shape = c;
 		fdef.friction = 1f;
 		fdef.density = 0.1f;
 	}
-	
+
 	@Override
 	public void init(World world) {
-		
+
 		body = world.createBody(def);
 		body.createFixture(fdef);
-		
+
 	}
 
 }
