@@ -2,9 +2,13 @@ package blank.game;
 
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
+
+import org.jbox2d.common.Vec2;
+
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
 
@@ -62,6 +66,14 @@ public class Game {
 		
 //		das Test-Rechteck hinzufügen
 		allObjects.add(new DynamicRectangle(105,300,40,48));
+		
+		
+		
+//		ArrayList<Vec2> positions = new ArrayList<Vec2>();
+//		positions.add(new Vec2(30, 0));
+//		positions.add(new Vec2(0, 60));
+//		positions.add(new Vec2(60, 60));
+//		allObjects.add(new DynamicPolygon(200, 300, positions));
 		
 		world.start();
 	
