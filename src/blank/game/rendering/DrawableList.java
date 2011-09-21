@@ -13,9 +13,10 @@ import java.util.LinkedList;
 public class DrawableList implements Drawable {
 
 	private LinkedList<Drawable> drawables;
+	private boolean visible;
 	private int zIndex = 0;
 
-	DrawableList() {
+	public DrawableList() {
 
 		drawables = new LinkedList<Drawable>();
 
@@ -36,14 +37,14 @@ public class DrawableList implements Drawable {
 		else
 			for (int x = 0; x < drawables.size(); x++) {
 
-				if (drawable.getZIndex() < drawables.get(x).getZIndex()) {
+				if (drawable.getZIndex() <= drawables.get(x).getZIndex()) {
 
 					drawables.add(x, drawable);
 					break;
 					// Falls die for-Schleife am Ende ankommt und drawable noch
 					// keinen Platz gefunden hat
 					// wird es ans Ende gesetzt
-				} else if (x == drawables.size() - 1
+				} else if (x == (drawables.size() - 1)
 						&& drawable.getZIndex() > drawables.get(x).getZIndex()) {
 
 					drawables.add(drawable);
@@ -60,7 +61,7 @@ public class DrawableList implements Drawable {
 	 * @param drawable
 	 *            loescht ein Drawable aus der Liste
 	 */
-	public void deleteDrawable(Drawable drawable) {
+	public void removeDrawable(Drawable drawable) {
 
 		drawables.remove(drawable);
 
@@ -77,6 +78,26 @@ public class DrawableList implements Drawable {
 
 	}
 
+	
+	/**
+	 * überprüft, ob das übergebene Drawable bereits in der Liste vorhanden ist
+	 */
+	public boolean contains(Drawable drawable) {
+		
+		if (drawables.contains(drawable)) return true;
+		else return false;
+		
+	}
+	
+	
+	
+	public int size() {
+		
+		return drawables.size();
+
+	}
+	
+	
 	/**
 	 * ruft auf alle Objekete der Liste die draw()-Methode auf
 	 */
@@ -97,5 +118,15 @@ public class DrawableList implements Drawable {
 	public void setZIndex(int zIndex) {
 		this.zIndex = zIndex;
 	}
+	
+	@Override
+	public boolean getVisible() {
+		return visible;
+	}
 
+	@Override
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
 }

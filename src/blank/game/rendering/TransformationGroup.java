@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 public class TransformationGroup extends Transformable {
 
 	private DrawableList list = new DrawableList();
+	private boolean visible;
 	private int zIndex = 0;
 
 	@Override
@@ -34,7 +35,18 @@ public class TransformationGroup extends Transformable {
 	}
 
 	public void removeChild(Drawable child) {
-		list.deleteDrawable(child);
+		list.removeDrawable(child);
+	}
+	
+	
+	@Override
+	public boolean getVisible() {
+		return visible;
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 
 }
