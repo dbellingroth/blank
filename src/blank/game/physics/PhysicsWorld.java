@@ -69,14 +69,14 @@ public class PhysicsWorld implements Runnable, ContactListener{
 		stop = true;
 	}
 	
-	public static void addObject(PhysicsObject obj) {
+	public void addObject(PhysicsObject obj) {
 		reservePhysics();
 		obj.init(world);
 		objectConnections.put(obj.getBody(), obj);
 		releasePhysics();
 	}
 	
-	public static void removeObject(PhysicsObject obj) {
+	public void removeObject(PhysicsObject obj) {
 		reservePhysics();
 		objectConnections.remove(obj.getBody());
 		world.destroyBody(obj.getBody());

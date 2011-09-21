@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 
 import blank.game.physics.CollisionData;
+import blank.game.physics.PhysicsBox;
 import blank.game.physics.PhysicsCircle;
 import blank.game.physics.PhysicsObject;
 import blank.game.physics.PhysicsOwner;
@@ -49,7 +50,7 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	@Override
 	public void beginCollision(CollisionData collision) {
 		
-		if ( collision.getImpulse() > 3) {
+		if (collision.getImpulse() > 3/*collision.getSecondObject() instanceof PhysicsBox*/) {
 			Graphics2D g2d = sprite.getGraphics2D();
 			g2d.setColor(Color.WHITE);
 			g2d.fillOval(0, 0, r*2, r*2);
