@@ -17,8 +17,8 @@ import org.jbox2d.dynamics.contacts.Contact;
  * Wrapperklasse für die JBox2D World
  */
 public class PhysicsWorld implements Runnable, ContactListener{
-    private World world;
-    private HashMap<Body, PhysicsObject> objectConnections; //Speichert, welche PhysicsObjects zu welchen Bodys gehören. Wichtig für die Kollisionsbenachrichtigung
+    private static World world;
+    private static HashMap<Body, PhysicsObject> objectConnections; //Speichert, welche PhysicsObjects zu welchen Bodys gehören. Wichtig für die Kollisionsbenachrichtigung
     private boolean stop;
     private static Semaphore physicsSemaphore = new Semaphore(1);
     public static int pixelsPerMeter = 30;
@@ -69,14 +69,14 @@ public class PhysicsWorld implements Runnable, ContactListener{
 		stop = true;
 	}
 	
-	public void addObject(PhysicsObject obj) {
+	public static void addObject(PhysicsObject obj) {
 		reservePhysics();
 		obj.init(world);
 		objectConnections.put(obj.getBody(), obj);
 		releasePhysics();
 	}
 	
-	public void removeObject(PhysicsObject obj) {
+	public static void removeObject(PhysicsObject obj) {
 		reservePhysics();
 		objectConnections.remove(obj.getBody());
 		world.destroyBody(obj.getBody());

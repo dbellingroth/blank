@@ -48,13 +48,13 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 
 	@Override
 	public void beginCollision(CollisionData collision) {
-		/*Graphics2D g2d = sprite.getGraphics2D();
-		g2d.setColor(new Color((float)Math.random(), (float)Math.random(), (float)Math.random()));
-		g2d.fillOval(0, 0, r*2, r*2);
-		g2d.setColor(new Color((float)Math.random(), (float)Math.random(), (float)Math.random()));
-		g2d.drawLine(r, 0, r, r*2);
-		g2d.drawLine(0, r, r*2, r);
-		sprite.update();*/
+		
+		if ( collision.getImpulse() > 3) {
+			Graphics2D g2d = sprite.getGraphics2D();
+			g2d.setColor(Color.WHITE);
+			g2d.fillOval(0, 0, r*2, r*2);
+			sprite.update();
+		}
 	}
 
 	@Override

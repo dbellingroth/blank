@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.Semaphore;
 
 import org.jbox2d.common.Vec2;
 
@@ -25,6 +27,8 @@ public class Game {
 	private static PhysicsWorld world;
 	private PhysicsBox rect;
 	private LinkedList<Ball> balls;
+	private static Queue<Executor> actionList = new LinkedList<Executor>(); //Qeue von Executors, die ausgeführt werden sollen
+	private static Semaphore actionSem = new Semaphore(1);
 
 	public static void main(String args[]) {
 		new Window(new Game(), 800, 600);
@@ -79,6 +83,8 @@ public class Game {
 	 */
 	protected void update(int delta) {
 		
+		executeActions();
+		
 		test2.setTranslate(new Point2D.Double(rect.getPosition().x-30,rect.getPosition().y-30));
 		test2.setRotationPoint(new Point2D.Double(30,30));
 		test2.setRotationAngle(rect.getAngle());
@@ -101,6 +107,34 @@ public class Game {
 	
 	public void stop() {
 		world.stop();
-	}	
+	}
+	
+	public static void addAction(Executor action) {
+		try {
+			actionSem.acquire();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		actionList.add(action);
+		actionSem.release();
+	}
+	
+	private void executeActions() {
+		
+		while (!actionList.isEmpty()){
+			try {
+				actionSem.acquire();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			actionList.remove().execute();
+			
+			actionSem.release();
+		}
+		
+	}
 	
 }

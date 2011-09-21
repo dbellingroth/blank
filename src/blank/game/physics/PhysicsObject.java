@@ -4,6 +4,9 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
 
+import blank.game.Executor;
+import blank.game.Game;
+
 /**
  * Die abstrakte Oberklasse aller Physikalischen Körper.
  * @author David Bellingroth
@@ -55,13 +58,29 @@ public abstract class PhysicsObject {
 		this.owner = owner;
 	}
 	
-	protected void beginCollision(CollisionData data) {
+	protected void beginCollision(final CollisionData data) {
 		//System.out.println(this+" meldet:   "+data.getFirstObject() + " kollidiert mit "+data.getSecondObject()+ "   Impuls:"+data.getImpulse());
-		if (owner!=null) owner.beginCollision(data);
+		if (owner!=null) {
+			Game.addAction(new Executor() {
+				public void execute() {
+					owner.beginCollision(data);
+				}
+			}
+			);
+			
+		}
 	}
 	
-	protected void endCollision(CollisionData data) {
-		if (owner!=null) owner.endCollision(data);
+	protected void endCollision(final CollisionData data) {	
+		if (owner!=null) {
+			Game.addAction(new Executor() {
+				public void execute() {
+					owner.beginCollision(data);
+				}
+			}
+			);
+			
+		}
 	}
 	
 	protected Body getBody() {
