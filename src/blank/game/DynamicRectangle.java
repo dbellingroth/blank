@@ -14,7 +14,6 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 
 	private PhysicsObject phys;
 	private Sprite sprite;
-	private Sprite test;
 	public float width, height;
 	private int zIndex;
 	private boolean visible;
@@ -33,7 +32,7 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 //		sprite.update();
 		
 		
-		test = new Sprite("res/sonic.png");
+		sprite = new Sprite("res/sonic.png");
 	}
 
 	@Override
@@ -45,12 +44,12 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 //		sprite.setRotationAngle(phys.getAngle());
 //		sprite.draw();
 		
-		test.setTranslate(new Vec2(
+		sprite.setTranslate(new Vec2(
 				phys.getPosition().x - width / 2, phys.getPosition().y - height
 						/ 2));
-		test.setRotationPoint(new Vec2(width / 2, height / 2));
-		test.setRotationAngle(phys.getAngle());
-		test.draw();
+		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
+		sprite.setRotationAngle(phys.getAngle());
+		sprite.draw();
 	}
 
 	@Override
