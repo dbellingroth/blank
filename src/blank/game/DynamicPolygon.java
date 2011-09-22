@@ -40,18 +40,17 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 		Graphics2D g2d = sprite.getGraphics2D();
 		g2d.setColor(Color.MAGENTA);
 		
+		
 		int[] xPoints = new int[positions.size()];
 		int[] yPoints = new int[positions.size()];
 		
 		for (int i = 0; i < positions.size(); i++) {
+			
 			xPoints[i] = (int) positions.get(i).x;
 			yPoints[i] = (int) positions.get(i).y;
-			
-			centerX += positions.get(i).x;
-			centerY += positions.get(i).y;
-			centerX /= positions.size();
-			centerY /= positions.size();
 		}
+		
+		
 		g2d.fillPolygon(xPoints, yPoints, positions.size());
 		sprite.update();
 		
@@ -63,16 +62,15 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 		sprite.setTranslate(new Vec2(
 				phys.getPosition().x - width / 2, phys.getPosition().y - height
 						/ 2));
-		sprite.setRotationPoint(new Vec2(centerX, centerY));
+		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
 		sprite.setRotationAngle(phys.getAngle());
 		sprite.draw();
-			
 	}
 	
 
 	@Override
 	public void update(int delta) {
-		phys.applyForce(new Vec2(-5000+(float)Math.random()*10000,-5000+(float)Math.random()*10000), new Vec2(25,25));
+//		phys.applyForce(new Vec2(-5000+(float)Math.random()*10000,-5000+(float)Math.random()*10000), new Vec2(25,25));
 	}
 
 	@Override
