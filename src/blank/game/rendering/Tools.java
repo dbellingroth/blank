@@ -13,7 +13,10 @@ import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 import java.util.Hashtable;
+
+import org.jbox2d.common.Vec2;
 
 /**
  * 
@@ -103,5 +106,23 @@ public class Tools {
 		return sprite_edge;
 
 	}
+	
+	
+	
+	
+	public static Vec2[] arrayList_to_array(ArrayList<Vec2> positions_arrayList) {
+		
+		
+		Vec2[] positions_array = new Vec2[positions_arrayList.size()];
+		
+		for (int i = 0; i < positions_arrayList.size(); i++) {
+			positions_array[i] = positions_arrayList.get(i);
+		}
+		
+		return positions_array;
+	}
+	
+	
+	
 
 }
