@@ -9,6 +9,8 @@ import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 
+import blank.game.rendering.Tools;
+
 public class PhysicsPolygon extends PhysicsObject {
 
 
@@ -18,28 +20,18 @@ public class PhysicsPolygon extends PhysicsObject {
 	
 	public PhysicsPolygon(int x, int y, int width, int height, ArrayList<Vec2> positions) {
 		
-		
 		def = new BodyDef();
 		def.position.set(x / PhysicsWorld.pixelsPerMeter
-				+ (width / (PhysicsWorld.pixelsPerMeter * 2)), y
-				/ PhysicsWorld.pixelsPerMeter
-				+ (height / (PhysicsWorld.pixelsPerMeter * 2)));
+									+ (width / (PhysicsWorld.pixelsPerMeter * 2)), 
+				y / PhysicsWorld.pixelsPerMeter
+								+ (height / (PhysicsWorld.pixelsPerMeter * 2)));
 		def.type = BodyType.DYNAMIC;
 		def.fixedRotation = true;
 
-		
 		PolygonShape shape = new PolygonShape();
 
-		Vec2[] positions_array = new Vec2[positions.size()-1];
-		
-		for (int i = 0; i < positions.size(); i++) {
-			System.out.println(i);
-			positions_array[i].x = positions.get(i).x;
-			positions_array[i].y = positions.get(i).y;
-		}
-		
-		shape.set(positions_array, positions.size());
-		
+		Vec2[] positions_array = Tools.arrayList_to_array(positions);		
+		shape.set(positions_array, positions_array.length);
 		fdef = new FixtureDef();
 
 		fdef.shape = shape;
