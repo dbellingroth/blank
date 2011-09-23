@@ -22,16 +22,19 @@ public class PhysicsPolygon extends PhysicsObject {
 		
 		def = new BodyDef();
 		def.position.set(x / PhysicsWorld.pixelsPerMeter
-									+ (width / (PhysicsWorld.pixelsPerMeter * 2)), 
+									+ (width / (float) (Math.pow(2, PhysicsWorld.pixelsPerMeter) * 2)), 
 				y / PhysicsWorld.pixelsPerMeter
-								+ (height / (PhysicsWorld.pixelsPerMeter * 2)));
+								+ (height / (float) ((Math.pow(2, PhysicsWorld.pixelsPerMeter) * 2))));
 		def.type = BodyType.DYNAMIC;
 		def.fixedRotation = true;
 
+		
 		PolygonShape shape = new PolygonShape();
 
-		Vec2[] positions_array = Tools.arrayList_to_array(positions);		
+		Vec2[] positions_array = Tools.arrayList_to_array(positions, new Vec2(1/PhysicsWorld.pixelsPerMeter, 1/PhysicsWorld.pixelsPerMeter));		
 		shape.set(positions_array, positions_array.length);
+		
+		
 		fdef = new FixtureDef();
 
 		fdef.shape = shape;
