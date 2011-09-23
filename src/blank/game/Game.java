@@ -2,12 +2,10 @@ package blank.game;
 
 
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
 
-import org.jbox2d.common.Vec2;
 
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
