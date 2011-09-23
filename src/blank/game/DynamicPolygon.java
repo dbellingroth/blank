@@ -27,6 +27,7 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 	public DynamicPolygon(int x, int y, ArrayList<Vec2> positions) {
 		
 
+		//Breite und Höhe berechnen
 		for (Vec2 pos : positions) {
 			width = (int) (pos.x > width ? pos.x : width);
 			height = (int) (pos.y > height ? pos.y : height);
@@ -36,7 +37,7 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
 
-		sprite = new Sprite((int) width, (int) height);
+		sprite = new Sprite((int) Math.round(width), (int) Math.round(height));
 		Graphics2D g2d = sprite.getGraphics2D();
 		g2d.setColor(Color.MAGENTA);
 		
@@ -71,6 +72,11 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 	@Override
 	public void update(int delta) {
 //		phys.applyForce(new Vec2(-5000+(float)Math.random()*10000,-5000+(float)Math.random()*10000), new Vec2(25,25));
+	}
+	
+	@Override
+	public void beforeCollision(CollisionData data) {
+		
 	}
 
 	@Override
@@ -111,12 +117,5 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 	public void setZIndex(int zIndex) {
 		this.zIndex = zIndex;
 	}
-
-	@Override
-	public void beforeCollision(CollisionData data) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
+	
 }

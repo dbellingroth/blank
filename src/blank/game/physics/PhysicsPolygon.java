@@ -26,13 +26,11 @@ public class PhysicsPolygon extends PhysicsObject {
 	public PhysicsPolygon(int x, int y, int width, int height, ArrayList<Vec2> positions) {
 		
 		def = new BodyDef();
-		def.position.set(x / PhysicsWorld.pixelsPerMeter
-									+ (width / (PhysicsWorld.pixelsPerMeter * 2)), 
-				y / PhysicsWorld.pixelsPerMeter
-								+ (height / (PhysicsWorld.pixelsPerMeter * 2)));
+		def.position.set(x / PhysicsWorld.pixelsPerMeter + (width / (PhysicsWorld.pixelsPerMeter * 2)), 
+				y / PhysicsWorld.pixelsPerMeter + (height / (PhysicsWorld.pixelsPerMeter * 2)));
 		def.type = BodyType.DYNAMIC;
-		//def.fixedRotation = true;
-
+		
+		
 		PolygonShape shape = new PolygonShape();
 
 		Vec2[] positions_array = Tools.arrayList_to_array(positions);		
@@ -41,7 +39,7 @@ public class PhysicsPolygon extends PhysicsObject {
 
 		fdef.shape = shape;
 		fdef.friction = 0.3f;
-		fdef.density = 1f;
+		fdef.density = 0.5f;
 
 	}
 

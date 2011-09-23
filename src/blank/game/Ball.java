@@ -52,7 +52,7 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	@Override
 	public void beginCollision(CollisionData collision) {
 		
-		if (collision.getImpulse() > 0.3/*collision.getSecondObject() instanceof PhysicsBox*/) {
+		if (collision.getImpulse() > 3/*collision.getSecondObject() instanceof PhysicsBox*/) {
 			Graphics2D g2d = sprite.getGraphics2D();
 			g2d.setColor(Color.WHITE);
 			g2d.fillOval(0, 0, r*2, r*2);
@@ -62,7 +62,6 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 
 	@Override
 	public void endCollision(CollisionData collision) {
-		// TODO Auto-generated method stub
 		
 	}
 
