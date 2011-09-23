@@ -95,6 +95,10 @@ public class PhysicsWorld implements Runnable, ContactListener{
 	public static void releasePhysics() {
 		physicsSemaphore.release();
 	}
+	
+	public static PhysicsObject getObjectForBody(Body body) {
+		return objectConnections.get(body);
+	}
 
 	
 	
@@ -107,21 +111,24 @@ public class PhysicsWorld implements Runnable, ContactListener{
 	public void endContact(Contact contact) {
 		PhysicsObject first = objectConnections.get(contact.getFixtureA().getBody());
 		PhysicsObject second = objectConnections.get(contact.getFixtureB().getBody());
-		first.endCollision(new CollisionData(first,second,0));
-		second.endCollision(new CollisionData(second,first,0));
+		first.endCollision(new CollisionData(contact,0,false));
+		second.endCollision(new CollisionData(contact,0,true));
 	}
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
 		PhysicsObject first = objectConnections.get(contact.getFixtureA().getBody());
 		PhysicsObject second = objectConnections.get(contact.getFixtureB().getBody());
-		first.beginCollision(new CollisionData(first,second,impulse.normalImpulses[0]));
-		second.beginCollision(new CollisionData(second,first,impulse.normalImpulses[0]));
+		first.beginCollision(new CollisionData(contact,impulse.normalImpulses[0],false));
+		second.beginCollision(new CollisionData(contact,impulse.normalImpulses[0],true));
 	}
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		
+		PhysicsObject first = objectConnections.get(contact.getFixtureA().getBody());
+		PhysicsObject second = objectConnections.get(contact.getFixtureB().getBody());
+		first.beforeCollision(new CollisionData(contact,0,false));
+		second.beforeCollision(new CollisionData(contact,0,true));
 	}
 	
 	public void step() {

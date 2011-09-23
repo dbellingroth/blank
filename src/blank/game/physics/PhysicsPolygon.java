@@ -11,6 +11,11 @@ import org.jbox2d.dynamics.World;
 
 import blank.game.rendering.Tools;
 
+/**
+ * 
+ * @author Kilian Helmenstein
+ * Eine Dynamisches Polygon das aus beliebig vielen Punkten bestehen kann
+ */
 public class PhysicsPolygon extends PhysicsObject {
 
 
@@ -26,7 +31,7 @@ public class PhysicsPolygon extends PhysicsObject {
 				y / PhysicsWorld.pixelsPerMeter
 								+ (height / (PhysicsWorld.pixelsPerMeter * 2)));
 		def.type = BodyType.DYNAMIC;
-		def.fixedRotation = true;
+		//def.fixedRotation = true;
 
 		PolygonShape shape = new PolygonShape();
 

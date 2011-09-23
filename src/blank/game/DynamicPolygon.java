@@ -112,5 +112,11 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 		this.zIndex = zIndex;
 	}
 
+	@Override
+	public void beforeCollision(CollisionData data) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

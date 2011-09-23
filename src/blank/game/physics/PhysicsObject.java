@@ -16,6 +16,10 @@ public abstract class PhysicsObject {
 	protected Body body;
 	private PhysicsOwner owner = null;
 	
+	public PhysicsOwner getOwner() {
+		return owner;
+	}
+
 	//Initialisiert das Objekt, erzeugt den Body und liefert ihn zurück, damit PhysicsWorld in die KollisionsHashMap packen kann
 	public abstract void init(World world);
 	
@@ -85,6 +89,12 @@ public abstract class PhysicsObject {
 	
 	protected Body getBody() {
 		return this.body;
+	}
+
+	public void beforeCollision(CollisionData data) {
+		if (owner != null) {
+			owner.beforeCollision(data);
+		}
 	}
 
 	

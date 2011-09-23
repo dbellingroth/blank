@@ -1,7 +1,5 @@
 package blank.game;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import org.jbox2d.common.Vec2;
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsBox;
@@ -94,6 +92,12 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 	@Override
 	public void setZIndex(int zIndex) {
 		this.zIndex = zIndex;
+	}
+
+	@Override
+	public void beforeCollision(CollisionData data) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
