@@ -19,7 +19,8 @@ public class Sprite extends Transformable {
 	private int textureID;
 	private BufferedImage image;
 	private static int idCounter;
-	public int width, height, twidth, theight;
+	private int width, height, twidth, theight;
+	private float wfac, hfac;
 
 	public Sprite(int width, int height) {
 
@@ -48,7 +49,14 @@ public class Sprite extends Transformable {
 		textureID = idCounter++;
 		
 		int texture_edge = Tools.next_powerOfTwo_square(width, height);
+		
+		//Die Textur wird quadratisch mit einer Kantenlänge, die eine 2erpotenz ist.
 		this.twidth = this.theight = texture_edge;
+		
+		//Der Faktor, mit dem die Textur auf das Quad gemappt wird
+		this.wfac = (float)width/twidth;
+		this.hfac = (float)height/theight;
+		
 		/*
 		 * image wird zu einem neuen BufferedImage mit einer Seitenlänge einer 2er-Potenz in
 		 * das das eigentliche Bild gezeichnet wird.
@@ -84,12 +92,12 @@ public class Sprite extends Transformable {
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glTexCoord2f(0, 0);
 		GL11.glVertex2f(0, 0);
-		GL11.glTexCoord2f(1, 0);
-		GL11.glVertex2f(twidth, 0);
-		GL11.glTexCoord2f(1, 1);
-		GL11.glVertex2f(twidth, theight);
-		GL11.glTexCoord2f(0, 1);
-		GL11.glVertex2f(0, theight);
+		GL11.glTexCoord2f(wfac, 0);
+		GL11.glVertex2f(width, 0);
+		GL11.glTexCoord2f(wfac, hfac);
+		GL11.glVertex2f(width, height);
+		GL11.glTexCoord2f(0, hfac);
+		GL11.glVertex2f(0, height);
 		GL11.glEnd();
 
 		GL11.glPopMatrix();
