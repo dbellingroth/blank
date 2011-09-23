@@ -62,19 +62,22 @@ public class Game {
 			}
 		}
 		
+		
 //		das Test-Rechteck hinzufügen
-		allObjects.add(new DynamicRectangle(105,300,40,48));
+//		allObjects.add(new DynamicRectangle(105,300,40,48));
 		
 		
+//		Test-Polygon hinzufügen
+		ArrayList<Vec2> positions = new ArrayList<Vec2>();
+		positions.add(new Vec2(25, 0));
+		positions.add(new Vec2(50, 50));
+		positions.add(new Vec2(25, 25));
+		positions.add(new Vec2(0, 50));
+		allObjects.add(new DynamicPolygon(250, 250, positions));
 		
-//		ArrayList<Vec2> positions = new ArrayList<Vec2>();
-//		positions.add(new Vec2(30, 0));
-//		positions.add(new Vec2(0, 60));
-//		positions.add(new Vec2(60, 60));
-//		allObjects.add(new DynamicPolygon(200, 300, positions));
+		
 		
 		world.start();
-	
 	}
 
 	/**
