@@ -32,6 +32,7 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 			height = (int) (pos.y > height ? pos.y : height);
 		}
 		
+		
 		phys = new PhysicsPolygon(x, y, (int) width, (int) height, positions);
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
@@ -39,6 +40,8 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 		sprite = new Sprite((int) width, (int) height);
 		Graphics2D g2d = sprite.getGraphics2D();
 		g2d.setColor(Color.MAGENTA);
+		
+		
 		
 		
 		int[] xPoints = new int[positions.size()];
@@ -49,7 +52,6 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 			xPoints[i] = (int) positions.get(i).x;
 			yPoints[i] = (int) positions.get(i).y;
 		}
-		
 		
 		g2d.fillPolygon(xPoints, yPoints, positions.size());
 		sprite.update();
