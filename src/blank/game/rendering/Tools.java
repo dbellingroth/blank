@@ -123,6 +123,24 @@ public class Tools {
 	}
 	
 	
+	public static Vec2[] arrayList_to_array(ArrayList<Vec2> positions_arrayList, Vec2 factor) {
+		
+		
+		Vec2[] positions_array = new Vec2[positions_arrayList.size()];
+		
+		for (int i = 0; i < positions_arrayList.size(); i++) {
+			positions_array[i] = positions_arrayList.get(i);
+			
+			int x = (int) (positions_arrayList.get(i).x * factor.x);
+			int y = (int) (positions_arrayList.get(i).y * factor.y);
+			
+			positions_array[i].x = x;
+			positions_array[i].y = y;
+		}
+		
+		return positions_array;
+	}
+	
 	
 
 }
