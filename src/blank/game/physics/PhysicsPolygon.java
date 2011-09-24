@@ -38,7 +38,7 @@ public class PhysicsPolygon extends PhysicsObject {
 		
 		PolygonShape shape = new PolygonShape();
 
-		Vec2[] positions_array = Tools.arrayList_to_array(positions, new Vec2(1/PhysicsWorld.pixelsPerMeter, 1/PhysicsWorld.pixelsPerMeter));		
+		Vec2[] positions_array = Tools.arrayList_to_array(positions);		
 		shape.set(positions_array, positions_array.length);
 		
 
