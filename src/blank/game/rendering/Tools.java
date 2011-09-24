@@ -120,11 +120,23 @@ public class Tools {
 		Vec2[] positions_array = new Vec2[positions_arrayList.size()];
 		
 		for (int i = 0; i < positions_arrayList.size(); i++) {
-			positions_array[i] = new Vec2(positions_arrayList.get(i).x / PhysicsWorld.pixelsPerMeter, positions_arrayList.get(i).y / PhysicsWorld.pixelsPerMeter);
+			positions_array[i] = new Vec2(positions_arrayList.get(i).x, positions_arrayList.get(i).y);
 		}
 		
 		return positions_array;
 	}
 	
+	
+	public static Vec2[] arrayList_to_array(ArrayList<Vec2> positions_arrayList, Vec2 factor) {
+		
+		
+		Vec2[] positions_array = new Vec2[positions_arrayList.size()];
+		
+		for (int i = 0; i < positions_arrayList.size(); i++) {
+			positions_array[i] = new Vec2(positions_arrayList.get(i).x * factor.x, positions_arrayList.get(i).y * factor.y);
+		}
+		
+		return positions_array;
+	}
 
 }
