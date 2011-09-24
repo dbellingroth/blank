@@ -15,9 +15,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Hashtable;
-
 import org.jbox2d.common.Vec2;
-
 import blank.game.physics.PhysicsWorld;
 
 /**
@@ -129,6 +127,16 @@ public class Tools {
 	}
 	
 	
-	
+//	public static Vec2[] arrayList_to_array(ArrayList<Vec2> positions_arrayList, Vec2 factor) {
+//		
+//		
+//		Vec2[] positions_array = new Vec2[positions_arrayList.size()];
+//		
+//		for (int i = 0; i < positions_arrayList.size(); i++) {
+//			positions_array[i] = new Vec2(positions_arrayList.get(i).x * factor.x, positions_arrayList.get(i).y * factor.y);
+//		}
+//		
+//		return positions_array;
+//	}
 
 }
