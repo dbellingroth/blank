@@ -14,7 +14,7 @@ import blank.game.rendering.Tools;
 /**
  * 
  * @author Kilian Helmenstein
- * Eine Dynamisches Polygon das aus beliebig vielen Punkten bestehen kann
+ * Ein Dynamisches Polygon das aus beliebig vielen Punkten bestehen kann
  */
 public class PhysicsPolygon extends PhysicsObject {
 
@@ -41,7 +41,7 @@ public class PhysicsPolygon extends PhysicsObject {
 		Vec2[] positions_array = Tools.arrayList_to_array(positions);		
 		shape.set(positions_array, positions_array.length);
 		
-		
+
 		fdef = new FixtureDef();
 
 		fdef.shape = shape;
