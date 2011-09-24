@@ -11,6 +11,7 @@ import org.jbox2d.common.Vec2;
 
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
+import blank.game.rendering.Sprite;
 
 
 /**
@@ -26,6 +27,8 @@ public class Game {
 	private static Semaphore actionSem = new Semaphore(1);
 
 	private AllObjectsList allObjects;
+	
+	private Sprite wald;
 	
 	
 	public static void main(String args[]) {
@@ -45,6 +48,8 @@ public class Game {
 	 * @throws InterruptedException 
 	 */
 	public void init() {
+		
+		wald = new Sprite("res/wald.jpg");
 		
 		world = new PhysicsWorld();
 		
@@ -107,6 +112,7 @@ public class Game {
 	
 	private void render() {
 		
+		wald.draw();
 		allObjects.draw();
 		
 	}
