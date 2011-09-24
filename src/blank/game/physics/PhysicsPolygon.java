@@ -9,7 +9,7 @@ import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
 
-import blank.game.rendering.Tools;
+import blank.game.Tools;
 
 /**
  * 
@@ -38,9 +38,8 @@ public class PhysicsPolygon extends PhysicsObject {
 		
 		PolygonShape shape = new PolygonShape();
 
-		Vec2[] positions_array = Tools.arrayList_to_array(positions);		
+		Vec2[] positions_array = Tools.arrayList_to_array(positions,new Vec2((float)1/PhysicsWorld.pixelsPerMeter, (float)1/PhysicsWorld.pixelsPerMeter));		
 		shape.set(positions_array, positions_array.length);
-		
 
 		fdef = new FixtureDef();
 

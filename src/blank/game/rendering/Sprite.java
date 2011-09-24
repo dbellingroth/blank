@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 
 import org.lwjgl.opengl.GL11;
 
+import blank.game.Tools;
+
 //import org.lwjgl.opengl.GL30;
 
 public class Sprite extends Transformable {

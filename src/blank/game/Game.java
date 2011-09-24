@@ -63,11 +63,11 @@ public class Game {
 		world.addObject(new PhysicsStaticBlock(800,0,100,600));
 				
 //		Bälle hinzufügen
-		for (int i = 1; i< 40; i++) {
-			for (int j = 1; j<30; j++) {
-				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*6+4)));
-			}
-		}
+//		for (int i = 1; i< 40; i++) {
+//			for (int j = 1; j<30; j++) {
+//				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*6+4)));
+//			}
+//		}
 		
 		
 //		das Test-Rechteck hinzufügen
@@ -76,8 +76,7 @@ public class Game {
 		
 //		Test-Polygon hinzufügen
 		ArrayList<Vec2> positions = new ArrayList<Vec2>();
-			positions.add(new Vec2(50, 50));
-			positions.add(new Vec2(25, 0));
+			positions.add(new Vec2(0, 0));
 			positions.add(new Vec2(0, 50));
 			positions.add(new Vec2(25, 25));
 		allObjects.add(new DynamicPolygon(250, 250, positions));
