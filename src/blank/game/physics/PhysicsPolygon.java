@@ -11,6 +11,11 @@ import org.jbox2d.dynamics.World;
 
 import blank.game.rendering.Tools;
 
+/**
+ * 
+ * @author Kilian Helmenstein
+ * Eine Dynamisches Polygon das aus beliebig vielen Punkten bestehen kann
+ */
 public class PhysicsPolygon extends PhysicsObject {
 
 
@@ -21,17 +26,19 @@ public class PhysicsPolygon extends PhysicsObject {
 	public PhysicsPolygon(int x, int y, int width, int height, ArrayList<Vec2> positions) {
 		
 		def = new BodyDef();
-		def.position.set(x / PhysicsWorld.pixelsPerMeter
-									+ (width / (float) (Math.pow(2, PhysicsWorld.pixelsPerMeter) * 2)), 
-				y / PhysicsWorld.pixelsPerMeter
-								+ (height / (float) ((Math.pow(2, PhysicsWorld.pixelsPerMeter) * 2))));
+
+		def.position.set(x / PhysicsWorld.pixelsPerMeter + (width / (PhysicsWorld.pixelsPerMeter * 2)), 
+							+ y / PhysicsWorld.pixelsPerMeter + (height / (PhysicsWorld.pixelsPerMeter * 2)));
 		def.type = BodyType.DYNAMIC;
-		def.fixedRotation = true;
+		def.position.set(x / PhysicsWorld.pixelsPerMeter + (width / (PhysicsWorld.pixelsPerMeter * 2)), 
+				y / PhysicsWorld.pixelsPerMeter + (height / (PhysicsWorld.pixelsPerMeter * 2)));
+		def.type = BodyType.DYNAMIC;
+		
 
 		
 		PolygonShape shape = new PolygonShape();
 
-		Vec2[] positions_array = Tools.arrayList_to_array(positions, new Vec2(1/PhysicsWorld.pixelsPerMeter, 1/PhysicsWorld.pixelsPerMeter));		
+		Vec2[] positions_array = Tools.arrayList_to_array(positions);		
 		shape.set(positions_array, positions_array.length);
 		
 		
@@ -39,7 +46,7 @@ public class PhysicsPolygon extends PhysicsObject {
 
 		fdef.shape = shape;
 		fdef.friction = 0.3f;
-		fdef.density = 1f;
+		fdef.density = 0.5f;
 
 	}
 

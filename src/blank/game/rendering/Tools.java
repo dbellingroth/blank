@@ -18,6 +18,8 @@ import java.util.Hashtable;
 
 import org.jbox2d.common.Vec2;
 
+import blank.game.physics.PhysicsWorld;
+
 /**
  * 
  * @author David Bellingroth & Kilian Helmenstein
@@ -64,7 +66,7 @@ public class Tools {
 		return imageBuffer;
 	}
 
-	/*
+	/**
 	 * berechnet die nächstgrößer 2er-Potenz für die Seitenlänge eines Quadrats
 	 * 
 	 * @return nächstgrößere 2er-Potenz für den größten Wert der beiden
@@ -89,7 +91,7 @@ public class Tools {
 
 	}
 
-	/*
+	/**
 	 * berechnet die nächstgrößer 2er-Potenz für das Argument
 	 * 
 	 * @return nächstgrößere 2er-Potenz Argument
@@ -109,14 +111,18 @@ public class Tools {
 	
 	
 	
-	
+	/**
+	 * Macht aus einer ArrayList von Positionen ein Array aus Positionen mit bereits konvertierten Werten für die Physikengine
+	 * @param positions_arrayList Die zu konvertierende ArrayList
+	 * @return konvertiertes Array
+	 */
 	public static Vec2[] arrayList_to_array(ArrayList<Vec2> positions_arrayList) {
 		
 		
 		Vec2[] positions_array = new Vec2[positions_arrayList.size()];
 		
 		for (int i = 0; i < positions_arrayList.size(); i++) {
-			positions_array[i] = positions_arrayList.get(i);
+			positions_array[i] = new Vec2(positions_arrayList.get(i).x / PhysicsWorld.pixelsPerMeter, positions_arrayList.get(i).y / PhysicsWorld.pixelsPerMeter);
 		}
 		
 		return positions_array;

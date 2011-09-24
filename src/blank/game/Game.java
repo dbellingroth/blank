@@ -30,7 +30,7 @@ public class Game {
 	
 	public static void main(String args[]) {
 		new Window(new Game(), 800, 600);
-	}
+	} 
 
 	public Game() {
 		
@@ -71,12 +71,21 @@ public class Game {
 		
 //		Test-Polygon hinzufügen
 		ArrayList<Vec2> positions = new ArrayList<Vec2>();
+		
+		
 		positions.add(new Vec2(50, 50));
 		positions.add(new Vec2(25, 0));
 		positions.add(new Vec2(0, 50));
 		positions.add(new Vec2(25, 25));
-		allObjects.add(new DynamicPolygon(250, 250, positions));
+		
+		
+		
 
+		
+		allObjects.add(new DynamicPolygon(250, 250, positions));
+		
+		
+		
 		world.start();
 	}
 

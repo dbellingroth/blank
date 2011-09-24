@@ -17,6 +17,7 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	private int r;
 	private int zIndex;
 	private boolean visible;
+	private long time;
 	
 	public Ball(float x, float y, int r) {
 		this.r = r;
@@ -32,6 +33,7 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 		g2d.drawLine(r, 0, r, r*2);
 		g2d.drawLine(0, r, r*2, r);
 		sprite.update();
+		time = System.currentTimeMillis();
 	}
 	
 	@Override
@@ -60,7 +62,6 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 
 	@Override
 	public void endCollision(CollisionData collision) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -89,6 +90,11 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	@Override
 	public void setZIndex(int zIndex) {
 		this.zIndex = zIndex;
+	}
+
+	@Override
+	public void beforeCollision(CollisionData data) {
+		if (data.getSecondObject().getOwner() instanceof Ball && (System.currentTimeMillis() - time) > 10000) data.disable();
 	}
 
 }
