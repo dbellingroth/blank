@@ -30,7 +30,7 @@ public class Game {
 	
 	public static void main(String args[]) {
 		new Window(new Game(), 800, 600);
-	}
+	} 
 
 	public Game() {
 		
@@ -58,11 +58,11 @@ public class Game {
 		world.addObject(new PhysicsStaticBlock(800,0,100,600));
 				
 //		Bälle hinzufügen
-//		for (int i = 1; i< 40; i++) {
-//			for (int j = 1; j<30; j++) {
-//				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*6+4)));
-//			}
-//		}
+		for (int i = 1; i< 40; i++) {
+			for (int j = 1; j<30; j++) {
+				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*6+4)));
+			}
+		}
 		
 		
 //		das Test-Rechteck hinzufügen
