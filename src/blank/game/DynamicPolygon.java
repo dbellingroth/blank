@@ -38,15 +38,15 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
 
+		
 		sprite = new Sprite((int) Math.round(width), (int) Math.round(height));
 		Graphics2D g2d = sprite.getGraphics2D();
 		g2d.setColor(Color.MAGENTA);
 		
-		
-		
-		
+			
 		int[] xPoints = new int[positions.size()];
 		int[] yPoints = new int[positions.size()];
+		
 		
 		for (int i = 0; i < positions.size(); i++) {
 			
@@ -67,7 +67,6 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 						/ 2));
 		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
 		sprite.setRotationAngle(phys.getAngle());
-		System.out.println(phys.getAngle());
 		sprite.draw();
 	}
 	

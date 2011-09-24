@@ -29,11 +29,10 @@ public class PhysicsPolygon extends PhysicsObject {
 
 		def.position.set(x / PhysicsWorld.pixelsPerMeter + (width / (PhysicsWorld.pixelsPerMeter * 2)), 
 							+ y / PhysicsWorld.pixelsPerMeter + (height / (PhysicsWorld.pixelsPerMeter * 2)));
-		def.type = BodyType.DYNAMIC;
 		def.position.set(x / PhysicsWorld.pixelsPerMeter + (width / (PhysicsWorld.pixelsPerMeter * 2)), 
 				y / PhysicsWorld.pixelsPerMeter + (height / (PhysicsWorld.pixelsPerMeter * 2)));
 		def.type = BodyType.DYNAMIC;
-		
+//		def.angle = 3.14f;
 
 		
 		PolygonShape shape = new PolygonShape();
@@ -42,11 +41,9 @@ public class PhysicsPolygon extends PhysicsObject {
 		shape.set(positions_array, positions_array.length);
 
 		fdef = new FixtureDef();
-
 		fdef.shape = shape;
 		fdef.friction = 0.3f;
 		fdef.density = 0.5f;
-
 	}
 
 	@Override
