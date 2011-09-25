@@ -41,7 +41,7 @@ public abstract class PhysicsObject {
 	 */
 	public double getAngle() {
 		PhysicsWorld.reservePhysics();
-		double result = (body.getAngle()/(2*Math.PI))*360;
+		double result = (body.getAngle()/Math.PI*180);
 		PhysicsWorld.releasePhysics();
 		return result;
 	}
