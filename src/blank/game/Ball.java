@@ -94,7 +94,7 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 
 	@Override
 	public void beforeCollision(CollisionData data) {
-		//if (data.getSecondObject().getOwner() instanceof Ball && (System.currentTimeMillis() - time) > 10000) data.disable();
+//		if (data.getSecondObject().getOwner() instanceof Ball && (System.currentTimeMillis() - time) > 10000) data.disable();
 	}
 
 }

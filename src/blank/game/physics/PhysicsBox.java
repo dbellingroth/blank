@@ -18,6 +18,7 @@ public class PhysicsBox extends PhysicsObject {
 				/ PhysicsWorld.pixelsPerMeter
 				+ (height / (PhysicsWorld.pixelsPerMeter * 2)));
 		def.type = BodyType.DYNAMIC;
+		def.bullet = true;
 		def.fixedRotation = true;
 
 		PolygonShape shape = new PolygonShape();
