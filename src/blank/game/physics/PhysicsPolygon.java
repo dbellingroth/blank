@@ -1,9 +1,11 @@
 package blank.game.physics;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.collision.shapes.ShapeType;
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
@@ -21,8 +23,8 @@ public class PhysicsPolygon extends PhysicsObject {
 
 	private BodyDef def;
 	private FixtureDef fdef;
-	private PolygonShape polygonShape;
 
+	
 	
 	public PhysicsPolygon(int x, int y, int width, int height, ArrayList<Vec2> positions) {
 		
@@ -43,12 +45,7 @@ public class PhysicsPolygon extends PhysicsObject {
 		fdef.shape = shape;
 		fdef.friction = 0.3f;
 		fdef.density = 0.5f;
-		
-		
-		
-	
-		
-		
+				
 	}
 
 
