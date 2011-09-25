@@ -29,7 +29,7 @@ public abstract class PhysicsObject {
 	 */
 	public Vec2 getPosition() {
 		PhysicsWorld.reservePhysics();
-		Vec2 result = new Vec2(body.getPosition().x*PhysicsWorld.pixelsPerMeter,body.getPosition().y*PhysicsWorld.pixelsPerMeter);
+		Vec2 result = new Vec2(body.getPosition().x * PhysicsWorld.pixelsPerMeter,body.getPosition().y * PhysicsWorld.pixelsPerMeter);
 		PhysicsWorld.releasePhysics();
 		return result;
 		

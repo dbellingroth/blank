@@ -33,7 +33,7 @@ public class PhysicsPolygon extends PhysicsObject {
 		def.position.set(x / PhysicsWorld.pixelsPerMeter + (width / (PhysicsWorld.pixelsPerMeter * 2)), 
 							+ y / PhysicsWorld.pixelsPerMeter + (height / (PhysicsWorld.pixelsPerMeter * 2)));
 		def.type = BodyType.DYNAMIC;
-		def.angularVelocity = 1;
+
 		
 		PolygonShape shape = new PolygonShape();
 		Vec2[] positions_array = Tools.arrayList_to_array(positions,new Vec2((float) 1/PhysicsWorld.pixelsPerMeter, (float) 1/PhysicsWorld.pixelsPerMeter));
