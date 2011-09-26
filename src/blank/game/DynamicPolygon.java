@@ -42,7 +42,7 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 		
 		sprite = new Sprite((int) Math.round(width), (int) Math.round(height));
 		Graphics2D g2d = sprite.getGraphics2D();
-		g2d.setColor(new Color(Math.round(Math.random()), Math.round(Math.random()), Math.round(Math.random()), 1));
+		g2d.setColor(new Color((float)(Math.random()), (float)(Math.random()), (float)(Math.random()), 1));
 		
 		
 		
