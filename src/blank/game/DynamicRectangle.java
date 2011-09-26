@@ -30,29 +30,26 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 //		sprite.update();
 		
 		
-		sprite = new Sprite("res/sonic.png");
+		sprite = new Sprite("res/player.png");
 	}
 
 	@Override
-	public void draw() {
-//		sprite.setTranslate(new Vec2(
-//				phys.getPosition().x - width / 2, phys.getPosition().y - height
-//						/ 2));
-//		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
-//		sprite.setRotationAngle(phys.getAngle());
-//		sprite.draw();
+	public void draw() {	
 		
 		sprite.setTranslate(new Vec2(
 				phys.getPosition().x - width / 2, phys.getPosition().y - height
 						/ 2));
+		
 		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
 		sprite.setRotationAngle(phys.getAngle());
+		sprite.setScaleFactor(new Vec2(width/sprite.getWidth(), height/sprite.getHeight()));
 		sprite.draw();
+		
 	}
 
 	@Override
 	public void update(int delta) {
-		phys.applyForce(new Vec2(-5000+(float)Math.random()*10000,-5000+(float)Math.random()*10000), new Vec2(25,25));
+		phys.applyForce(new Vec2(-5000+(float)Math.random()*10000,-5000+(float)Math.random()*10000), new Vec2(width/2,height/2));
 	}
 
 	@Override
