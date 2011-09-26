@@ -79,11 +79,7 @@ public class Game {
 		
 		
 //		das Test-Rechteck hinzufügen
-		allObjects.add(new DynamicRectangle(105,300,40,48));
-		
-		
-
-		
+		allObjects.add(new DynamicRectangle(105, 300, 70, 70));
 		
 		
 		world.start();
