@@ -10,6 +10,7 @@ import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsObject;
 import blank.game.physics.PhysicsOwner;
 import blank.game.physics.PhysicsPolygon;
+import blank.game.physics.PhysicsWorld;
 import blank.game.rendering.Drawable;
 import blank.game.rendering.Sprite;
 
@@ -29,45 +30,61 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 
 		//Breite und Höhe berechnen
 		for (Vec2 pos : positions) {
-			width = (int) (pos.x > width ? pos.x : width);
-			height = (int) (pos.y > height ? pos.y : height);
+			width = (pos.x > width ? pos.x : width);
+			height = (pos.y > height ? pos.y : height);
 		}
 		
 		
 		phys = new PhysicsPolygon(x, y, (int) width, (int) height, positions);
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
-
+		
 		
 		sprite = new Sprite((int) Math.round(width), (int) Math.round(height));
 		Graphics2D g2d = sprite.getGraphics2D();
 		g2d.setColor(Color.MAGENTA);
 		
-			
+		
+		
+		
 		int[] xPoints = new int[positions.size()];
 		int[] yPoints = new int[positions.size()];
 		
+
 		
 		for (int i = 0; i < positions.size(); i++) {
-			
 			xPoints[i] = (int) positions.get(i).x;
 			yPoints[i] = (int) positions.get(i).y;
 		}
 		
+		
+				
+//		CenterX, CenterY berechnen
+		
+		int sum_xPoints = 0;
+		int sum_yPoints = 0;
+		for (int i = 0; i < positions.size(); i++) {
+			sum_xPoints =+ (int) positions.get(i).x;
+			sum_yPoints =+ (int) positions.get(i).y;
+		}
+		centerX = sum_xPoints/positions.size();
+		centerX = sum_xPoints/positions.size();
+
+		
 		g2d.fillPolygon(xPoints, yPoints, positions.size());
 		sprite.update();
-		
 		
 	}
 
 	@Override
 	public void draw() {
 		sprite.setTranslate(new Vec2(
-				phys.getPosition().x, phys.getPosition().y
-						));
-		//sprite.setRotationPoint(new Vec2(0,0));
+				phys.getPosition().x, phys.getPosition().y));
+		sprite.setRotationPoint(new Vec2(centerX, centerY));
 		sprite.setRotationAngle(phys.getAngle());
 		sprite.draw();
+		
+
 	}
 	
 

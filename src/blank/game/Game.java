@@ -78,6 +78,8 @@ public class Game {
 		ArrayList<Vec2> positions = new ArrayList<Vec2>();
 			positions.add(new Vec2(0, 50));
 			positions.add(new Vec2(25, 0));
+			positions.add(new Vec2(50, 0));
+			positions.add(new Vec2(75, 25));
 			positions.add(new Vec2(50, 50));
 		allObjects.add(new DynamicPolygon(250, 250, positions));
 		
