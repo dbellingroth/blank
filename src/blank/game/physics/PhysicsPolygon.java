@@ -30,8 +30,8 @@ public class PhysicsPolygon extends PhysicsObject {
 		
 		
 		def = new BodyDef();
-		def.position.set(x / PhysicsWorld.pixelsPerMeter + (width / (PhysicsWorld.pixelsPerMeter * 2)), 
-							+ y / PhysicsWorld.pixelsPerMeter + (height / (PhysicsWorld.pixelsPerMeter * 2)));
+		def.position.set(x / PhysicsWorld.pixelsPerMeter, 
+							+ y / PhysicsWorld.pixelsPerMeter);
 		def.type = BodyType.DYNAMIC;
 		def.angularVelocity = 1;
 		

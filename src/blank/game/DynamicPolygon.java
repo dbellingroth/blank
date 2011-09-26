@@ -63,9 +63,9 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 	@Override
 	public void draw() {
 		sprite.setTranslate(new Vec2(
-				phys.getPosition().x - width / 2, phys.getPosition().y - height
-						/ 2));
-		sprite.setRotationPoint(new Vec2(phys.getPosition().x/30, phys.getPosition().y/30));
+				phys.getPosition().x, phys.getPosition().y
+						));
+		//sprite.setRotationPoint(new Vec2(0,0));
 		sprite.setRotationAngle(phys.getAngle());
 		sprite.draw();
 	}
