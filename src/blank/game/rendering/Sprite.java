@@ -128,4 +128,12 @@ public class Sprite extends Transformable {
 		this.visible = visible;
 	}
 
+	
+	public int getWidth() {
+		return width;	
+	}
+	
+	public int getHeight() {
+		return height;
+	}
 }
