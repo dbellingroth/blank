@@ -61,27 +61,28 @@ public class Game {
 		world.addObject(new PhysicsStaticBlock(0,-100,800,100));
 		world.addObject(new PhysicsStaticBlock(-100,0,100,600));
 		world.addObject(new PhysicsStaticBlock(800,0,100,600));
+		
 				
 //		Bälle hinzufügen
-//		for (int i = 1; i< 40; i++) {
-//			for (int j = 1; j<30; j++) {
-//				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*6+4)));
-//			}
-//		}
+		for (int i = 1; i< 40; i+=2) {
+			for (int j = 1; j<30; j+=2) {
+				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*12+4)));
+				
+				ArrayList<Vec2> positions = new ArrayList<Vec2>();
+				positions.add(new Vec2(0, 0));
+				positions.add(new Vec2((float)Math.random()*70+5, (float)Math.random()*70+5));
+				positions.add(new Vec2(0, (float)Math.random()*70+5));
+				
+				allObjects.add(new DynamicPolygon(i*20, j*20, positions));
+			}
+		}
 		
 		
 //		das Test-Rechteck hinzufügen
 		allObjects.add(new DynamicRectangle(105,300,40,48));
 		
 		
-//		Test-Polygon hinzufügen
-		ArrayList<Vec2> positions = new ArrayList<Vec2>();
-			positions.add(new Vec2(0, 50));
-			positions.add(new Vec2(25, 0));
-			positions.add(new Vec2(50, 0));
-			positions.add(new Vec2(75, 25));
-			positions.add(new Vec2(50, 50));
-		allObjects.add(new DynamicPolygon(250, 250, positions));
+
 		
 		
 		

@@ -43,7 +43,7 @@ public class PhysicsWorld implements Runnable, ContactListener{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			world.step(1f/60, 5, 5);
+			world.step(1f/60, 8, 3);
 			physicsSemaphore.release();
 			try {
 				Thread.sleep(1000/60);
