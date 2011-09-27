@@ -76,7 +76,7 @@ public class Game {
 				allObjects.add(new DynamicPolygon(i*20, j*20, positions));
 			}
 		}
-		
+				
 		
 //		das Test-Rechteck hinzufügen
 		allObjects.add(new DynamicRectangle(105, 300, 70, 70));
