@@ -31,8 +31,13 @@ public abstract class PhysicsObject {
 		PhysicsWorld.reservePhysics();
 		Vec2 result = new Vec2(body.getPosition().x * PhysicsWorld.pixelsPerMeter,body.getPosition().y * PhysicsWorld.pixelsPerMeter);
 		PhysicsWorld.releasePhysics();
-		return result;
-		
+		return result;	
+	}
+	
+	public void setPosition(Vec2 position) {
+		PhysicsWorld.reservePhysics();
+		body.setTransform(new Vec2(position.x/PhysicsWorld.pixelsPerMeter,position.y/PhysicsWorld.pixelsPerMeter), body.getAngle());
+		PhysicsWorld.releasePhysics();
 	}
 	
 	/**
@@ -45,6 +50,13 @@ public abstract class PhysicsObject {
 		PhysicsWorld.releasePhysics();
 		return result;
 	}
+	
+	public void setAngle(double angle) {
+		PhysicsWorld.reservePhysics();
+		body.setTransform(body.getPosition(), (float)(angle/360*Math.PI*2));
+		PhysicsWorld.releasePhysics();
+	}
+	
 	
 	public void applyAngularImpulse(float impulse) {
 		body.applyAngularImpulse(impulse);
@@ -97,5 +109,10 @@ public abstract class PhysicsObject {
 		}
 	}
 
+	public void stop() {
+		PhysicsWorld.reservePhysics();
+		body.setLinearVelocity(new Vec2(0,0));
+		PhysicsWorld.releasePhysics();
+	}
 	
 }

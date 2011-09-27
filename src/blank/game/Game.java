@@ -140,4 +140,12 @@ public class Game {
 		
 	}
 	
+	public void keyPressed(int key) {
+		System.out.println(key);
+	}
+	
+	public void keyReleased(int key) {
+		System.out.println(key);
+	}
+	
 }

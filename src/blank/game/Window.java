@@ -2,6 +2,8 @@ package blank.game;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -78,6 +80,8 @@ public class Window {
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glLoadIdentity();
 
+			handleInput();
+			
 			// Spiel kümmert sich um den Rest
 			parent.update(delta);
 
@@ -117,6 +121,13 @@ public class Window {
 		int delta = (int) (time - lastFrame);
 		lastFrame = time;
 		return delta;
+	}
+	
+	private void handleInput() {
+		while (Keyboard.next()) {
+			if (Keyboard.getEventKeyState()) parent.keyPressed(Keyboard.getEventKey());
+			else parent.keyReleased(Keyboard.getEventKey());
+		}
 	}
 
 }

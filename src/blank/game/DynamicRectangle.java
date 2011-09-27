@@ -1,6 +1,8 @@
 package blank.game;
 
 import org.jbox2d.common.Vec2;
+import org.lwjgl.input.Mouse;
+
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsBox;
 import blank.game.physics.PhysicsObject;
@@ -49,7 +51,8 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 
 	@Override
 	public void update(int delta) {
-		phys.applyForce(new Vec2(-5000+(float)Math.random()*10000,-5000+(float)Math.random()*10000), new Vec2(width/2,height/2));
+		phys.applyForce(new Vec2((Mouse.getX()-phys.getPosition().x)*100, ((600-Mouse.getY())-phys.getPosition().y)*100), new Vec2(width/2,height/2));
+		phys.stop();
 	}
 
 	@Override
@@ -60,7 +63,6 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 	@Override
 	public void endCollision(CollisionData collision) {
 
-	
 	}
 	
 	
