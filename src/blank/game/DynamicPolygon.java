@@ -10,7 +10,6 @@ import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsObject;
 import blank.game.physics.PhysicsOwner;
 import blank.game.physics.PhysicsPolygon;
-import blank.game.physics.PhysicsWorld;
 import blank.game.rendering.Drawable;
 import blank.game.rendering.Sprite;
 
@@ -62,6 +61,7 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 //		CenterX, CenterY berechnen
 		
 		int sum_xPoints = 0;
+		@SuppressWarnings("unused")
 		int sum_yPoints = 0;
 		for (int i = 0; i < positions.size(); i++) {
 			sum_xPoints =+ (int) positions.get(i).x;

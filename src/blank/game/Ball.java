@@ -17,6 +17,7 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	private int r;
 	private int zIndex;
 	private boolean visible;
+	@SuppressWarnings("unused")
 	private long time;
 	
 	public Ball(float x, float y, int r) {

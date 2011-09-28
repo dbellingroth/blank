@@ -26,9 +26,12 @@ public class Game {
 	private static Queue<Executor> actionList = new LinkedList<Executor>(); //Qeue von Executors, die ausgeführt werden sollen
 	private static Semaphore actionSem = new Semaphore(1);
 
+	public static InputHandler inputHandler  = new InputHandler();
+	
 	private AllObjectsList allObjects;
 	
 	private Sprite wald;
+	private DynamicRectangle dr;
 	
 	
 	public static void main(String args[]) {
@@ -79,7 +82,20 @@ public class Game {
 				
 		
 //		das Test-Rechteck hinzufügen
-		allObjects.add(new DynamicRectangle(105, 300, 70, 70));
+		dr = new DynamicRectangle(105, 300, 70, 70);
+//		//left
+//		inputHandler.addKeyPressedListener(dr, 203, 1);
+//		inputHandler.addKeyReleasedListener(dr, 203, 1);
+//		//right
+//		inputHandler.addKeyPressedListener(dr, 205, 2);
+//		inputHandler.addKeyReleasedListener(dr, 205, 2);
+//		//up
+//		inputHandler.addKeyPressedListener(dr, 200, 3);
+//		inputHandler.addKeyReleasedListener(dr, 200, 3);
+//		//down
+//		inputHandler.addKeyPressedListener(dr, 208, 4);		
+//		inputHandler.addKeyReleasedListener(dr, 208, 4);
+		allObjects.add(dr);
 		
 		
 		world.start();
@@ -140,20 +156,25 @@ public class Game {
 		
 	}
 	
+	
+//	die handleInput-Methoden weiterschleifen and den InputHandler,
+//	dieser verwaltet dann die Weiterleitung an die richtigen InputListeners.
 	public void keyPressed(int key) {
-		System.out.println(key + " pressed");
+//		inputHandler.keyPressed(key);
+		dr.keyPressed(key);
 	}
 	
 	public void keyReleased(int key) {
-		System.out.println(key + " released");
+//		inputHandler.keyReleased(key);
+		dr.keyReleased(key);
 	}
 	
 	public void mousePressed(int button) {
-		System.out.println(button + " pressed");
+		inputHandler.mousePressed(button);
 	}
 	
 	public void mouseReleased(int button) {
-		System.out.println(button + " released");
+		inputHandler.mouseReleased(button);
 	}
 	
 }

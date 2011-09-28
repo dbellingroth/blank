@@ -1,8 +1,6 @@
 package blank.game;
 
 import org.jbox2d.common.Vec2;
-import org.lwjgl.input.Mouse;
-
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsBox;
 import blank.game.physics.PhysicsObject;
@@ -10,13 +8,15 @@ import blank.game.physics.PhysicsOwner;
 import blank.game.rendering.Drawable;
 import blank.game.rendering.Sprite;
 
-public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
+public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable, InputListener {
 
 	private PhysicsObject phys;
 	private Sprite sprite;
 	public float width, height;
 	private int zIndex;
 	private boolean visible;
+	boolean up, down, left, right; //nur zum testen...
+	int key_up = 200, key_down = 208, key_left = 203, key_right = 205;
 
 	public DynamicRectangle(float x, float y, float width, float height) {
 		this.width = width;
@@ -49,18 +49,23 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 		
 	}
 
-	@Override
+	
 	public void update(int delta) {
-		phys.applyForce(new Vec2((Mouse.getX()-phys.getPosition().x)*100, ((600-Mouse.getY())-phys.getPosition().y)*100), new Vec2(width/2,height/2));
-		phys.stop();
+//		phys.applyForce(new Vec2((Mouse.getX()-phys.getPosition().x)*100, ((600-Mouse.getY())-phys.getPosition().y)*100), new Vec2(width/2,height/2));
+//		phys.stop();
+		
+		if (up) phys.applyForce(new Vec2(0, -400f), new Vec2(width/2,height/2));
+		if (down) phys.applyForce(new Vec2(0, 400f), new Vec2(width/2,height/2));
+		if (left) phys.applyForce(new Vec2(-400f, 0), new Vec2(width/2,height/2));
+		if (right) phys.applyForce(new Vec2(400f, 0), new Vec2(width/2,height/2));
 	}
 
-	@Override
+	
 	public void beginCollision(CollisionData collision) {
 
 	}
 
-	@Override
+	
 	public void endCollision(CollisionData collision) {
 
 	}
@@ -73,29 +78,75 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable {
 	}
 	
 	
-	@Override
+
 	public boolean getVisible() {
 		return visible;
 	}
 
-	@Override
+
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
 	
-	@Override
+
 	public int getZIndex() {
 		return zIndex;
 	}
 	
-	@Override
+
 	public void setZIndex(int zIndex) {
 		this.zIndex = zIndex;
 	}
 
-	@Override
+
 	public void beforeCollision(CollisionData data) {
-		// TODO Auto-generated method stub
+	
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	public void keyPressed(int key) {
+//		if (key == 1)  left = true;
+//		if (key == 2) right = true;
+//		
+//		if (key == 3) up = true;
+//		if (key == 4) down = true;
+		
+		if (key == key_up) up = true;
+		if (key == key_down) down = true;
+		if (key == key_left) left = true;
+		if (key == key_right) right = true;
+	}
+
+	
+	public void keyReleased(int key) {
+		
+//		if (key == 1) left = false;
+//		if (key == 2) right = false;
+//		
+//		if (key == 3) up = false;
+//		if (key == 4) down = false;
+		
+		if (key == key_up) up = false;
+		if (key == key_down) down = false;
+		if (key == key_left) left = false;
+		if (key == key_right) right = false;
+	}
+
+	
+	public void mousePressed(int button) {
+		
+		
+	}
+
+	
+	public void mouseReleased(int button) {
+		
 		
 	}
 
