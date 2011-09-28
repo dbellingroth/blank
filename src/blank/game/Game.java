@@ -141,11 +141,11 @@ public class Game {
 	}
 	
 	public void keyPressed(int key) {
-		System.out.println(key);
+		System.out.println(key + " pressed");
 	}
 	
 	public void keyReleased(int key) {
-		System.out.println(key);
+		System.out.println(key + " released");
 	}
 	
 }
