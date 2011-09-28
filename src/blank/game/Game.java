@@ -148,4 +148,12 @@ public class Game {
 		System.out.println(key + " released");
 	}
 	
+	public void mousePressed(int button) {
+		System.out.println(button + " pressed");
+	}
+	
+	public void mouseReleased(int button) {
+		System.out.println(button + " released");
+	}
+	
 }

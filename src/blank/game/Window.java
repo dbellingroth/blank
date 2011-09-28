@@ -128,6 +128,12 @@ public class Window {
 			if (Keyboard.getEventKeyState()) parent.keyPressed(Keyboard.getEventKey());
 			else parent.keyReleased(Keyboard.getEventKey());
 		}
+		
+		while (Mouse.next()) {
+			if (Mouse.getEventButtonState() && Mouse.getEventButton() >= 0) parent.mousePressed(Mouse.getEventButton());
+			else if (Mouse.getEventButton() >= 0) parent.mouseReleased(Mouse.getEventButton());
+		}
+		
 	}
 
 }
