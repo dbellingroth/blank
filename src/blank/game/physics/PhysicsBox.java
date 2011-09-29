@@ -34,7 +34,7 @@ public class PhysicsBox extends PhysicsObject {
 
 	}
 
-	@Override
+
 	public void init(World world) {
 		body = world.createBody(def);
 		body.createFixture(fdef);
