@@ -12,6 +12,7 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.Contact;
 import org.jbox2d.dynamics.joints.JointDef;
+import org.jbox2d.dynamics.joints.RevoluteJointDef;
 
  
 /*
@@ -80,11 +81,11 @@ public class PhysicsWorld implements Runnable, ContactListener{
 	
 	public static void createJoint(Body bodyA, Body bodyB) {
 		
-		JointDef jDef = new JointDef();
-		
-		jDef.bodyA = bodyA;
-		jDef.bodyB = bodyB;	
-		jDef.collideConnected = false;
+		RevoluteJointDef jDef = new RevoluteJointDef();
+			
+//		jDef.bodyA = bodyA;
+//		jDef.bodyB = bodyB;	
+		jDef.initialize(bodyA, bodyB, bodyA.getLocalCenter());
 		
 		world.createJoint(jDef);
 	}

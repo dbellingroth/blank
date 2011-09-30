@@ -1,6 +1,8 @@
 package blank.game;
 
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.BodyType;
+
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsBox;
 import blank.game.physics.PhysicsObject;
@@ -8,7 +10,7 @@ import blank.game.physics.PhysicsOwner;
 import blank.game.rendering.Drawable;
 import blank.game.rendering.Sprite;
 
-public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable, InputListener {
+public class Rectangle implements GameObject, PhysicsOwner, Drawable, InputListener {
 
 	private PhysicsObject phys;
 	private Sprite sprite;
@@ -18,10 +20,10 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable, Inp
 	boolean up, down, left, right; //nur zum testen...
 	int key_up = 200, key_down = 208, key_left = 203, key_right = 205;
 
-	public DynamicRectangle(float x, float y, float width, float height) {
+	public Rectangle(float x, float y, float width, float height, BodyType bodyType) {
 		this.width = width;
 		this.height = height;
-		phys = new PhysicsBox(x, y, width, height);
+		phys = new PhysicsBox(x, y, width, height, bodyType);
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
 

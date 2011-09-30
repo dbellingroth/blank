@@ -11,10 +11,10 @@ public class PhysicsCircle extends PhysicsObject {
 	private BodyDef def;
 	private FixtureDef fdef;
 
-	public PhysicsCircle(float x, float y, float r) {
+	public PhysicsCircle(float x, float y, float r, BodyType bodyType) {
 		def = new BodyDef();
 		def.position.set(x / 30, y / 30);
-		def.type = BodyType.DYNAMIC;
+		def.type = bodyType;
 		CircleShape c = new CircleShape();
 		c.m_radius = r / PhysicsWorld.pixelsPerMeter;
 		fdef = new FixtureDef();

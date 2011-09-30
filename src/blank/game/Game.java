@@ -7,6 +7,7 @@ import java.util.Queue;
 import java.util.concurrent.Semaphore;
 
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.BodyType;
 
 
 
@@ -32,7 +33,7 @@ public class Game {
 	private AllObjectsList allObjects;
 	
 	private Sprite wald;
-	private DynamicRectangle dr;
+	private Rectangle dr;
 	
 	
 	public static void main(String args[]) {
@@ -83,7 +84,7 @@ public class Game {
 				
 		
 //		das Test-Rechteck hinzufügen
-		dr = new DynamicRectangle(105, 300, 70, 70);
+		dr = new Rectangle(105, 300, 70, 70, BodyType.DYNAMIC);
 //		//left
 //		inputHandler.addKeyPressedListener(dr, 203, 1);
 //		inputHandler.addKeyReleasedListener(dr, 203, 1);
@@ -99,14 +100,18 @@ public class Game {
 		allObjects.add(dr);
 		
 		
-		Ball ballA = new Ball(100, 100, 50);
-		Ball ballB = new Ball(100, 100, 50);
-		allObjects.add(ballA);
-		allObjects.add(ballB);
-		PhysicsWorld.createJoint(ballA.getPhysicsObject().getBody(), ballB.getPhysicsObject().getBody());
+		ArrayList<Vec2> positions = new ArrayList<Vec2>();
+		positions.add(new Vec2(0, 0));
+		positions.add(new Vec2((float)Math.random()*70+5, (float)Math.random()*70+5));
+		positions.add(new Vec2(0, (float)Math.random()*70+5));
+		Polygon bodyA = new Polygon(300, 400, positions, BodyType.DYNAMIC);
+		Circle bodyB = new Circle(100, 100, 50, BodyType.STATIC);
+		allObjects.add(bodyA);
+		allObjects.add(bodyB);
+		PhysicsWorld.createJoint(bodyA.getPhysicsObject().getBody(), bodyB.getPhysicsObject().getBody());
 		
 		
-		allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
+//		allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
 		
 		world.start();
 	}

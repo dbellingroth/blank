@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.BodyType;
 
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsObject;
@@ -15,7 +16,7 @@ import blank.game.rendering.Sprite;
 
 
 
-public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
+public class Polygon implements GameObject, PhysicsOwner, Drawable {
 	
 	private PhysicsObject phys;
 	private Sprite sprite;
@@ -24,7 +25,7 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 	private int zIndex;
 	private boolean visible;
 
-	public DynamicPolygon(int x, int y, ArrayList<Vec2> positions) {
+	public Polygon(int x, int y, ArrayList<Vec2> positions, BodyType bodyType) {
 		
 
 		//Breite und Höhe berechnen
@@ -34,7 +35,7 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 		}
 		
 		
-		phys = new PhysicsPolygon(x, y, (int) width, (int) height, positions);
+		phys = new PhysicsPolygon(x, y, (int) width, (int) height, positions, bodyType);
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
 		

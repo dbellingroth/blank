@@ -3,6 +3,8 @@ package blank.game;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.BodyType;
+
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsCircle;
 import blank.game.physics.PhysicsObject;
@@ -10,7 +12,7 @@ import blank.game.physics.PhysicsOwner;
 import blank.game.rendering.Drawable;
 import blank.game.rendering.Sprite;
 
-public class Ball implements GameObject, PhysicsOwner, Drawable {
+public class Circle implements GameObject, PhysicsOwner, Drawable {
 	
 	private PhysicsObject phys;
 	private Sprite	sprite;
@@ -20,9 +22,9 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	@SuppressWarnings("unused")
 	private long time;
 	
-	public Ball(float x, float y, int r) {
+	public Circle(float x, float y, int r, BodyType bodyType) {
 		this.r = r;
-		phys = new PhysicsCircle(x, y, r);
+		phys = new PhysicsCircle(x, y, r, bodyType);
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
 		
@@ -53,12 +55,12 @@ public class Ball implements GameObject, PhysicsOwner, Drawable {
 	@Override
 	public void beginCollision(CollisionData collision) {
 		
-		if (collision.getImpulse() > 10/*collision.getSecondObject() instanceof PhysicsBox*/) {
-			Graphics2D g2d = sprite.getGraphics2D();
-			g2d.setColor(Color.WHITE);
-			g2d.fillOval(0, 0, r*2, r*2);
-			sprite.update();
-		}
+//		if (collision.getImpulse() > 10/*collision.getSecondObject() instanceof PhysicsBox*/) {
+//			Graphics2D g2d = sprite.getGraphics2D();
+//			g2d.setColor(Color.WHITE);
+//			g2d.fillOval(0, 0, r*2, r*2);
+//			sprite.update();
+//		}
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.BodyType;
 
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsLine;
@@ -13,7 +14,7 @@ import blank.game.physics.PhysicsOwner;
 import blank.game.rendering.Drawable;
 import blank.game.rendering.Sprite;
 
-public class StaticLine implements GameObject, PhysicsOwner, Drawable {
+public class Line implements GameObject, PhysicsOwner, Drawable {
 
 	
 	private PhysicsObject phys;
@@ -24,10 +25,10 @@ public class StaticLine implements GameObject, PhysicsOwner, Drawable {
 	boolean up, down, left, right; //nur zum testen...
 	int key_up = 200, key_down = 208, key_left = 203, key_right = 205;
 
-	public StaticLine(Vec2 p1, Vec2 p2) {
+	public Line(Vec2 p1, Vec2 p2, BodyType bodyType) {
 
 		
-		phys = new PhysicsLine(p1, p2);
+		phys = new PhysicsLine(p1, p2, bodyType);
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
 

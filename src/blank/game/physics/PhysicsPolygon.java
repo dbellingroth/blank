@@ -24,13 +24,13 @@ public class PhysicsPolygon extends PhysicsObject {
 
 	
 	
-	public PhysicsPolygon(int x, int y, int width, int height, ArrayList<Vec2> positions) {
+	public PhysicsPolygon(int x, int y, int width, int height, ArrayList<Vec2> positions, BodyType bodyType) {
 		
 		
 		def = new BodyDef();
 		def.position.set(x / PhysicsWorld.pixelsPerMeter, 
 							+ y / PhysicsWorld.pixelsPerMeter);
-		def.type = BodyType.DYNAMIC;
+		def.type = bodyType;
 
 		
 		PolygonShape shape = new PolygonShape();

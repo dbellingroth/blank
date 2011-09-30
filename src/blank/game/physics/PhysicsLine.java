@@ -14,7 +14,7 @@ public class PhysicsLine extends PhysicsObject {
 	private FixtureDef fdef;
 		
 	
-	public PhysicsLine(Vec2 p1, Vec2 p2) {
+	public PhysicsLine(Vec2 p1, Vec2 p2, BodyType bodyType) {
 		
 		float x = p1.x < p2.x ? p1.x : p2.x;
 		float y = p1.y < p2.y ? p1.x : p1.y;
@@ -23,7 +23,7 @@ public class PhysicsLine extends PhysicsObject {
 		def.position = new Vec2(x / PhysicsWorld.pixelsPerMeter, y / PhysicsWorld.pixelsPerMeter);
 		def.bullet = true;
 		def.fixedRotation = true;
-		def.type = BodyType.STATIC;
+		def.type = bodyType;
 		
 		
 		PolygonShape shape = new PolygonShape();
