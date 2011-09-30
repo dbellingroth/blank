@@ -1,10 +1,8 @@
 package blank.game.physics;
 
-import java.util.ArrayList;
 
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
@@ -14,30 +12,25 @@ public class PhysicsLine extends PhysicsObject {
 
 	private BodyDef def;
 	private FixtureDef fdef;
-	private ArrayList<PolygonShape> shapes;
-	private ArrayList<Body> bodies;
+		
 	
+	public PhysicsLine(Vec2 p1, Vec2 p2) {
+		
+		float x = p1.x < p2.x ? p1.x : p2.x;
+		float y = p1.y < p2.y ? p1.x : p1.y;
 	
-	public PhysicsLine(ArrayList<Vec2> points) {
-		
-		shapes = new ArrayList<PolygonShape>();
-		bodies = new ArrayList<Body>();
-		
-		
 		def = new BodyDef();
-		def.position = new Vec2(points.get(0).x, points.get(0).y);
+		def.position = new Vec2(x / PhysicsWorld.pixelsPerMeter, y / PhysicsWorld.pixelsPerMeter);
 		def.bullet = true;
 		def.fixedRotation = true;
 		def.type = BodyType.STATIC;
 		
 		
-		for (int i = 0; i < points.size()-1; i++) {
-			shapes.add(new PolygonShape());
-			shapes.get(i).setAsEdge(points.get(i), points.get(i+1));
-		}
-		
+		PolygonShape shape = new PolygonShape();
+		shape.setAsEdge(new Vec2(p1.x / PhysicsWorld.pixelsPerMeter, p1.y / PhysicsWorld.pixelsPerMeter), new Vec2(p2.x / PhysicsWorld.pixelsPerMeter, p2.y / PhysicsWorld.pixelsPerMeter));		
 		
 		fdef = new FixtureDef();
+		fdef.shape = shape;
 		fdef.friction = 0.3f;
 		fdef.density = 1f;
 		
@@ -46,29 +39,11 @@ public class PhysicsLine extends PhysicsObject {
 		
 	
 	public void init(World world) {
-		
-		for (int i = 0; i < shapes.size(); i++) {
-			fdef.shape = shapes.get(i);
-			bodies.add(world.createBody(def));
-			bodies.get(i).createFixture(fdef);
-		}
+
+		body = world.createBody(def);
+		body.createFixture(fdef);
 	
 	}
 
-	
-	
-	public Vec2 getPosition() {
-		PhysicsWorld.reservePhysics();
-		Vec2 result = bodies.get(0).getPosition();
-		PhysicsWorld.releasePhysics();
-		return result;	
-	}
-	
-	public double getAngle() {
-		PhysicsWorld.reservePhysics();
-		double result = 0;
-		PhysicsWorld.releasePhysics();
-		return result;
-	}
 	
 }

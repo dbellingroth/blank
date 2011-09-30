@@ -83,8 +83,6 @@ public class DynamicPolygon implements GameObject, PhysicsOwner, Drawable {
 		sprite.setRotationPoint(new Vec2(0, 0));
 		sprite.setRotationAngle(phys.getAngle());
 		sprite.draw();
-		
-
 	}
 	
 

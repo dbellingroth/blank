@@ -1,12 +1,13 @@
 package blank.game;
 
 
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
+
 import org.jbox2d.common.Vec2;
+
 
 
 import blank.game.physics.PhysicsStaticBlock;
@@ -67,18 +68,18 @@ public class Game {
 		
 				
 //		Bälle hinzufügen
-//		for (int i = 1; i< 40; i+=2) {
-//			for (int j = 1; j<30; j+=2) {
-//				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*12+4)));
-//				
-//				ArrayList<Vec2> positions = new ArrayList<Vec2>();
-//				positions.add(new Vec2(0, 0));
-//				positions.add(new Vec2((float)Math.random()*70+5, (float)Math.random()*70+5));
-//				positions.add(new Vec2(0, (float)Math.random()*70+5));
-//				
-//				allObjects.add(new DynamicPolygon(i*20, j*20, positions));
-//			}
-//		}
+		for (int i = 1; i< 40; i+=2) {
+			for (int j = 1; j<30; j+=2) {
+				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*12+4)));
+				
+				ArrayList<Vec2> positions = new ArrayList<Vec2>();
+				positions.add(new Vec2(0, 0));
+				positions.add(new Vec2((float)Math.random()*70+5, (float)Math.random()*70+5));
+				positions.add(new Vec2(0, (float)Math.random()*70+5));
+				
+				allObjects.add(new DynamicPolygon(i*20, j*20, positions));
+			}
+		}
 				
 		
 //		das Test-Rechteck hinzufügen
@@ -96,14 +97,8 @@ public class Game {
 //		inputHandler.addKeyPressedListener(dr, 208, 4);		
 //		inputHandler.addKeyReleasedListener(dr, 208, 4);
 		allObjects.add(dr);
-		
-		
-		ArrayList<Vec2> points = new ArrayList<Vec2>();
-		points.add(new Vec2(100, 100));
-		points.add(new Vec2(200, 200));
-		points.add(new Vec2(300, 300));
-		points.add(new Vec2(500, 550));
-		allObjects.add(new StaticLine(points));
+			
+		allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
 		
 		world.start();
 	}

@@ -24,6 +24,7 @@ public class Sprite extends Transformable {
 	private int width, height, twidth, theight;
 	private float wfac, hfac;
 
+	
 	public Sprite(int width, int height) {
 
 		this.width = width;
