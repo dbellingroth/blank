@@ -71,7 +71,7 @@ public abstract class PhysicsObject {
 	}
 	
 	public void applyForce(Vec2 force) {
-		body.applyForce(force, body.getLocalCenter());
+		body.applyForce(force, body.getWorldCenter());
 	}
 	
 	public void applyLinearImpulse(Vec2 impulse, Vec2 point) {
@@ -79,7 +79,7 @@ public abstract class PhysicsObject {
 	}
 	
 	public void applyLinearImpulse(Vec2 impulse) {
-		body.applyLinearImpulse(impulse, body.getLocalCenter());
+		body.applyLinearImpulse(impulse, body.getWorldCenter());
 	}
 	
 	public void setOwner(PhysicsOwner owner) {

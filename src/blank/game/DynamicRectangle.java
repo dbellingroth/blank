@@ -54,11 +54,11 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable, Inp
 //		phys.applyForce(new Vec2((Mouse.getX()-phys.getPosition().x)*100, ((600-Mouse.getY())-phys.getPosition().y)*100), new Vec2(width/2,height/2));
 //		phys.stop();
 		
-		if (up) phys.applyForce(new Vec2(0, -4000f), new Vec2(width/2,height/2));
+		if (up) phys.applyForce(new Vec2(0, -4000f));
 		up = false;
 //		if (down) phys.applyForce(new Vec2(0, 40f), new Vec2(width/2,height/2));
-		if (left) phys.applyForce(new Vec2(-40f, 0), new Vec2(width/2,height/2));
-		if (right) phys.applyForce(new Vec2(40f, 0), new Vec2(width/2,height/2));
+		if (left) phys.applyTorque(-40);
+		if (right) phys.applyTorque(40);
 	}
 
 	
