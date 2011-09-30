@@ -62,16 +62,32 @@ public abstract class PhysicsObject {
 		body.applyAngularImpulse(impulse);
 	}
 	
+	public void applyTorque(float torque) {
+		body.applyTorque(torque);
+	}
+	
 	public void applyForce(Vec2 force, Vec2 point) {
 		body.applyForce(force, point);
+	}
+	
+	public void applyForce(Vec2 force) {
+		body.applyForce(force, body.getLocalCenter());
 	}
 	
 	public void applyLinearImpulse(Vec2 impulse, Vec2 point) {
 		body.applyLinearImpulse(impulse, point);
 	}
 	
+	public void applyLinearImpulse(Vec2 impulse) {
+		body.applyLinearImpulse(impulse, body.getLocalCenter());
+	}
+	
 	public void setOwner(PhysicsOwner owner) {
 		this.owner = owner;
+	}
+	
+	public Vec2 getMassCenter() {
+		return body.getLocalCenter();
 	}
 	
 	protected void beginCollision(final CollisionData data) {
