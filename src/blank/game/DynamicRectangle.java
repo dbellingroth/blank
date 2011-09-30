@@ -59,6 +59,7 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable, Inp
 //		if (down) phys.applyForce(new Vec2(0, 40f), new Vec2(width/2,height/2));
 		if (left) phys.applyTorque(-40);
 		if (right) phys.applyTorque(40);
+		
 	}
 
 	

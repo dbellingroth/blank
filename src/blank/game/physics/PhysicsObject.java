@@ -1,11 +1,13 @@
 package blank.game.physics;
 
+import org.jbox2d.collision.shapes.MassData;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
 
 import blank.game.Executor;
 import blank.game.Game;
+import blank.game.Tools;
 
 /**
  * Die abstrakte Oberklasse aller Physikalischen Körper.
@@ -29,14 +31,14 @@ public abstract class PhysicsObject {
 	 */
 	public Vec2 getPosition() {
 		PhysicsWorld.reservePhysics();
-		Vec2 result = new Vec2(body.getPosition().x * PhysicsWorld.pixelsPerMeter,body.getPosition().y * PhysicsWorld.pixelsPerMeter);
+		Vec2 result = Tools.convertVectorPhys2Pix(body.getPosition());
 		PhysicsWorld.releasePhysics();
 		return result;	
 	}
 	
 	public void setPosition(Vec2 position) {
 		PhysicsWorld.reservePhysics();
-		body.setTransform(new Vec2(position.x/PhysicsWorld.pixelsPerMeter,position.y/PhysicsWorld.pixelsPerMeter), body.getAngle());
+		body.setTransform(Tools.convertVectorPix2Phys(position), body.getAngle());
 		PhysicsWorld.releasePhysics();
 	}
 	
@@ -67,7 +69,7 @@ public abstract class PhysicsObject {
 	}
 	
 	public void applyForce(Vec2 force, Vec2 point) {
-		body.applyForce(force, point);
+		body.applyForce(force, Tools.convertVectorPix2Phys(point));
 	}
 	
 	public void applyForce(Vec2 force) {
@@ -75,7 +77,7 @@ public abstract class PhysicsObject {
 	}
 	
 	public void applyLinearImpulse(Vec2 impulse, Vec2 point) {
-		body.applyLinearImpulse(impulse, point);
+		body.applyLinearImpulse(impulse, Tools.convertVectorPix2Phys(point));
 	}
 	
 	public void applyLinearImpulse(Vec2 impulse) {
@@ -87,7 +89,27 @@ public abstract class PhysicsObject {
 	}
 	
 	public Vec2 getMassCenter() {
-		return body.getLocalCenter();
+		return Tools.convertVectorPhys2Pix(body.getLocalCenter());
+	}
+	
+	public void setMassCenter(Vec2 point) {
+		MassData md = new MassData();
+		md.center.set(Tools.convertVectorPix2Phys(point));
+		md.mass = body.getMass();
+		md.I = body.getInertia();
+		body.setMassData(md);
+	}
+	
+	public void setMass(float mass) {
+		MassData md = new MassData();
+		md.center.set(body.getLocalCenter());
+		md.mass = mass;
+		md.I = body.getInertia();
+		body.setMassData(md);
+	}
+	
+	public void resetMassData() {
+		body.resetMassData();
 	}
 	
 	protected void beginCollision(final CollisionData data) {
