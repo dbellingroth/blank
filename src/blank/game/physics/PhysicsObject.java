@@ -73,6 +73,9 @@ public abstract class PhysicsObject {
 		return result;
 	}
 	
+	
+	
+	
 	public void applyAngularImpulse(float impulse) {
 		body.applyAngularImpulse(impulse);
 	}
@@ -150,7 +153,7 @@ public abstract class PhysicsObject {
 		}
 	}
 	
-	protected Body getBody() {
+	public Body getBody() {
 		return this.body;
 	}
 
@@ -161,7 +164,7 @@ public abstract class PhysicsObject {
 	}
 
 	public void stop() {
-		PhysicsWorld.reservePhysics();
+		PhysicsWorld.reservePhysics();	
 		body.setLinearVelocity(new Vec2(0,0));
 		PhysicsWorld.releasePhysics();
 	}

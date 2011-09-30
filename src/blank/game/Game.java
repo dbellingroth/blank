@@ -97,7 +97,15 @@ public class Game {
 //		inputHandler.addKeyPressedListener(dr, 208, 4);		
 //		inputHandler.addKeyReleasedListener(dr, 208, 4);
 		allObjects.add(dr);
-			
+		
+		
+		Ball ballA = new Ball(100, 100, 50);
+		Ball ballB = new Ball(100, 100, 50);
+		allObjects.add(ballA);
+		allObjects.add(ballB);
+		PhysicsWorld.createJoint(ballA.getPhysicsObject().getBody(), ballB.getPhysicsObject().getBody());
+		
+		
 		allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
 		
 		world.start();

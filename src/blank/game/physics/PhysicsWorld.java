@@ -11,6 +11,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.Contact;
+import org.jbox2d.dynamics.joints.JointDef;
 
  
 /*
@@ -76,6 +77,20 @@ public class PhysicsWorld implements Runnable, ContactListener{
 		releasePhysics();
 	}
 	
+	
+	public static void createJoint(Body bodyA, Body bodyB) {
+		
+		JointDef jDef = new JointDef();
+		
+		jDef.bodyA = bodyA;
+		jDef.bodyB = bodyB;	
+		jDef.collideConnected = false;
+		
+		world.createJoint(jDef);
+	}
+	
+	
+	
 	public void removeObject(PhysicsObject obj) {
 		reservePhysics();
 		objectConnections.remove(obj.getBody());
@@ -134,5 +149,9 @@ public class PhysicsWorld implements Runnable, ContactListener{
 	public void step() {
 		world.step(1f/60, 5, 5);
 	}
+	
+	
+	
+	
 	
 }
