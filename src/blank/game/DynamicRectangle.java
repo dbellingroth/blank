@@ -1,8 +1,5 @@
 package blank.game;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-
 import org.jbox2d.common.Vec2;
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsBox;
@@ -20,7 +17,6 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable, Inp
 	private boolean visible;
 	boolean up, down, left, right; //nur zum testen...
 	int key_up = 200, key_down = 208, key_left = 203, key_right = 205;
-	
 
 	public DynamicRectangle(float x, float y, float width, float height) {
 		this.width = width;
@@ -39,13 +35,13 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable, Inp
 		sprite = new Sprite("res/player.png");
 	}
 
-	
-
+	@Override
 	public void draw() {	
 		
 		sprite.setTranslate(new Vec2(
 				phys.getPosition().x - width / 2, phys.getPosition().y - height
 						/ 2));
+		
 		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
 		sprite.setRotationAngle(phys.getAngle());
 		sprite.setScaleFactor(new Vec2(width/sprite.getWidth(), height/sprite.getHeight()));
@@ -58,11 +54,12 @@ public class DynamicRectangle implements GameObject, PhysicsOwner, Drawable, Inp
 //		phys.applyForce(new Vec2((Mouse.getX()-phys.getPosition().x)*100, ((600-Mouse.getY())-phys.getPosition().y)*100), new Vec2(width/2,height/2));
 //		phys.stop();
 		
-		if (up) phys.applyLinearImpulse(new Vec2(0, -1f), new Vec2(width/2, height/2));
+		if (up) phys.applyForce(new Vec2(0, -4000f));
+		up = false;
+//		if (down) phys.applyForce(new Vec2(0, 40f), new Vec2(width/2,height/2));
+		if (left) phys.applyTorque(-40);
+		if (right) phys.applyTorque(40);
 		
-		if (down) phys.applyForce(new Vec2(0, 2f), new Vec2(width/2,height/2));
-		if (left) phys.applyAngularImpulse(-1f);
-		if (right) phys.applyAngularImpulse(1f);
 	}
 
 	

@@ -58,7 +58,7 @@ public abstract class Transformable implements Drawable {
 	protected void transform() {
 		
 		GL11.glTranslated(translate.x, translate.y, 0);
-		GL11.glScaled(scaleFactor.x, scaleFactor.y, 1);
+		
 		GL11.glTranslated(rotationPoint.x, rotationPoint.y, 0);
 		// falls Rotation gewünscht
 		if (rotationAngle != 0)
@@ -67,6 +67,7 @@ public abstract class Transformable implements Drawable {
 		
 
 		GL11.glTranslated(-rotationPoint.x, -rotationPoint.y, 0);
+		GL11.glScaled(scaleFactor.x, scaleFactor.y, 1);
 
 	}
 

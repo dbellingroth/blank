@@ -139,5 +139,15 @@ public class Tools {
 		return positions_array;
 		
 	}
+	
+	public static Vec2 convertVectorPhys2Pix(Vec2 vector) {
+	
+		return new Vec2(vector.x*PhysicsWorld.pixelsPerMeter,vector.y*PhysicsWorld.pixelsPerMeter);
+	}
+	
+	public static Vec2 convertVectorPix2Phys(Vec2 vector) {
+		
+		return new Vec2(vector.x/PhysicsWorld.pixelsPerMeter,vector.y/PhysicsWorld.pixelsPerMeter);
+	}
 
 }
