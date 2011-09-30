@@ -68,18 +68,18 @@ public class Game {
 		
 				
 //		Bälle hinzufügen
-		for (int i = 1; i< 40; i+=2) {
-			for (int j = 1; j<30; j+=2) {
-				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*12+4)));
-				
-				ArrayList<Vec2> positions = new ArrayList<Vec2>();
-				positions.add(new Vec2(0, 0));
-				positions.add(new Vec2((float)Math.random()*70+5, (float)Math.random()*70+5));
-				positions.add(new Vec2(0, (float)Math.random()*70+5));
-				
-				allObjects.add(new DynamicPolygon(i*20, j*20, positions));
-			}
-		}
+//		for (int i = 1; i< 40; i+=2) {
+//			for (int j = 1; j<30; j+=2) {
+//				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*12+4)));
+//				
+//				ArrayList<Vec2> positions = new ArrayList<Vec2>();
+//				positions.add(new Vec2(0, 0));
+//				positions.add(new Vec2((float)Math.random()*70+5, (float)Math.random()*70+5));
+//				positions.add(new Vec2(0, (float)Math.random()*70+5));
+//				
+//				allObjects.add(new DynamicPolygon(i*20, j*20, positions));
+//			}
+//		}
 				
 		
 //		das Test-Rechteck hinzufügen
@@ -134,7 +134,6 @@ public class Game {
 		try {
 			actionSem.acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		actionList.add(action);
@@ -147,7 +146,6 @@ public class Game {
 			try {
 				actionSem.acquire();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
