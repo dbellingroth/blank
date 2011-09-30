@@ -12,6 +12,7 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.Contact;
 import org.jbox2d.dynamics.joints.JointDef;
+import org.jbox2d.dynamics.joints.PrismaticJointDef;
 import org.jbox2d.dynamics.joints.RevoluteJointDef;
 
  
@@ -79,16 +80,45 @@ public class PhysicsWorld implements Runnable, ContactListener{
 	}
 	
 	
-	public static void createJoint(Body bodyA, Body bodyB) {
+	
+	
+	
+	
+	public static void createRevoluteJoint(Body bodyA, Body bodyB) {
 		
 		RevoluteJointDef jDef = new RevoluteJointDef();
 			
-//		jDef.bodyA = bodyA;
-//		jDef.bodyB = bodyB;	
-		jDef.initialize(bodyA, bodyB, bodyA.getLocalCenter());
+		jDef.initialize(bodyA, bodyB, bodyA.getWorldCenter());
+		world.createJoint(jDef);
+	}
+	
+	
+	public static void createMotorJoint(Body bodyA, Body bodyB) {
+		
+		RevoluteJointDef jDef = new RevoluteJointDef();
+		
+		jDef.initialize(bodyA, bodyB, bodyA.getWorldCenter());
+		jDef.enableLimit = false;
+		jDef.maxMotorTorque = 10.0f;
+		jDef.motorSpeed = 11.0f;
+		jDef.enableMotor = true;
 		
 		world.createJoint(jDef);
 	}
+	
+	
+	
+	public static void createPrismaticJoint(Body bodyA, Body bodyB) {
+		
+		PrismaticJointDef pDef = new PrismaticJointDef();
+		
+		pDef.initialize(bodyA, bodyB, bodyA.getWorldCenter(), new Vec2(20, 20));
+		
+		
+		world.createJoint(pDef);
+	}
+	
+	
 	
 	
 	

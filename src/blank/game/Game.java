@@ -100,15 +100,11 @@ public class Game {
 		allObjects.add(dr);
 		
 		
-		ArrayList<Vec2> positions = new ArrayList<Vec2>();
-		positions.add(new Vec2(0, 0));
-		positions.add(new Vec2((float)Math.random()*70+5, (float)Math.random()*70+5));
-		positions.add(new Vec2(0, (float)Math.random()*70+5));
-		Polygon bodyA = new Polygon(300, 400, positions, BodyType.DYNAMIC);
-		Circle bodyB = new Circle(100, 100, 50, BodyType.STATIC);
+		Circle bodyA = new Circle(300, 400, 10, BodyType.STATIC);
+		Circle bodyB = new Circle(300, 400, 50, BodyType.DYNAMIC);
 		allObjects.add(bodyA);
 		allObjects.add(bodyB);
-		PhysicsWorld.createJoint(bodyA.getPhysicsObject().getBody(), bodyB.getPhysicsObject().getBody());
+		PhysicsWorld.createMotorJoint(bodyA.getPhysicsObject().getBody(), bodyB.getPhysicsObject().getBody());
 		
 		
 //		allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
