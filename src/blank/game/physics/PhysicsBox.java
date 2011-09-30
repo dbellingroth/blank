@@ -29,7 +29,7 @@ public class PhysicsBox extends PhysicsObject {
 		fdef = new FixtureDef();
 
 		fdef.shape = shape;
-		fdef.friction = 0.3f;
+		fdef.friction = 1f;
 		fdef.density = 1f;
 
 	}
