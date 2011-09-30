@@ -18,8 +18,7 @@ public class PhysicsBox extends PhysicsObject {
 				/ PhysicsWorld.pixelsPerMeter
 				+ (height / (PhysicsWorld.pixelsPerMeter * 2)));
 		def.type = BodyType.DYNAMIC;
-		def.bullet = true;
-		def.fixedRotation = true;
+
 
 		PolygonShape shape = new PolygonShape();
 
@@ -29,7 +28,7 @@ public class PhysicsBox extends PhysicsObject {
 		fdef = new FixtureDef();
 
 		fdef.shape = shape;
-		fdef.friction = 0.3f;
+		fdef.friction = 10f;
 		fdef.density = 1f;
 
 	}

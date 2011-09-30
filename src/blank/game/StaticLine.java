@@ -24,37 +24,33 @@ public class StaticLine implements GameObject, PhysicsOwner, Drawable {
 	boolean up, down, left, right; //nur zum testen...
 	int key_up = 200, key_down = 208, key_left = 203, key_right = 205;
 
-	public StaticLine(ArrayList<Vec2> points) {
+	public StaticLine(Vec2 p1, Vec2 p2) {
 
-		phys = new PhysicsLine(points);
+		
+		phys = new PhysicsLine(p1, p2);
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
 
-		x = points.get(0).x;
-		y = points.get(0).y;
-		for (Vec2 pos : points) {
-			width = (pos.x > width ? pos.x : width);
-			height = (pos.y > height ? pos.y : height);
-		}
+		x = p1.x < p2.x ? p1.x : p2.x;
+		y = p1.y < p2.y ? p1.x : p1.y;
+
+		
+		width = (float) Math.abs((int) (p1.x - p2.x));
+		height = (float) Math.abs((int) (p1.y - p2.y));
+		
 		
 		sprite = new Sprite((int) width, (int) height);
 		Graphics2D g2d = sprite.getGraphics2D();
 		g2d.setColor(Color.MAGENTA);
-		for (int i = 1; i < points.size(); i++) {
-			g2d.drawLine((int) points.get(i-1).x, (int) points.get(i-1).y, (int) points.get(i).x, (int) points.get(i).y);
-		}
+		g2d.drawLine((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y);
 		sprite.update();
-		
-		
 	}
 
 	
 	public void draw() {	
 		
 		sprite.setTranslate(new Vec2(
-				phys.getPosition().x , phys.getPosition().y));
-		
-		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
+					x, y));
 		sprite.setRotationAngle(phys.getAngle());
 		sprite.draw();
 		
