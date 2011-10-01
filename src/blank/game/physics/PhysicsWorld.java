@@ -1,9 +1,8 @@
 package blank.game.physics;
 
 
-import java.util.HashMap;
-import java.util.concurrent.Semaphore;
 
+import java.util.concurrent.Semaphore;
 import org.jbox2d.callbacks.ContactImpulse;
 import org.jbox2d.callbacks.ContactListener;
 import org.jbox2d.collision.Manifold;
@@ -13,8 +12,6 @@ import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.Contact;
 import org.jbox2d.dynamics.joints.DistanceJointDef;
 import org.jbox2d.dynamics.joints.Joint;
-import org.jbox2d.dynamics.joints.JointDef;
-import org.jbox2d.dynamics.joints.PrismaticJointDef;
 import org.jbox2d.dynamics.joints.RevoluteJointDef;
 
  
@@ -78,20 +75,15 @@ public class PhysicsWorld implements Runnable, ContactListener{
 		releasePhysics();
 	}
 	
-	
-	
-	
-	
-	
-	public static void createRevoluteJoint(Body bodyA, Body bodyB) {
-		
-		RevoluteJointDef jDef = new RevoluteJointDef();
-			
-		jDef.initialize(bodyA, bodyB, bodyA.getWorldCenter());
-		world.createJoint(jDef);
+	public void addJoint(PhysicsJoint joint) {
+		reservePhysics();
+		joint.init(world);
+		releasePhysics();
 	}
 	
 	
+	
+
 	public static void createMotorJoint(Body bodyA, Body bodyB) {
 		
 		RevoluteJointDef jDef = new RevoluteJointDef();

@@ -11,6 +11,7 @@ import org.jbox2d.dynamics.BodyType;
 
 
 
+import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
 import blank.game.rendering.Sprite;
@@ -84,7 +85,7 @@ public class Game {
 				
 		
 //		das Test-Rechteck hinzufügen
-		dr = new Rectangle(105, 300, 70, 70, BodyType.DYNAMIC);
+		dr = new Rectangle(100, 300, 80, 80, BodyType.DYNAMIC);
 //		//left
 //		inputHandler.addKeyPressedListener(dr, 203, 1);
 //		inputHandler.addKeyReleasedListener(dr, 203, 1);
@@ -100,12 +101,16 @@ public class Game {
 		allObjects.add(dr);
 		
 		
-		Circle bodyA = new Circle(300, 400, 10, BodyType.STATIC);
-		Circle bodyB = new Circle(300, 400, 20, BodyType.DYNAMIC);
+		Circle bodyA = new Circle(101, 379, 20, BodyType.DYNAMIC);
+		Circle bodyB = new Circle(179, 379, 20, BodyType.DYNAMIC);
 		allObjects.add(bodyA);
 		allObjects.add(bodyB);
-		PhysicsWorld.createRevoluteJoint(bodyA.getPhysicsObject().getBody(), bodyB.getPhysicsObject().getBody());
-		
+		NailJoint nJoint1 = new NailJoint(dr.getPhysicsObject(), bodyA.getPhysicsObject(), new Vec2(-39, 39));
+		NailJoint nJoint2 = new NailJoint(dr.getPhysicsObject(), bodyB.getPhysicsObject(), new Vec2(39, 39));
+		world.addJoint(nJoint1);
+		world.addJoint(nJoint2);
+		nJoint1.enableMotor(10, 10);
+		nJoint2.enableMotor(10, 10);
 		
 //		allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
 		
