@@ -103,14 +103,17 @@ public class Game {
 		
 		Circle bodyA = new Circle(101, 379, 35, BodyType.DYNAMIC);
 		Circle bodyB = new Circle(179, 379, 20, BodyType.DYNAMIC);
+		bodyA.getPhysicsObject().setMass(-110f);
+		bodyB.getPhysicsObject().setMass(-110f);
 		allObjects.add(bodyA);
 		allObjects.add(bodyB);
-		NailJoint nJoint1 = new NailJoint(dr.getPhysicsObject(), bodyA.getPhysicsObject(), new Vec2(-39, 39));
-		NailJoint nJoint2 = new NailJoint(dr.getPhysicsObject(), bodyB.getPhysicsObject(), new Vec2(39, 39));
-		world.addJoint(nJoint1);
-		world.addJoint(nJoint2);
-		nJoint1.enableMotor(10, 10);
-		nJoint2.enableMotor(10, 10);
+//		NailJoint nJoint1 = new NailJoint(dr.getPhysicsObject(), bodyA.getPhysicsObject(), new Vec2(-39, 39));
+//		NailJoint nJoint2 = new NailJoint(dr.getPhysicsObject(), bodyB.getPhysicsObject(), new Vec2(39, 39));
+//		world.addJoint(nJoint1);
+//		world.addJoint(nJoint2);
+//		nJoint1.enableMotor(10, 10);
+//		nJoint2.enableMotor(10, 10);
+		
 		
 		
 //		allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));

@@ -22,7 +22,7 @@ public class NailJoint extends PhysicsJoint {
 		
 		rJointDef.initialize(pObjectA.getBody(), pObjectB.getBody(), 
 				anchorPoint);
-	
+		
 		
 		
 	}
@@ -35,6 +35,17 @@ public class NailJoint extends PhysicsJoint {
 	}
 	
 	
+	public void setMotorTorque(float torque) {
+		rJoint.m_maxMotorTorque = torque;
+	}
+	
+	public void setMotorSpeed(float speed) {
+		rJoint.m_motorSpeed = speed;
+	}
+	
+	public void stopMotor() {
+		rJoint.m_enableMotor = false;
+	}
 	
 	public void init(World world) {
 			
