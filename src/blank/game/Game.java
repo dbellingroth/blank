@@ -101,7 +101,7 @@ public class Game {
 		allObjects.add(dr);
 		
 		
-		Circle bodyA = new Circle(101, 379, 20, BodyType.DYNAMIC);
+		Circle bodyA = new Circle(101, 379, 35, BodyType.DYNAMIC);
 		Circle bodyB = new Circle(179, 379, 20, BodyType.DYNAMIC);
 		allObjects.add(bodyA);
 		allObjects.add(bodyB);
@@ -111,6 +111,7 @@ public class Game {
 		world.addJoint(nJoint2);
 		nJoint1.enableMotor(10, 10);
 		nJoint2.enableMotor(10, 10);
+		
 		
 //		allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
 		
