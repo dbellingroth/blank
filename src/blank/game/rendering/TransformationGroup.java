@@ -37,8 +37,7 @@ public class TransformationGroup extends Transformable {
 	public void removeChild(Drawable child) {
 		list.removeDrawable(child);
 	}
-	
-	
+
 	@Override
 	public boolean getVisible() {
 		return visible;

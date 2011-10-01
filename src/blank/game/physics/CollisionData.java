@@ -21,19 +21,27 @@ public class CollisionData {
 	}
 
 	public PhysicsObject getFirstObject() {
-		if (switchBodies) return (PhysicsObject) contact.getFixtureB().getBody().getUserData();
-		else return (PhysicsObject) contact.getFixtureA().getBody().getUserData();
+		if (switchBodies)
+			return (PhysicsObject) contact.getFixtureB().getBody()
+					.getUserData();
+		else
+			return (PhysicsObject) contact.getFixtureA().getBody()
+					.getUserData();
 	}
 
 	public PhysicsObject getSecondObject() {
-		if (switchBodies) return (PhysicsObject) contact.getFixtureA().getBody().getUserData();
-		else return (PhysicsObject) contact.getFixtureB().getBody().getUserData();
+		if (switchBodies)
+			return (PhysicsObject) contact.getFixtureA().getBody()
+					.getUserData();
+		else
+			return (PhysicsObject) contact.getFixtureB().getBody()
+					.getUserData();
 	}
 
 	public float getImpulse() {
 		return impulse;
 	}
-	
+
 	/**
 	 * Kollision ignorieren
 	 */

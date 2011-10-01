@@ -61,8 +61,11 @@ public class Window {
 		GL11.glOrtho(0, width, height, 0, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		/*GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_CLAMP);
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_CLAMP);*/
+		/*
+		 * GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S,
+		 * GL11.GL_CLAMP); GL11.glTexParameteri(GL11.GL_TEXTURE_2D,
+		 * GL11.GL_TEXTURE_WRAP_T, GL11.GL_CLAMP);
+		 */
 	}
 
 	/**
@@ -81,7 +84,7 @@ public class Window {
 			GL11.glLoadIdentity();
 
 			handleInput();
-			
+
 			// Spiel kümmert sich um den Rest
 			parent.update(delta);
 
@@ -122,18 +125,22 @@ public class Window {
 		lastFrame = time;
 		return delta;
 	}
-	
+
 	private void handleInput() {
 		while (Keyboard.next()) {
-			if (Keyboard.getEventKeyState()) parent.keyPressed(Keyboard.getEventKey());
-			else parent.keyReleased(Keyboard.getEventKey());
+			if (Keyboard.getEventKeyState())
+				parent.keyPressed(Keyboard.getEventKey());
+			else
+				parent.keyReleased(Keyboard.getEventKey());
 		}
-		
+
 		while (Mouse.next()) {
-			if (Mouse.getEventButtonState() && Mouse.getEventButton() >= 0) parent.mousePressed(Mouse.getEventButton());
-			else if (Mouse.getEventButton() >= 0) parent.mouseReleased(Mouse.getEventButton());
+			if (Mouse.getEventButtonState() && Mouse.getEventButton() >= 0)
+				parent.mousePressed(Mouse.getEventButton());
+			else if (Mouse.getEventButton() >= 0)
+				parent.mouseReleased(Mouse.getEventButton());
 		}
-		
+
 	}
 
 }

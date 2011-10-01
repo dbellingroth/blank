@@ -24,13 +24,11 @@ public class Sprite extends Transformable {
 	private int width, height, twidth, theight;
 	private float wfac, hfac;
 
-	
 	public Sprite(int width, int height) {
 
 		this.width = width;
 		this.height = height;
-		init(new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_ARGB));
+		init(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
 
 	}
 
@@ -44,30 +42,30 @@ public class Sprite extends Transformable {
 		}
 	}
 
-	
 	private void init(BufferedImage image) {
 		this.width = image.getWidth();
 		this.height = image.getHeight();
-		
+
 		textureID = idCounter++;
-		
+
 		int texture_edge = Tools.next_powerOfTwo_square(width, height);
-		
-		//Die Textur wird quadratisch mit einer Kantenlänge, die eine 2erpotenz ist.
+
+		// Die Textur wird quadratisch mit einer Kantenlänge, die eine 2erpotenz
+		// ist.
 		this.twidth = this.theight = texture_edge;
-		
-		//Der Faktor, mit dem die Textur auf das Quad gemappt wird
-		this.wfac = (float)width/twidth;
-		this.hfac = (float)height/theight;
-		
+
+		// Der Faktor, mit dem die Textur auf das Quad gemappt wird
+		this.wfac = (float) width / twidth;
+		this.hfac = (float) height / theight;
+
 		/*
-		 * image wird zu einem neuen BufferedImage mit einer Seitenlänge einer 2er-Potenz in
-		 * das das eigentliche Bild gezeichnet wird.
+		 * image wird zu einem neuen BufferedImage mit einer Seitenlänge einer
+		 * 2er-Potenz in das das eigentliche Bild gezeichnet wird.
 		 */
-		this.image = new BufferedImage(texture_edge, texture_edge,	
-				BufferedImage.TYPE_INT_ARGB); 
+		this.image = new BufferedImage(texture_edge, texture_edge,
+				BufferedImage.TYPE_INT_ARGB);
 		this.image.getGraphics().drawImage(image, 0, 0, null);
-		
+
 		update();
 	}
 
@@ -129,11 +127,10 @@ public class Sprite extends Transformable {
 		this.visible = visible;
 	}
 
-	
 	public int getWidth() {
-		return width;	
+		return width;
 	}
-	
+
 	public int getHeight() {
 		return height;
 	}

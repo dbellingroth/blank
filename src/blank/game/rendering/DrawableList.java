@@ -78,26 +78,24 @@ public class DrawableList implements Drawable {
 
 	}
 
-	
 	/**
 	 * überprüft, ob das übergebene Drawable bereits in der Liste vorhanden ist
 	 */
 	public boolean contains(Drawable drawable) {
-		
-		if (drawables.contains(drawable)) return true;
-		else return false;
-		
+
+		if (drawables.contains(drawable))
+			return true;
+		else
+			return false;
+
 	}
-	
-	
-	
+
 	public int size() {
-		
+
 		return drawables.size();
 
 	}
-	
-	
+
 	/**
 	 * ruft auf alle Objekete der Liste die draw()-Methode auf
 	 */
@@ -118,7 +116,7 @@ public class DrawableList implements Drawable {
 	public void setZIndex(int zIndex) {
 		this.zIndex = zIndex;
 	}
-	
+
 	@Override
 	public boolean getVisible() {
 		return visible;
@@ -128,5 +126,5 @@ public class DrawableList implements Drawable {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	
+
 }

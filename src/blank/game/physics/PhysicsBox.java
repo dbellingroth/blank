@@ -11,7 +11,8 @@ public class PhysicsBox extends PhysicsObject {
 	private BodyDef def;
 	private FixtureDef fdef;
 
-	public PhysicsBox(float x, float y, float width, float height, BodyType bodyType) {
+	public PhysicsBox(float x, float y, float width, float height,
+			BodyType bodyType) {
 		def = new BodyDef();
 		def.position.set(x / PhysicsWorld.pixelsPerMeter
 				+ (width / (PhysicsWorld.pixelsPerMeter * 2)), y
@@ -19,7 +20,7 @@ public class PhysicsBox extends PhysicsObject {
 				+ (height / (PhysicsWorld.pixelsPerMeter * 2)));
 		def.type = bodyType;
 		def.bullet = true;
-		//def.fixedRotation = true;
+		// def.fixedRotation = true;
 
 		PolygonShape shape = new PolygonShape();
 
@@ -33,7 +34,6 @@ public class PhysicsBox extends PhysicsObject {
 		fdef.density = 1f;
 
 	}
-
 
 	public void init(World world) {
 		body = world.createBody(def);

@@ -68,7 +68,7 @@ public class Tools {
 	 * berechnet die nächstgrößer 2er-Potenz für die Seitenlänge eines Quadrats
 	 * 
 	 * @return nächstgrößere 2er-Potenz für den größten Wert der beiden
-	 * Argumente
+	 *         Argumente
 	 */
 	public static int next_powerOfTwo_square(int width, int height) {
 
@@ -106,53 +106,50 @@ public class Tools {
 		return sprite_edge;
 
 	}
-	
-	
-	
+
 	/**
-	 * Macht aus einer ArrayList von Positionen ein Array aus Positionen mit bereits konvertierten Werten für die Physikengine
-	 * @param positions_arrayList Die zu konvertierende ArrayList
+	 * Macht aus einer ArrayList von Positionen ein Array aus Positionen mit
+	 * bereits konvertierten Werten für die Physikengine
+	 * 
+	 * @param positions_arrayList
+	 *            Die zu konvertierende ArrayList
 	 * @return konvertiertes Array
 	 */
 	public static Vec2[] arrayList_to_array(ArrayList<Vec2> positions_arrayList) {
-		
-		
+
 		Vec2[] positions_array = new Vec2[positions_arrayList.size()];
-		
+
 		for (int i = 0; i < positions_arrayList.size(); i++) {
-			positions_array[i] = new Vec2(positions_arrayList.get(i).x / PhysicsWorld.pixelsPerMeter, positions_arrayList.get(i).y / PhysicsWorld.pixelsPerMeter);
+			positions_array[i] = new Vec2(positions_arrayList.get(i).x
+					/ PhysicsWorld.pixelsPerMeter, positions_arrayList.get(i).y
+					/ PhysicsWorld.pixelsPerMeter);
 		}
-		
+
 		return positions_array;
 	}
-	
-	
-	
-	public static Vec2[] arrayList_to_array(ArrayList<Vec2> positions_arrayList, Vec2 factor) {
-		
-		
+
+	public static Vec2[] arrayList_to_array(
+			ArrayList<Vec2> positions_arrayList, Vec2 factor) {
+
 		Vec2[] positions_array = new Vec2[positions_arrayList.size()];
 		for (int i = 0; i < positions_arrayList.size(); i++) {
-			positions_array[i] = new Vec2(positions_arrayList.get(i).x * factor.x, positions_arrayList.get(i).y * factor.y);
+			positions_array[i] = new Vec2(positions_arrayList.get(i).x
+					* factor.x, positions_arrayList.get(i).y * factor.y);
 		}
-		
+
 		return positions_array;
 	}
-	
-	
-	
-	
-	
-	
+
 	public static Vec2 convertVectorPhys2Pix(Vec2 vector) {
-	
-		return new Vec2(vector.x*PhysicsWorld.pixelsPerMeter,vector.y*PhysicsWorld.pixelsPerMeter);
+
+		return new Vec2(vector.x * PhysicsWorld.pixelsPerMeter, vector.y
+				* PhysicsWorld.pixelsPerMeter);
 	}
-	
-	
+
 	public static Vec2 convertVectorPix2Phys(Vec2 vector) {
-		
-		return new Vec2(vector.x/PhysicsWorld.pixelsPerMeter,vector.y/PhysicsWorld.pixelsPerMeter);
+
+		return new Vec2(vector.x / PhysicsWorld.pixelsPerMeter, vector.y
+				/ PhysicsWorld.pixelsPerMeter);
 	}
 
 }

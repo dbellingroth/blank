@@ -7,55 +7,55 @@ import org.jbox2d.dynamics.joints.RevoluteJointDef;
 
 import blank.game.Tools;
 
+/**
+ * 
+ * @author Kilian Helmenstein
+ * 
+ *         Mit dieser Klasse können zwei Physic-Bodies aneinander genagelt
+ *         werden. Zusätzlich kann der Motor aktiviert werden: Ein Drehmoment am
+ *         Nagelpunkt
+ */
 public class NailJoint extends PhysicsJoint {
 
-	private RevoluteJointDef rJointDef;
-	private RevoluteJoint rJoint;
-	
+	private RevoluteJointDef jointDef;
+	private RevoluteJoint joint;
+
 	public NailJoint(PhysicsObject pObjectA, PhysicsObject pObjectB, Vec2 anchor) {
-		
-		rJointDef = new RevoluteJointDef();
-		
-		
-		Vec2 anchorPoint = new Vec2(pObjectA.getBody().getPosition().x + Tools.convertVectorPix2Phys(anchor).x, 
-								pObjectA.getBody().getPosition().y + Tools.convertVectorPix2Phys(anchor).y);
-		
-		rJointDef.initialize(pObjectA.getBody(), pObjectB.getBody(), 
-				anchorPoint);
-		
-		
-		
-	}
-	
 
-	public void enableMotor(float torque, float speed) {
-		rJoint.m_enableMotor = true;
-		rJoint.m_maxMotorTorque = 10f;
-		rJoint.m_motorSpeed = 10f;
+		jointDef = new RevoluteJointDef();
+
+		Vec2 anchorPoint = new Vec2(pObjectA.getBody().getPosition().x
+				+ Tools.convertVectorPix2Phys(anchor).x, pObjectA.getBody()
+				.getPosition().y + Tools.convertVectorPix2Phys(anchor).y);
+
+		jointDef.initialize(pObjectA.getBody(), pObjectB.getBody(), anchorPoint);
+
 	}
-	
-	
+
+	public void enableMotor(boolean enable) {
+		if (joint != null)
+			joint.m_enableMotor = enable;
+		else
+			jointDef.enableMotor = enable;
+	}
+
 	public void setMotorTorque(float torque) {
-		rJoint.m_maxMotorTorque = torque;
-	}
-	
-	public void setMotorSpeed(float speed) {
-		rJoint.m_motorSpeed = speed;
-	}
-	
-	public void stopMotor() {
-		rJoint.m_enableMotor = false;
-	}
-	
-	public void init(World world) {
-			
-		rJoint = (RevoluteJoint) world.createJoint(rJointDef);
-		rJoint.setUserData(this);
-		
+		if (joint != null)
+			joint.m_maxMotorTorque = torque;
+		else
+			jointDef.maxMotorTorque = torque;
 	}
 
-	
-	
-	
-	
+	public void setMotorSpeed(float speed) {
+		if (joint != null)
+			joint.m_motorSpeed = speed;
+		else
+			jointDef.motorSpeed = speed;
+	}
+
+	public void init(World world) {
+		joint = (RevoluteJoint) world.createJoint(jointDef);
+		joint.setUserData(this);
+	}
+
 }

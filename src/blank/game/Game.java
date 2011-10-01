@@ -1,153 +1,150 @@
 package blank.game;
 
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
-
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
-
-
-
-import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
+import blank.game.physics.StickJoint;
 import blank.game.rendering.Sprite;
-
 
 /**
  * Die eigentliche Hauptklasse mit der Mainmethode.
+ * 
  * @author Kilian Helmenstein, David Bellingroth
- *
+ * 
  */
 public class Game {
 
-
 	private static PhysicsWorld world;
-	private static Queue<Executor> actionList = new LinkedList<Executor>(); //Qeue von Executors, die ausgeführt werden sollen
+	private static Queue<Executor> actionList = new LinkedList<Executor>(); // Qeue
+																			// von
+																			// Executors,
+																			// die
+																			// ausgeführt
+																			// werden
+																			// sollen
 	private static Semaphore actionSem = new Semaphore(1);
 
-	public static InputHandler inputHandler  = new InputHandler();
-	
+	public static InputHandler inputHandler = new InputHandler();
+
 	private AllObjectsList allObjects;
-	
+
 	private Sprite wald;
 	private Rectangle dr;
-	
-	
+
 	public static void main(String args[]) {
 		new Window(new Game(), 800, 600);
-	} 
+	}
 
 	public Game() {
-		
+
 	}
-	
+
 	public static PhysicsWorld getPhysicsWorld() {
 		return world;
 	}
 
 	/**
 	 * Wird vom Window nach dem initialisieren von OpenGL aufgerufen
-	 * @throws InterruptedException 
+	 * 
+	 * @throws InterruptedException
 	 */
 	public void init() {
-		
+
 		wald = new Sprite("res/wald.jpg");
-		
+
 		world = new PhysicsWorld();
-		
-		
+
 		allObjects = new AllObjectsList();
-		
-	
-		world.addObject(new PhysicsStaticBlock(0,600,800,100));
-		world.addObject(new PhysicsStaticBlock(0,-100,800,100));
-		world.addObject(new PhysicsStaticBlock(-100,0,100,600));
-		world.addObject(new PhysicsStaticBlock(800,0,100,600));
-		
-				
-//		Bälle hinzufügen
-//		for (int i = 1; i< 40; i+=2) {
-//			for (int j = 1; j<30; j+=2) {
-//				allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*12+4)));
-//				
-//				ArrayList<Vec2> positions = new ArrayList<Vec2>();
-//				positions.add(new Vec2(0, 0));
-//				positions.add(new Vec2((float)Math.random()*70+5, (float)Math.random()*70+5));
-//				positions.add(new Vec2(0, (float)Math.random()*70+5));
-//				
-//				allObjects.add(new DynamicPolygon(i*20, j*20, positions));
-//			}
-//		}
-				
-		
-//		das Test-Rechteck hinzufügen
+
+		world.addObject(new PhysicsStaticBlock(0, 600, 800, 100));
+		world.addObject(new PhysicsStaticBlock(0, -100, 800, 100));
+		world.addObject(new PhysicsStaticBlock(-100, 0, 100, 600));
+		world.addObject(new PhysicsStaticBlock(800, 0, 100, 600));
+
+		// Bälle hinzufügen
+		// for (int i = 1; i< 40; i+=2) {
+		// for (int j = 1; j<30; j+=2) {
+		// allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*12+4)));
+		//
+		// ArrayList<Vec2> positions = new ArrayList<Vec2>();
+		// positions.add(new Vec2(0, 0));
+		// positions.add(new Vec2((float)Math.random()*70+5,
+		// (float)Math.random()*70+5));
+		// positions.add(new Vec2(0, (float)Math.random()*70+5));
+		//
+		// allObjects.add(new DynamicPolygon(i*20, j*20, positions));
+		// }
+		// }
+
+		// das Test-Rechteck hinzufügen
 		dr = new Rectangle(100, 300, 80, 80, BodyType.DYNAMIC);
-//		//left
-//		inputHandler.addKeyPressedListener(dr, 203, 1);
-//		inputHandler.addKeyReleasedListener(dr, 203, 1);
-//		//right
-//		inputHandler.addKeyPressedListener(dr, 205, 2);
-//		inputHandler.addKeyReleasedListener(dr, 205, 2);
-//		//up
-//		inputHandler.addKeyPressedListener(dr, 200, 3);
-//		inputHandler.addKeyReleasedListener(dr, 200, 3);
-//		//down
-//		inputHandler.addKeyPressedListener(dr, 208, 4);		
-//		inputHandler.addKeyReleasedListener(dr, 208, 4);
+		// //left
+		// inputHandler.addKeyPressedListener(dr, 203, 1);
+		// inputHandler.addKeyReleasedListener(dr, 203, 1);
+		// //right
+		// inputHandler.addKeyPressedListener(dr, 205, 2);
+		// inputHandler.addKeyReleasedListener(dr, 205, 2);
+		// //up
+		// inputHandler.addKeyPressedListener(dr, 200, 3);
+		// inputHandler.addKeyReleasedListener(dr, 200, 3);
+		// //down
+		// inputHandler.addKeyPressedListener(dr, 208, 4);
+		// inputHandler.addKeyReleasedListener(dr, 208, 4);
 		allObjects.add(dr);
-		
-		
-		Circle bodyA = new Circle(101, 379, 35, BodyType.DYNAMIC);
-		Circle bodyB = new Circle(179, 379, 20, BodyType.DYNAMIC);
+
+		Circle bodyA = new Circle(400, 379, 20, BodyType.DYNAMIC);
+		Circle bodyB = new Circle(400, 379, 30, BodyType.STATIC);
 		bodyA.getPhysicsObject().setMass(-110f);
 		bodyB.getPhysicsObject().setMass(-110f);
 		allObjects.add(bodyA);
 		allObjects.add(bodyB);
-//		NailJoint nJoint1 = new NailJoint(dr.getPhysicsObject(), bodyA.getPhysicsObject(), new Vec2(-39, 39));
-//		NailJoint nJoint2 = new NailJoint(dr.getPhysicsObject(), bodyB.getPhysicsObject(), new Vec2(39, 39));
-//		world.addJoint(nJoint1);
-//		world.addJoint(nJoint2);
-//		nJoint1.enableMotor(10, 10);
-//		nJoint2.enableMotor(10, 10);
-		
-		
-		
-//		allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
-		
+		StickJoint sJoint1 = new StickJoint(bodyA.getPhysicsObject(),
+				bodyB.getPhysicsObject(), new Vec2(0, 0), new Vec2(0, 0));
+		world.addJoint(sJoint1);
+		sJoint1.setLength(5f);
+		sJoint1.setDampingRation(10f);
+
+		// allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200,
+		// 200)));
+
 		world.start();
 	}
 
 	/**
 	 * Wird vom Window einmal pro Frame ausgeführt
-	 * @param delta Das aktuelle Delta. Sollte bei allen Animationen etc. berücksichtigt werden!
+	 * 
+	 * @param delta
+	 *            Das aktuelle Delta. Sollte bei allen Animationen etc.
+	 *            berücksichtigt werden!
 	 */
 	protected void update(int delta) {
-		
+
 		executeActions();
-			
-		//balls.get((int)(Math.random()*(balls.size()-1)+0.9999)).getPhysicsObject().applyForce(new Vec2(-100+(float)Math.random()*200,-100+(float)Math.random()*200), new Vec2(5,5));
-		
+
+		// balls.get((int)(Math.random()*(balls.size()-1)+0.9999)).getPhysicsObject().applyForce(new
+		// Vec2(-100+(float)Math.random()*200,-100+(float)Math.random()*200),
+		// new Vec2(5,5));
+
 		allObjects.update(delta);
-		
-		
+
 		render();
 	}
-	
+
 	private void render() {
-		
+
 		wald.draw();
 		allObjects.draw();
-		
+
 	}
-	
+
 	public void stop() {
 		world.stop();
 	}
-	
+
 	public static void addAction(Executor action) {
 		try {
 			actionSem.acquire();
@@ -157,42 +154,41 @@ public class Game {
 		actionList.add(action);
 		actionSem.release();
 	}
-	
+
 	private void executeActions() {
-		
-		while (!actionList.isEmpty()){
+
+		while (!actionList.isEmpty()) {
 			try {
 				actionSem.acquire();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 			actionList.remove().execute();
-			
+
 			actionSem.release();
 		}
-		
+
 	}
-	
-	
-//	die handleInput-Methoden weiterschleifen and den InputHandler,
-//	dieser verwaltet dann die Weiterleitung an die richtigen InputListeners.
+
+	// die handleInput-Methoden weiterschleifen and den InputHandler,
+	// dieser verwaltet dann die Weiterleitung an die richtigen InputListeners.
 	public void keyPressed(int key) {
-//		inputHandler.keyPressed(key);
+		// inputHandler.keyPressed(key);
 		dr.keyPressed(key);
 	}
-	
+
 	public void keyReleased(int key) {
-//		inputHandler.keyReleased(key);
+		// inputHandler.keyReleased(key);
 		dr.keyReleased(key);
 	}
-	
+
 	public void mousePressed(int button) {
 		inputHandler.mousePressed(button);
 	}
-	
+
 	public void mouseReleased(int button) {
 		inputHandler.mouseReleased(button);
 	}
-	
+
 }
