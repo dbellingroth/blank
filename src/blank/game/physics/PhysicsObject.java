@@ -22,8 +22,8 @@ public abstract class PhysicsObject {
 		return owner;
 	}
 
-	//Initialisiert das Objekt, erzeugt den Body und liefert ihn zurück, damit PhysicsWorld in die KollisionsHashMap packen kann
-	public abstract void init(World world);
+	//Initialisiert das Objekt, erzeugt den Body
+	protected abstract void init(World world);
 	
 	/**
 	 * Gibt die aktuelle Position des Objekts zurück
