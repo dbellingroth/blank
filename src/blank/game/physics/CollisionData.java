@@ -21,13 +21,13 @@ public class CollisionData {
 	}
 
 	public PhysicsObject getFirstObject() {
-		if (switchBodies) return PhysicsWorld.getObjectForBody(contact.getFixtureB().getBody());
-		else return PhysicsWorld.getObjectForBody(contact.getFixtureA().getBody());
+		if (switchBodies) return (PhysicsObject) contact.getFixtureB().getBody().getUserData();
+		else return (PhysicsObject) contact.getFixtureA().getBody().getUserData();
 	}
 
 	public PhysicsObject getSecondObject() {
-		if (switchBodies) return PhysicsWorld.getObjectForBody(contact.getFixtureA().getBody());
-		else return PhysicsWorld.getObjectForBody(contact.getFixtureB().getBody());
+		if (switchBodies) return (PhysicsObject) contact.getFixtureA().getBody().getUserData();
+		else return (PhysicsObject) contact.getFixtureB().getBody().getUserData();
 	}
 
 	public float getImpulse() {

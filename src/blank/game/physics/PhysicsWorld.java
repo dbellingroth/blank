@@ -23,14 +23,12 @@ import org.jbox2d.dynamics.joints.RevoluteJointDef;
  */
 public class PhysicsWorld implements Runnable, ContactListener{
     static World world;
-    private static HashMap<Body, PhysicsObject> objectConnections; //Speichert, welche PhysicsObjects zu welchen Bodys gehören. Wichtig für die Kollisionsbenachrichtigung
     private boolean stop;
     private static Semaphore physicsSemaphore = new Semaphore(1);
     public static int pixelsPerMeter = 30;
 	
 	public PhysicsWorld(Vec2 gravity) { 
         boolean doSleep = true;
-        objectConnections = new HashMap<Body, PhysicsObject>();
         world = new World(gravity, doSleep);
         world.setContactListener(this);
 	}
@@ -77,7 +75,6 @@ public class PhysicsWorld implements Runnable, ContactListener{
 	public void addObject(PhysicsObject obj) {
 		reservePhysics();
 		obj.init(world);
-		objectConnections.put(obj.getBody(), obj);
 		releasePhysics();
 	}
 	
@@ -131,7 +128,6 @@ public class PhysicsWorld implements Runnable, ContactListener{
 	
 	public void removeObject(PhysicsObject obj) {
 		reservePhysics();
-		objectConnections.remove(obj.getBody());
 		world.destroyBody(obj.getBody());
 		releasePhysics();
 	}
@@ -147,13 +143,7 @@ public class PhysicsWorld implements Runnable, ContactListener{
 	
 	public static void releasePhysics() {
 		physicsSemaphore.release();
-	}
-	
-	public static PhysicsObject getObjectForBody(Body body) {
-		return objectConnections.get(body);
-	}
-
-	
+	}	
 	
 	@Override
 	public void beginContact(Contact contact) {
@@ -162,24 +152,24 @@ public class PhysicsWorld implements Runnable, ContactListener{
 
 	@Override
 	public void endContact(Contact contact) {
-		PhysicsObject first = objectConnections.get(contact.getFixtureA().getBody());
-		PhysicsObject second = objectConnections.get(contact.getFixtureB().getBody());
+		PhysicsObject first = (PhysicsObject) contact.getFixtureA().getBody().getUserData();
+		PhysicsObject second = (PhysicsObject) contact.getFixtureB().getBody().getUserData();
 		first.endCollision(new CollisionData(contact,0,false));
 		second.endCollision(new CollisionData(contact,0,true));
 	}
 
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
-		PhysicsObject first = objectConnections.get(contact.getFixtureA().getBody());
-		PhysicsObject second = objectConnections.get(contact.getFixtureB().getBody());
+		PhysicsObject first = (PhysicsObject) contact.getFixtureA().getBody().getUserData();
+		PhysicsObject second = (PhysicsObject) contact.getFixtureB().getBody().getUserData();
 		first.beginCollision(new CollisionData(contact,impulse.normalImpulses[0],false));
 		second.beginCollision(new CollisionData(contact,impulse.normalImpulses[0],true));
 	}
 
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		PhysicsObject first = objectConnections.get(contact.getFixtureA().getBody());
-		PhysicsObject second = objectConnections.get(contact.getFixtureB().getBody());
+		PhysicsObject first = (PhysicsObject) contact.getFixtureA().getBody().getUserData();
+		PhysicsObject second = (PhysicsObject) contact.getFixtureB().getBody().getUserData();
 		first.beforeCollision(new CollisionData(contact,0,false));
 		second.beforeCollision(new CollisionData(contact,0,true));
 	}

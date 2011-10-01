@@ -41,6 +41,7 @@ public class PhysicsLine extends PhysicsObject {
 	public void init(World world) {
 
 		body = world.createBody(def);
+		body.setUserData(this);
 		body.createFixture(fdef);
 	
 	}
