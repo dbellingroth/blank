@@ -4,6 +4,8 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.joints.DistanceJoint;
 import org.jbox2d.dynamics.joints.DistanceJointDef;
+import org.jbox2d.dynamics.joints.PrismaticJoint;
+
 import blank.game.Tools;
 
 /**
@@ -60,6 +62,12 @@ public class StickJoint extends PhysicsJoint {
 			jointDef.frequencyHz = frequencyHz;
 	}
 
+	
+	public DistanceJoint getJoint() {
+		if (joint != null) return joint;
+		else return null;
+	}
+	
 	void init(World world) {
 		joint = (DistanceJoint) world.createJoint(jointDef);
 		joint.setUserData(this);

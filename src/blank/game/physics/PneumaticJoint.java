@@ -69,6 +69,12 @@ public class PneumaticJoint extends PhysicsJoint {
 		joint.m_motorSpeed = speed;
 	}
 
+	
+	public PrismaticJoint getJoint() {
+		if (joint != null) return joint;
+		else return null;
+	}
+	
 	public void init(World world) {
 
 		joint = (PrismaticJoint) world.createJoint(jointDef);

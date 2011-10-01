@@ -2,6 +2,7 @@ package blank.game.physics;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.joints.PrismaticJoint;
 import org.jbox2d.dynamics.joints.RevoluteJoint;
 import org.jbox2d.dynamics.joints.RevoluteJointDef;
 
@@ -51,6 +52,12 @@ public class NailJoint extends PhysicsJoint {
 			joint.m_motorSpeed = speed;
 		else
 			jointDef.motorSpeed = speed;
+	}
+	
+	
+	public RevoluteJoint getJoint() {
+		if (joint != null) return joint;
+		else return null;
 	}
 
 	public void init(World world) {

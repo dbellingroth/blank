@@ -15,6 +15,7 @@ public class PhysicsCircle extends PhysicsObject {
 		def = new BodyDef();
 		def.position.set(x / 30, y / 30);
 		def.type = bodyType;
+		def.fixedRotation = false;
 		CircleShape c = new CircleShape();
 		c.m_radius = r / PhysicsWorld.pixelsPerMeter;
 		fdef = new FixtureDef();

@@ -5,8 +5,13 @@ import java.util.Queue;
 import java.util.concurrent.Semaphore;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
+
+import blank.game.physics.GearWheelJoint;
+import blank.game.physics.LiftJoint;
+import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
+import blank.game.physics.PneumaticJoint;
 import blank.game.physics.StickJoint;
 import blank.game.rendering.Sprite;
 
@@ -96,20 +101,37 @@ public class Game {
 		// inputHandler.addKeyReleasedListener(dr, 208, 4);
 		allObjects.add(dr);
 
-		Circle bodyA = new Circle(400, 379, 20, BodyType.DYNAMIC);
-		Circle bodyB = new Circle(400, 379, 30, BodyType.STATIC);
-		bodyA.getPhysicsObject().setMass(-110f);
-		bodyB.getPhysicsObject().setMass(-110f);
+		Circle bodyA = new Circle(100, 300, 40, BodyType.DYNAMIC);
+		Circle bodyB = new Circle(100, 300, 10, BodyType.STATIC);
+		
+		Circle bodyC = new Circle(400, 300, 30, BodyType.DYNAMIC);
+		Circle bodyD = new Circle(400, 300, 10, BodyType.STATIC);
+		
 		allObjects.add(bodyA);
 		allObjects.add(bodyB);
-		StickJoint sJoint1 = new StickJoint(bodyA.getPhysicsObject(),
-				bodyB.getPhysicsObject(), new Vec2(0, 0), new Vec2(0, 0));
-		world.addJoint(sJoint1);
-		sJoint1.setLength(5f);
-		sJoint1.setDampingRation(10f);
+		allObjects.add(bodyC);
+		allObjects.add(bodyD);
+		
+		NailJoint nJoint = new NailJoint(bodyA.getPhysicsObject(), bodyB.getPhysicsObject(),
+								new Vec2(0, 0));
+		world.addJoint(nJoint);
+		
+		PneumaticJoint pJoint = new PneumaticJoint(bodyC.getPhysicsObject(), bodyD.getPhysicsObject(),
+								new Vec2(0, 0), new Vec2(0f, 1f));
+		pJoint.setUpperTranslation(2f);
+		pJoint.setLowerTranslation(-2f);
+		pJoint.enableTransLimit(true);
+		world.addJoint(pJoint);		
+		
+//		LiftJoint liftJoint = new LiftJoint(bodyA.getPhysicsObject(), bodyB.getPhysicsObject(), 
+//					new Vec2(100, 100), new Vec2(350, 100), new Vec2(0, 0), new Vec2(0, 0), 2);
+		
+		GearWheelJoint gwJoint = new GearWheelJoint(bodyC.getPhysicsObject(), bodyD.getPhysicsObject(),
+					nJoint, pJoint, 0.1f);
+		world.addJoint(gwJoint);
+		
 
-		// allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200,
-		// 200)));
+//		 allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
 
 		world.start();
 	}
