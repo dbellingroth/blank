@@ -11,6 +11,8 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.Contact;
+import org.jbox2d.dynamics.joints.DistanceJointDef;
+import org.jbox2d.dynamics.joints.Joint;
 import org.jbox2d.dynamics.joints.JointDef;
 import org.jbox2d.dynamics.joints.PrismaticJointDef;
 import org.jbox2d.dynamics.joints.RevoluteJointDef;
@@ -96,24 +98,29 @@ public class PhysicsWorld implements Runnable, ContactListener{
 	public static void createMotorJoint(Body bodyA, Body bodyB) {
 		
 		RevoluteJointDef jDef = new RevoluteJointDef();
+		Joint joint; 
 		
 		jDef.initialize(bodyA, bodyB, bodyA.getWorldCenter());
 		jDef.enableLimit = false;
 		jDef.maxMotorTorque = 10.0f;
-		jDef.motorSpeed = 11.0f;
+		jDef.motorSpeed = 40.0f;
 		jDef.enableMotor = true;
 		
-		world.createJoint(jDef);
+		joint = world.createJoint(jDef);
 	}
 	
 	
 	
-	public static void createPrismaticJoint(Body bodyA, Body bodyB) {
+	
+	public static void createDistanceJoint(Body bodyA, Body bodyB) {
 		
-		PrismaticJointDef pDef = new PrismaticJointDef();
+		DistanceJointDef pDef = new DistanceJointDef();
 		
-		pDef.initialize(bodyA, bodyB, bodyA.getWorldCenter(), new Vec2(20, 20));
-		
+		pDef.initialize(bodyA, bodyB, bodyA.getWorldCenter(), bodyB.getWorldCenter());
+		pDef.length = 2f;
+		pDef.dampingRatio = 2f;
+		pDef.frequencyHz = 30f;
+		pDef.collideConnected = true;
 		
 		world.createJoint(pDef);
 	}

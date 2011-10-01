@@ -101,10 +101,10 @@ public class Game {
 		
 		
 		Circle bodyA = new Circle(300, 400, 10, BodyType.STATIC);
-		Circle bodyB = new Circle(300, 400, 50, BodyType.DYNAMIC);
+		Circle bodyB = new Circle(300, 400, 20, BodyType.DYNAMIC);
 		allObjects.add(bodyA);
 		allObjects.add(bodyB);
-		PhysicsWorld.createMotorJoint(bodyA.getPhysicsObject().getBody(), bodyB.getPhysicsObject().getBody());
+		PhysicsWorld.createRevoluteJoint(bodyA.getPhysicsObject().getBody(), bodyB.getPhysicsObject().getBody());
 		
 		
 //		allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
