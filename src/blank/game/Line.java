@@ -27,33 +27,36 @@ public class Line implements GameObject, PhysicsOwner, Drawable {
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
 
-		x = p1.x < p2.x ? p1.x : p2.x;
-		y = p1.y < p2.y ? p1.x : p1.y;
-
+		x = p1.x <= p2.x ? p1.x : p2.x;
+		y = p1.y <= p2.y ? p1.y : p2.y;
+	
 		width = (float) Math.abs((int) (p1.x - p2.x));
 		height = (float) Math.abs((int) (p1.y - p2.y));
 
-		sprite = new Sprite((int) width, (int) height);
+		Vec2 localPosP1 = new Vec2(p1.x <= p2.x ? 0 : width,
+				p1.y <= p2.y ? 0 : height);	
+		Vec2 localPosP2 = new Vec2(p2.x < p1.x ? 0 : width,
+				p2.y < p1.y ? 0 : height);	
+
+		sprite = new Sprite((int) width+1, (int) height+1);
 		Graphics2D g2d = sprite.getGraphics2D();
 		g2d.setColor(Color.MAGENTA);
-		g2d.drawLine((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y);
+		g2d.drawLine((int) localPosP1.x, (int) localPosP1.y, 
+				(int) localPosP2.x, (int) localPosP2.y);
+
 		sprite.update();
 	}
 
 	public void draw() {
 
-		sprite.setTranslate(new Vec2(x, y));
-		sprite.setRotationAngle(phys.getAngle());
+		sprite.setTranslate(new Vec2(phys.getPosition().x+width, 
+				phys.getPosition().y+height));
 		sprite.draw();
 
 	}
 
 	public void update(int delta) {
-		// phys.applyForce(new Vec2((Mouse.getX()-phys.getPosition().x)*100,
-		// ((600-Mouse.getY())-phys.getPosition().y)*100), new
-		// Vec2(width/2,height/2));
-		// phys.stop();
-
+	
 	}
 
 	public void beginCollision(CollisionData collision) {

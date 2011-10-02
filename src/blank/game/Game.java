@@ -1,5 +1,6 @@
 package blank.game;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
@@ -37,8 +38,8 @@ public class Game {
 
 	private AllObjectsList allObjects;
 
-	private Sprite wald;
-	private Rectangle dr;
+	private Sprite test_backround;
+	private Rectangle player;
 
 	public static void main(String args[]) {
 		new Window(new Game(), 800, 600);
@@ -59,13 +60,13 @@ public class Game {
 	 */
 	public void init() {
 
-		wald = new Sprite("res/wald.jpg");
+		test_backround = new Sprite("res/backround_test.png");
 
 		world = new PhysicsWorld();
 
 		allObjects = new AllObjectsList();
 
-		world.addObject(new PhysicsStaticBlock(0, 600, 800, 100));
+		world.addObject(new PhysicsStaticBlock(0, 530, 800, 100));
 		world.addObject(new PhysicsStaticBlock(0, -100, 800, 100));
 		world.addObject(new PhysicsStaticBlock(-100, 0, 100, 600));
 		world.addObject(new PhysicsStaticBlock(800, 0, 100, 600));
@@ -86,7 +87,8 @@ public class Game {
 		// }
 
 		// das Test-Rechteck hinzufügen
-		dr = new Rectangle(100, 300, 80, 80, BodyType.DYNAMIC);
+		player = new Rectangle(100, 300, 40, 40, BodyType.DYNAMIC);
+		player.getPhysicsObject().setMass(10f);
 		// //left
 		// inputHandler.addKeyPressedListener(dr, 203, 1);
 		// inputHandler.addKeyReleasedListener(dr, 203, 1);
@@ -99,7 +101,7 @@ public class Game {
 		// //down
 		// inputHandler.addKeyPressedListener(dr, 208, 4);
 		// inputHandler.addKeyReleasedListener(dr, 208, 4);
-		allObjects.add(dr);
+		allObjects.add(player);
 
 		Circle bodyA = new Circle(100, 300, 40, BodyType.DYNAMIC);
 		Circle bodyB = new Circle(100, 300, 10, BodyType.STATIC);
@@ -131,8 +133,17 @@ public class Game {
 		world.addJoint(gwJoint);
 		
 
-//		 allObjects.add(new StaticLine(new Vec2(100, 100), new Vec2(200, 200)));
+		ArrayList<Vec2> points = new ArrayList<Vec2>();
 
+		points.add(new Vec2(100, 100));
+		points.add(new Vec2(200, 100));
+		points.add(new Vec2(200, 450));
+		points.add(new Vec2(450, 400));
+		
+		
+		allObjects.add(new Lines(points, BodyType.STATIC));
+//		allObjects.add(new Line(new Vec2(100, 100), new Vec2(200, 200), BodyType.STATIC));
+		
 		world.start();
 	}
 
@@ -158,7 +169,7 @@ public class Game {
 
 	private void render() {
 
-		wald.draw();
+		test_backround.draw();
 		allObjects.draw();
 
 	}
@@ -197,12 +208,12 @@ public class Game {
 	// dieser verwaltet dann die Weiterleitung an die richtigen InputListeners.
 	public void keyPressed(int key) {
 		// inputHandler.keyPressed(key);
-		dr.keyPressed(key);
+		player.keyPressed(key);
 	}
 
 	public void keyReleased(int key) {
 		// inputHandler.keyReleased(key);
-		dr.keyReleased(key);
+		player.keyReleased(key);
 	}
 
 	public void mousePressed(int button) {

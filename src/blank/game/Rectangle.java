@@ -35,7 +35,7 @@ public class Rectangle implements GameObject, PhysicsOwner, Drawable,
 		// g2d.fillRect(0, 0, (int) width, (int) height);
 		// sprite.update();
 
-		sprite = new Sprite("res/player.png");
+		sprite = new Sprite("res/player_sil.png");
 	}
 
 	@Override
@@ -64,9 +64,10 @@ public class Rectangle implements GameObject, PhysicsOwner, Drawable,
 		// if (down) phys.applyForce(new Vec2(0, 40f), new
 		// Vec2(width/2,height/2));
 		if (left && phys.getAngularSpeed() > -6)
-			phys.applyTorque(-100);
+			phys.applyTorque(-50);
 		if (right && phys.getAngularSpeed() < 6)
-			phys.applyTorque(100);
+			phys.applyTorque(50);
+		if (down) phys.applyForce(new Vec2(0, 500f));
 
 	}
 
