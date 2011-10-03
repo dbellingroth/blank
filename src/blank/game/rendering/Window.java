@@ -1,4 +1,4 @@
-package blank.game;
+package blank.game.rendering;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
@@ -7,6 +7,9 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.PixelFormat;
+
+import blank.game.Game;
 
 /**
  * Das Spielfenster, welches den OpenGL Kontext initialisiert und die
@@ -32,7 +35,7 @@ public class Window {
 			// Display.setFullscreen(true);
 			// Display.setVSyncEnabled(true);
 			Display.setTitle("Misery Block");
-			Display.create();
+			Display.create(/*new PixelFormat(8,0,0,4)*/);
 			initGL();
 			parent.init();
 			lastFPS = getTime();

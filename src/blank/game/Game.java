@@ -154,7 +154,7 @@ public class Game {
 	 *            Das aktuelle Delta. Sollte bei allen Animationen etc.
 	 *            berücksichtigt werden!
 	 */
-	protected void update(int delta) {
+	public void update(int delta) {
 
 		executeActions();
 
