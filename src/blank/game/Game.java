@@ -15,6 +15,7 @@ import blank.game.physics.PhysicsWorld;
 import blank.game.physics.PneumaticJoint;
 import blank.game.physics.StickJoint;
 import blank.game.rendering.Sprite;
+import blank.game.rendering.Window;
 
 /**
  * Die eigentliche Hauptklasse mit der Mainmethode.

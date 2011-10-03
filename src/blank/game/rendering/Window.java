@@ -35,7 +35,12 @@ public class Window {
 			// Display.setFullscreen(true);
 			// Display.setVSyncEnabled(true);
 			Display.setTitle("Misery Block");
-			Display.create(/*new PixelFormat(8,0,0,4)*/);
+			PixelFormat pix = new PixelFormat(org.lwjgl.opengl.Display.getDisplayMode().getBitsPerPixel(),
+				     8,   // alpha
+				    24,   // depth buffer
+				     1,   // stencil buffer
+				     4) ;
+			Display.create(pix);
 			initGL();
 			parent.init();
 			lastFPS = getTime();
