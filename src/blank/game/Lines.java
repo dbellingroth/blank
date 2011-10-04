@@ -3,7 +3,6 @@ package blank.game;
 import java.util.ArrayList;
 
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.BodyType;
 
 import blank.game.rendering.Drawable;
 

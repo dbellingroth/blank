@@ -1,19 +1,6 @@
 package blank.game;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.concurrent.Semaphore;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.BodyType;
-import blank.game.physics.GearWheelJoint;
-import blank.game.physics.LiftJoint;
-import blank.game.physics.NailJoint;
-import blank.game.physics.PhysicsStaticBlock;
-import blank.game.physics.PhysicsWorld;
-import blank.game.physics.PneumaticJoint;
-import blank.game.physics.StickJoint;
-import blank.game.rendering.Sprite;
+
 import blank.game.rendering.Window;
 
 /**

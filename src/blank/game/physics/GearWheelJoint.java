@@ -3,7 +3,6 @@ package blank.game.physics;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.joints.GearJoint;
 import org.jbox2d.dynamics.joints.GearJointDef;
-import org.jbox2d.dynamics.joints.Joint;
 
 
 public class GearWheelJoint extends PhysicsJoint {
