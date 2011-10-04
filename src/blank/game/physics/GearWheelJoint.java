@@ -24,16 +24,6 @@ public class GearWheelJoint extends PhysicsJoint {
 		jointDef.bodyA = pObjectA.getBody();
 		jointDef.bodyB = pObjectB.getBody();
 		
-		if (joint1 instanceof RevoluteJoint) {
-			joint1 = (RevoluteJoint) joint1;
-		} else {
-			joint1 = (PrismaticJoint) joint1;
-		}
-		if (joint2 instanceof RevoluteJoint) {
-			joint2 = (RevoluteJoint) joint2;
-		} else {
-			joint2 = (PrismaticJoint) joint2;
-		}
 		jointDef.joint1 = joint1;
 		jointDef.joint2 = joint2;
 		

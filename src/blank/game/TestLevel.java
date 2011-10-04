@@ -73,25 +73,28 @@ public class TestLevel extends Level {
 		allObjects.add(bodyC);
 		allObjects.add(bodyD);
 		
-		NailJoint nJoint = new NailJoint(bodyA.getPhysicsObject(), bodyB.getPhysicsObject(),
+		NailJoint joint1 = new NailJoint(bodyA.getPhysicsObject(), bodyB.getPhysicsObject(),
 								new Vec2(0, 0));
-		world.addJoint(nJoint);
+		world.addJoint(joint1);
 		
-		PneumaticJoint pJoint = new PneumaticJoint(bodyC.getPhysicsObject(), bodyD.getPhysicsObject(),
-								new Vec2(0, 0), new Vec2(0f, 1f));
-		pJoint.setUpperTranslation(2f);
-		pJoint.setLowerTranslation(-2f);
-		pJoint.enableTransLimit(true);
-		world.addJoint(pJoint);		
+//		PneumaticJoint joint2 = new PneumaticJoint(bodyC.getPhysicsObject(), bodyD.getPhysicsObject(),
+//								new Vec2(0, 0), new Vec2(0f, 1f));
+//		joint2.setUpperTranslation(2f);
+//		joint2.setLowerTranslation(-2f);
+//		joint2.enableTransLimit(true);
+//		world.addJoint(joint2);		
+		
+		NailJoint joint2 = new NailJoint(bodyD.getPhysicsObject(), bodyC.getPhysicsObject(),
+				new Vec2(0, 0));
+		world.addJoint(joint2);
 		
 //		LiftJoint liftJoint = new LiftJoint(bodyA.getPhysicsObject(), bodyB.getPhysicsObject(), 
 //					new Vec2(100, 100), new Vec2(350, 100), new Vec2(0, 0), new Vec2(0, 0), 2);
 		
-		GearWheelJoint gwJoint = new GearWheelJoint(bodyC.getPhysicsObject(), bodyD.getPhysicsObject(),
-					nJoint.getPhysicsJoint(), pJoint.getPhysicsJoint(), 0.1f);
+		GearWheelJoint gwJoint = new GearWheelJoint(bodyB.getPhysicsObject(), bodyD.getPhysicsObject(),
+				joint1.getPhysicsJoint(), joint2.getPhysicsJoint(), 11f);
 		world.addJoint(gwJoint);
 		
-
 //		ArrayList<Vec2> points = new ArrayList<Vec2>();
 //		points.add(new Vec2(100, 100));
 //		points.add(new Vec2(200, 100));
