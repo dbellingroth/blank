@@ -12,8 +12,9 @@ import org.jbox2d.dynamics.contacts.Contact;
  * @author David Bellingroth Wrapperklasse für die JBox2D World
  */
 public class PhysicsWorld implements Runnable, ContactListener {
-	static World world;
-	private boolean stop;
+	private static Thread thread;
+	private static World world;
+	private volatile boolean stop;
 	private static Semaphore physicsSemaphore = new Semaphore(1);
 	public static int pixelsPerMeter = 30;
 
@@ -44,7 +45,10 @@ public class PhysicsWorld implements Runnable, ContactListener {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 		}
+		stop = false;
+
 	}
 
 	/*
@@ -52,7 +56,8 @@ public class PhysicsWorld implements Runnable, ContactListener {
 	 */
 	public void start() {
 		stop = false;
-		new Thread(this).start();
+		thread = new Thread(this);
+		thread.start();
 	}
 
 	/*
