@@ -19,7 +19,7 @@ public class PhysicsLine extends PhysicsObject {
 		def = new BodyDef();
 		def.type = bodyType;
 		
-
+		
 		PolygonShape shape = new PolygonShape();
 		shape.setAsEdge(Tools.convertVectorPix2Phys(p1), 
 									Tools.convertVectorPix2Phys(p2));
@@ -35,7 +35,6 @@ public class PhysicsLine extends PhysicsObject {
 		body = world.createBody(def);
 		body.setUserData(this);
 		body.createFixture(fdef);
-
 	}
 
 }

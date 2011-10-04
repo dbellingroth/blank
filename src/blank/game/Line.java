@@ -21,26 +21,25 @@ public class Line implements GameObject, PhysicsOwner, Drawable {
 	boolean up, down, left, right; // nur zum testen...
 	int key_up = 200, key_down = 208, key_left = 203, key_right = 205;
 
-	public Line(Vec2 p1, Vec2 p2, BodyType bodyType) {
+	public Line(Vec2 p1, Vec2 p2) {
 
-		phys = new PhysicsLine(p1, p2, bodyType);
+		phys = new PhysicsLine(p1, p2, BodyType.STATIC);
 		phys.setOwner(this);
 		Game.getPhysicsWorld().addObject(phys);
 
 		x = p1.x <= p2.x ? p1.x : p2.x;
-		y = p1.y <= p2.y ? p1.y : p2.y;
-	
+		y = p1.y < p2.y ? p1.y : p2.y;
+			
 		width = (float) Math.abs((int) (p1.x - p2.x));
 		height = (float) Math.abs((int) (p1.y - p2.y));
-
-		Vec2 localPosP1 = new Vec2(p1.x <= p2.x ? 0 : width,
-				p1.y <= p2.y ? 0 : height);	
-		Vec2 localPosP2 = new Vec2(p2.x < p1.x ? 0 : width,
-				p2.y < p1.y ? 0 : height);	
-
+		
+		Vec2 localPosP1 = new Vec2(p1.x <= p2.x ? 0 : width, p1.y <= p2.y ? 0 : height);	
+		Vec2 localPosP2 = new Vec2(p2.x < p1.x ? 0 : width, p2.y < p1.y ? 0 : height);	
+		
+		
 		sprite = new Sprite((int) width+1, (int) height+1);
 		Graphics2D g2d = sprite.getGraphics2D();
-		g2d.setColor(Color.MAGENTA);
+		g2d.setColor(Color.BLACK);
 		g2d.drawLine((int) localPosP1.x, (int) localPosP1.y, 
 				(int) localPosP2.x, (int) localPosP2.y);
 
@@ -49,8 +48,7 @@ public class Line implements GameObject, PhysicsOwner, Drawable {
 
 	public void draw() {
 
-		sprite.setTranslate(new Vec2(phys.getPosition().x+width, 
-				phys.getPosition().y+height));
+		sprite.setTranslate(new Vec2(x, y));
 		sprite.draw();
 
 	}

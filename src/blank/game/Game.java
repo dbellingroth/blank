@@ -6,7 +6,6 @@ import java.util.Queue;
 import java.util.concurrent.Semaphore;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
-
 import blank.game.physics.GearWheelJoint;
 import blank.game.physics.LiftJoint;
 import blank.game.physics.NailJoint;
@@ -135,15 +134,11 @@ public class Game {
 		
 
 		ArrayList<Vec2> points = new ArrayList<Vec2>();
-
 		points.add(new Vec2(100, 100));
 		points.add(new Vec2(200, 100));
 		points.add(new Vec2(200, 450));
-		points.add(new Vec2(450, 400));
-		
-		
-		allObjects.add(new Lines(points, BodyType.STATIC));
-//		allObjects.add(new Line(new Vec2(100, 100), new Vec2(200, 200), BodyType.STATIC));
+		points.add(new Vec2(450, 450));
+		allObjects.add(new Lines(points));	
 		
 		world.start();
 	}
