@@ -77,6 +77,18 @@ public abstract class PhysicsObject {
 		PhysicsWorld.releasePhysics();
 		return result;
 	}
+	
+	public void setAngularSpeed(float w) {
+		PhysicsWorld.reservePhysics();
+		body.setAngularVelocity(w);
+		PhysicsWorld.releasePhysics();
+	}
+
+	public void setSpeed(Vec2 speed) {
+		PhysicsWorld.reservePhysics();
+		body.setLinearVelocity(Tools.convertVectorPix2Phys(speed));
+		PhysicsWorld.releasePhysics();
+	}
 
 	public void applyAngularImpulse(float impulse) {
 		body.applyAngularImpulse(impulse);
