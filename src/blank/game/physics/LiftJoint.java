@@ -2,6 +2,7 @@ package blank.game.physics;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.joints.Joint;
 import org.jbox2d.dynamics.joints.PulleyJoint;
 import org.jbox2d.dynamics.joints.PulleyJointDef;
 
@@ -44,9 +45,8 @@ public class LiftJoint extends PhysicsJoint {
 	}
 
 	
-	public void setLengthA(float lenghtA) {
-		
-
+	Joint getPhysicsJoint() {
+		return joint;
 	}
 	
 }

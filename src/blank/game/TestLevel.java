@@ -62,11 +62,11 @@ public class TestLevel extends Level {
 		// inputHandler.addKeyReleasedListener(dr, 208, 4);
 		allObjects.add(player);
 
-		Circle bodyA = new Circle(100, 300, 40, BodyType.DYNAMIC);
-		Circle bodyB = new Circle(100, 300, 10, BodyType.STATIC);
+		Circle bodyA = new Circle(100, 300, 10, BodyType.STATIC);
+		Circle bodyB = new Circle(100, 300, 40, BodyType.DYNAMIC);
 		
-		Circle bodyC = new Circle(400, 300, 30, BodyType.DYNAMIC);
-		Circle bodyD = new Circle(400, 300, 10, BodyType.STATIC);
+		Circle bodyC = new Circle(400, 300, 10, BodyType.STATIC);
+		Circle bodyD = new Circle(400, 300, 40, BodyType.DYNAMIC);
 		
 		allObjects.add(bodyA);
 		allObjects.add(bodyB);
@@ -88,16 +88,16 @@ public class TestLevel extends Level {
 //					new Vec2(100, 100), new Vec2(350, 100), new Vec2(0, 0), new Vec2(0, 0), 2);
 		
 		GearWheelJoint gwJoint = new GearWheelJoint(bodyC.getPhysicsObject(), bodyD.getPhysicsObject(),
-					nJoint, pJoint, 0.1f);
+					nJoint.getPhysicsJoint(), pJoint.getPhysicsJoint(), 0.1f);
 		world.addJoint(gwJoint);
 		
 
-		ArrayList<Vec2> points = new ArrayList<Vec2>();
-		points.add(new Vec2(100, 100));
-		points.add(new Vec2(200, 100));
-		points.add(new Vec2(200, 450));
-		points.add(new Vec2(450, 450));
-		allObjects.add(new Lines(points));	
+//		ArrayList<Vec2> points = new ArrayList<Vec2>();
+//		points.add(new Vec2(100, 100));
+//		points.add(new Vec2(200, 100));
+//		points.add(new Vec2(200, 450));
+//		points.add(new Vec2(450, 450));
+//		allObjects.add(new Lines(points));	
 		
 	}
 	

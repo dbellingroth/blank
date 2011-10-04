@@ -2,6 +2,7 @@ package blank.game.physics;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.joints.Joint;
 import org.jbox2d.dynamics.joints.RevoluteJoint;
 import org.jbox2d.dynamics.joints.RevoluteJointDef;
 
@@ -27,7 +28,7 @@ public class NailJoint extends PhysicsJoint {
 		Vec2 anchorPoint = new Vec2(pObjectA.getBody().getPosition().x
 				+ Tools.convertVectorPix2Phys(anchor).x, pObjectA.getBody()
 				.getPosition().y + Tools.convertVectorPix2Phys(anchor).y);
-
+		jointDef.collideConnected = false;
 		jointDef.initialize(pObjectA.getBody(), pObjectB.getBody(), anchorPoint);
 
 	}
@@ -54,14 +55,18 @@ public class NailJoint extends PhysicsJoint {
 	}
 	
 	
-	public RevoluteJoint getJoint() {
-		if (joint != null) return joint;
-		else return null;
-	}
 
 	public void init(World world) {
 		joint = (RevoluteJoint) world.createJoint(jointDef);
 		joint.setUserData(this);
 	}
+	
+	
+	public Joint getPhysicsJoint() {
+		return joint;
+	}
+	
+	
+	
 
 }

@@ -4,6 +4,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.joints.DistanceJoint;
 import org.jbox2d.dynamics.joints.DistanceJointDef;
+import org.jbox2d.dynamics.joints.Joint;
 
 import blank.game.Tools;
 
@@ -62,9 +63,8 @@ public class StickJoint extends PhysicsJoint {
 	}
 
 	
-	public DistanceJoint getJoint() {
-		if (joint != null) return joint;
-		else return null;
+	public Joint getPhysicsJoint() {
+		return joint;
 	}
 	
 	void init(World world) {

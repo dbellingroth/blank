@@ -2,6 +2,7 @@ package blank.game.physics;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
+import org.jbox2d.dynamics.joints.Joint;
 import org.jbox2d.dynamics.joints.PrismaticJoint;
 import org.jbox2d.dynamics.joints.PrismaticJointDef;
 
@@ -70,10 +71,10 @@ public class PneumaticJoint extends PhysicsJoint {
 	}
 
 	
-	public PrismaticJoint getJoint() {
-		if (joint != null) return joint;
-		else return null;
+	public Joint getPhysicsJoint() {
+		return joint;
 	}
+	
 	
 	public void init(World world) {
 
