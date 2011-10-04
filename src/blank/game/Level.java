@@ -17,7 +17,6 @@ public abstract class Level {
 	public Level() {
 		world = new PhysicsWorld();
 		allObjects = new AllObjectsList();
-		world.start();
 	}
 	
 	public PhysicsWorld getPhysicsWorld() {

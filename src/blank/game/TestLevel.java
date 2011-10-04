@@ -99,12 +99,12 @@ public class TestLevel extends Level {
 //		points.add(new Vec2(450, 450));
 //		allObjects.add(new Lines(points));	
 		
+		world.start();
 	}
 	
 	@Override
 	public void update(int delta) {
 		super.update(delta);
-		
 	}
 	
 	@Override
