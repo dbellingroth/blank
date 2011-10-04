@@ -25,7 +25,7 @@ public class Line implements GameObject, PhysicsOwner, Drawable {
 
 		phys = new PhysicsLine(p1, p2, BodyType.STATIC);
 		phys.setOwner(this);
-		Game.getPhysicsWorld().addObject(phys);
+		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);
 
 		x = p1.x <= p2.x ? p1.x : p2.x;
 		y = p1.y < p2.y ? p1.y : p2.y;

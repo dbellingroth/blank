@@ -34,7 +34,7 @@ public class Polygon implements GameObject, PhysicsOwner, Drawable {
 		phys = new PhysicsPolygon(x, y, (int) width, (int) height, positions,
 				bodyType);
 		phys.setOwner(this);
-		Game.getPhysicsWorld().addObject(phys);
+		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);
 
 		sprite = new Sprite((int) Math.round(width), (int) Math.round(height));
 		Graphics2D g2d = sprite.getGraphics2D();

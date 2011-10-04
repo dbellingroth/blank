@@ -147,7 +147,7 @@ public abstract class PhysicsObject {
 		// " kollidiert mit "+data.getSecondObject()+
 		// "   Impuls:"+data.getImpulse());
 		if (owner != null) {
-			Game.addAction(new Executor() {
+			Game.getCurrentLevel().addAction(new Executor() {
 				public void execute() {
 					owner.beginCollision(data);
 				}
@@ -158,7 +158,7 @@ public abstract class PhysicsObject {
 
 	protected void endCollision(final CollisionData data) {
 		if (owner != null) {
-			Game.addAction(new Executor() {
+			Game.getCurrentLevel().addAction(new Executor() {
 				public void execute() {
 					owner.beginCollision(data);
 				}

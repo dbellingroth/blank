@@ -27,7 +27,7 @@ public class Rectangle implements GameObject, PhysicsOwner, Drawable,
 		this.height = height;
 		phys = new PhysicsBox(x, y, width, height, bodyType);
 		phys.setOwner(this);
-		Game.getPhysicsWorld().addObject(phys);
+		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);
 
 		// sprite = new Sprite((int) width, (int) height);
 		// Graphics2D g2d = sprite.getGraphics2D();
@@ -109,7 +109,6 @@ public class Rectangle implements GameObject, PhysicsOwner, Drawable,
 		//
 		// if (key == 3) up = true;
 		// if (key == 4) down = true;
-
 		if (key == key_up)
 			up = true;
 		if (key == key_down)

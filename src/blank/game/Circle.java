@@ -26,7 +26,7 @@ public class Circle implements GameObject, PhysicsOwner, Drawable {
 		this.r = r;
 		phys = new PhysicsCircle(x, y, r, bodyType);
 		phys.setOwner(this);
-		Game.getPhysicsWorld().addObject(phys);
+		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);
 
 		sprite = new Sprite(r * 2, r * 2);
 		Graphics2D g2d = sprite.getGraphics2D();
