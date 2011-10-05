@@ -7,7 +7,7 @@ import java.util.concurrent.Semaphore;
 import blank.game.physics.PhysicsWorld;
 
 //Die abstrake Oberklasse für alle Levels
-public abstract class Level {
+public abstract class Level implements GameObject {
 	
 	protected PhysicsWorld world;
 	protected Queue<Executor> actionList = new LinkedList<Executor>();

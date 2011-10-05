@@ -36,7 +36,7 @@ public class Circle implements GameObject, PhysicsOwner, Drawable {
 		g2d.fillOval(0, 0, r * 2, r * 2);
 //		g2d.setColor(new Color((float) Math.random(), (float) Math.random(),
 //				(float) Math.random()));
-		g2d.setColor(new Color(40, 40, 40));
+		g2d.setColor(new Color(255, 255, 255));
 		g2d.drawLine(r, 0, r, r * 2);
 		g2d.drawLine(0, r, r * 2, r);
 		sprite.update();
