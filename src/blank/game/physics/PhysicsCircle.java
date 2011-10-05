@@ -13,7 +13,7 @@ public class PhysicsCircle extends PhysicsObject {
 
 	public PhysicsCircle(float x, float y, float r, BodyType bodyType) {
 		def = new BodyDef();
-		def.position.set(x / 30, y / 30);
+		def.position.set(x / PhysicsWorld.pixelsPerMeter, y / PhysicsWorld.pixelsPerMeter);
 		def.type = bodyType;
 		def.fixedRotation = false;
 		CircleShape c = new CircleShape();
@@ -22,6 +22,7 @@ public class PhysicsCircle extends PhysicsObject {
 		fdef.shape = c;
 		fdef.friction = 1f;
 		fdef.density = 0.1f;
+		fdef.restitution = 2f;
 	}
 
 	@Override

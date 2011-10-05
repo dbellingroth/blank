@@ -1,11 +1,10 @@
 package blank.game;
 
-import java.util.ArrayList;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
-
 import blank.game.physics.GearWheelJoint;
+import blank.game.physics.GlueJoint;
 import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
@@ -67,9 +66,11 @@ public class TestLevel extends Level {
 		
 		Circle bodyC = new Circle(300, 300, 10, BodyType.STATIC);
 		Rectangle bodyD = new Rectangle(280, 300, 40, 70, BodyType.DYNAMIC);
+		bodyD.getPhysicsObject().setMass(10);
 		
 		Circle bodyE = new Circle(500, 300, 10, BodyType.STATIC);
 		Rectangle bodyF = new Rectangle(480, 300, 40, 70, BodyType.DYNAMIC);
+		bodyD.getPhysicsObject().setMass(20);
 		
 		Circle bodyG = new Circle(700, 300, 10, BodyType.STATIC);
 		Circle bodyH = new Circle(700, 300, 40, BodyType.DYNAMIC);
@@ -82,7 +83,7 @@ public class TestLevel extends Level {
 		allObjects.add(bodyF);
 		allObjects.add(bodyG);
 		allObjects.add(bodyH);
-
+		
 		
 		NailJoint joint1 = new NailJoint(bodyA.getPhysicsObject(), bodyB.getPhysicsObject(),
 								new Vec2(0, 0));
@@ -91,9 +92,13 @@ public class TestLevel extends Level {
 				
 		PneumaticJoint joint2 = new PneumaticJoint(bodyC.getPhysicsObject(), bodyD.getPhysicsObject(),
 								new Vec2(0, 0), new Vec2(0f, -1f));
-		joint2.setUpperTranslation(2f);
-		joint2.setLowerTranslation(-2f);
+		joint2.setUpperTranslation(3f);
+		joint2.setLowerTranslation(-3f);
 		joint2.enableTransLimit(true);
+		
+		joint2.enableMotor(true);
+		joint2.setMotorForce(300f);
+		joint2.setMotorSpeed(100f);
 		world.addJoint(joint2);	
 		
 		
@@ -109,20 +114,20 @@ public class TestLevel extends Level {
 				new Vec2(0, 0));
 		world.addJoint(joint4);
 		joint4.enableMotor(true);
-		joint4.setMotorSpeed(10);
+		joint4.setMotorSpeed(-10);
 		joint4.setMotorTorque(10);
 
 		
 		GearWheelJoint gwJoint1 = new GearWheelJoint(bodyA.getPhysicsObject(), bodyC.getPhysicsObject(),
 				joint1.getPhysicsJoint(), joint2.getPhysicsJoint(), 1f);
-//		world.addJoint(gwJoint1);
+		world.addJoint(gwJoint1);
 		
 		GearWheelJoint gwJoint2 = new GearWheelJoint(bodyC.getPhysicsObject(), bodyE.getPhysicsObject(),
 				joint2.getPhysicsJoint(), joint3.getPhysicsJoint(), -1f);
 		world.addJoint(gwJoint2);
 		
 		GearWheelJoint gwJoint3 = new GearWheelJoint(bodyA.getPhysicsObject(), bodyG.getPhysicsObject(),
-				joint1.getPhysicsJoint(), joint4.getPhysicsJoint(), 2f);
+				joint1.getPhysicsJoint(), joint4.getPhysicsJoint(), -2f);
 		world.addJoint(gwJoint3);
 		
 		
@@ -132,6 +137,19 @@ public class TestLevel extends Level {
 //		points.add(new Vec2(200, 450));
 //		points.add(new Vec2(450, 450));
 //		allObjects.add(new Lines(points));	
+		
+		
+		Rectangle rec1 = new Rectangle(10, 10, 20, 20, BodyType.DYNAMIC);
+		Rectangle rec2 = new Rectangle(30, 30, 20, 20, BodyType.DYNAMIC);
+		allObjects.add(rec1);
+		allObjects.add(rec2);
+		
+		
+		GlueJoint glueJoint = new GlueJoint(rec1.getPhysicsObject(), rec2.getPhysicsObject(),
+						new Vec2(0, 0));
+		world.addJoint(glueJoint);
+		
+		
 		
 		world.start();
 	}

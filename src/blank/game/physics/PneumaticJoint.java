@@ -28,12 +28,21 @@ public class PneumaticJoint extends PhysicsJoint {
 				+ Tools.convertVectorPix2Phys(anchor).x, pObjectA.getBody()
 				.getPosition().y + Tools.convertVectorPix2Phys(anchor).y);
 
+		jointDef.collideConnected = false;
 		jointDef.initialize(pObjectA.getBody(), pObjectB.getBody(),
 				Tools.convertVectorPix2Phys(anchorPoint), axis);
-		jointDef.collideConnected = false;
-
+		
 	}
+	
+	
 
+	public void enableTransLimit(boolean enable) {
+		if (joint != null)
+			joint.enableLimit(enable);
+		else
+			jointDef.enableLimit = enable;
+	}
+	
 	public void setLowerTranslation(float trans) {
 		if (joint != null)
 			joint.m_lowerTranslation = trans;
@@ -48,32 +57,35 @@ public class PneumaticJoint extends PhysicsJoint {
 			jointDef.upperTranslation = trans;
 	}
 
-	public void enableTransLimit(boolean enable) {
-		if (joint != null)
-			joint.enableLimit(enable);
-		else
-			jointDef.enableLimit = enable;
-	}
+	
+	
+	
+	
+	
 
 	public void enableMotor(boolean enable) {
 		if (joint != null)
 			joint.m_enableMotor = enable;
 		else
-			joint.m_enableLimit = enable;
+			jointDef.enableMotor = enable;
 	}
 
 	public void setMotorForce(float torque) {
-		joint.m_maxMotorForce = torque;
+		if (joint != null) joint.m_maxMotorForce = torque;
+		else jointDef.maxMotorForce = torque;
 	}
 
 	public void setMotorSpeed(float speed) {
-		joint.m_motorSpeed = speed;
+		if (joint != null) joint.m_motorSpeed = speed;
+		else jointDef.motorSpeed = speed;
 	}
 
+	
 	
 	public Joint getPhysicsJoint() {
 		return joint;
 	}
+	
 	
 	
 	public void init(World world) {
