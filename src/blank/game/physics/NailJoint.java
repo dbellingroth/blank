@@ -12,9 +12,10 @@ import blank.game.Tools;
  * 
  * @author Kilian Helmenstein
  * 
- *         Mit dieser Klasse können zwei Physic-Bodies aneinander genagelt
- *         werden. Zusätzlich kann der Motor aktiviert werden: Ein Drehmoment am
- *         Nagelpunkt
+ *         Mit dieser Klasse können zwei Physic-Bodies aneinander "genagelt/geheftet"
+ *         werden. 
+ *         Zusätzlich kann der Motor aktiviert werden: Ein Drehmoment am
+ *         Nagelpunkt.
  */
 public class NailJoint extends PhysicsJoint {
 
@@ -33,6 +34,22 @@ public class NailJoint extends PhysicsJoint {
 
 	}
 
+	public void enableLimit(boolean enable) {
+		if (joint != null) joint.enableLimit(enable);
+		else jointDef.enableLimit = enable;		
+	}
+	
+	public void setUpperLimit(float uLimit) {
+		if (joint != null) joint.setLimits(joint.getLowerLimit(), uLimit);
+		else jointDef.upperAngle = uLimit;
+	}
+	
+	public void setLowerLimit(float lLimit) {
+		if (joint != null) joint.setLimits(lLimit, joint.getUpperLimit());
+		else jointDef.lowerAngle = lLimit;
+	}
+	
+	
 	public void enableMotor(boolean enable) {
 		if (joint != null)
 			joint.m_enableMotor = enable;

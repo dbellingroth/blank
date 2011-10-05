@@ -5,10 +5,16 @@ import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.joints.GearJoint;
 import org.jbox2d.dynamics.joints.GearJointDef;
 import org.jbox2d.dynamics.joints.Joint;
-import org.jbox2d.dynamics.joints.PrismaticJoint;
-import org.jbox2d.dynamics.joints.RevoluteJoint;
 
 
+/**
+ * Verbindet PneumaticJoints und/oder NailJoints zu 
+ * einem Getriebe/Zahnradwerk.
+ * Bsp.: Dreht sich der Kreis, bewegt sich das pneum. Object entsprechend.
+ * 
+ * @author Kilian Helmenstein
+ *
+ */
 public class GearWheelJoint extends PhysicsJoint {
 
 	
@@ -32,7 +38,6 @@ public class GearWheelJoint extends PhysicsJoint {
 	
 	
 	void init(World world) {
-		
 		joint = (GearJoint) world.createJoint(jointDef);
 		joint.setUserData(this);
 	}

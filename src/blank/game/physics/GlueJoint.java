@@ -1,38 +1,35 @@
 package blank.game.physics;
 
-import org.jbox2d.common.Vec2;
+
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.joints.Joint;
 import org.jbox2d.dynamics.joints.WeldJoint;
 import org.jbox2d.dynamics.joints.WeldJointDef;
 
-import blank.game.Tools;
-
+/**
+ * Verbindet zwei Bodies miteinander, diese haben
+ * dann immer dieselbe relative Bewegung(Translation & Angular)
+ * Ab einer gewissen Kraft bzw. Drehmoment (maxForce, maxTorque), "lösst sich
+ * der Kleber" und die Verbindung wird gelöscht.
+ * 
+ * @author Kilian Helmenstein
+ *
+ */
 public class GlueJoint extends PhysicsJoint {
 
 	private WeldJointDef jointDef;
 	private WeldJoint joint;
 	
 	
-	public GlueJoint(PhysicsObject pObjectA, PhysicsObject pObjectB, 
-									Vec2 anchor) {
+	public GlueJoint(PhysicsObject pObjectA, PhysicsObject pObjectB) {
 				
-		Vec2 anchorPoint = new Vec2(pObjectA.getBody().getPosition().x
-				+ Tools.convertVectorPix2Phys(anchor).x, pObjectA.getBody()
-				.getPosition().y + Tools.convertVectorPix2Phys(anchor).y);
+		
 	
 		
 		jointDef = new WeldJointDef();
 		
-			
-		
-		jointDef.initialize(pObjectA.getBody(), pObjectB.getBody(), anchorPoint);		
-		
-
-	
-	
-	
-	
+		jointDef.initialize(pObjectA.getBody(), pObjectB.getBody(), 
+								pObjectA.getBody().getWorldCenter());		
 	}
 	
 	

@@ -8,6 +8,12 @@ import org.jbox2d.dynamics.joints.PulleyJointDef;
 
 import blank.game.Tools;
 
+/**
+ * Einfacher Flaschenzug...
+ * 
+ * @author Kilian Helmenstein
+ *
+ */
 public class LiftJoint extends PhysicsJoint {
 
 	private PulleyJointDef jointDef;

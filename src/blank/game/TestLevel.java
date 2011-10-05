@@ -1,10 +1,12 @@
 package blank.game;
 
 
+import java.util.ArrayList;
+
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
 import blank.game.physics.GearWheelJoint;
-import blank.game.physics.GlueJoint;
+import blank.game.physics.GlibberJoint;
 import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
@@ -24,11 +26,13 @@ public class TestLevel extends Level {
 
 		allObjects = new AllObjectsList();
 
-		world.addObject(new PhysicsStaticBlock(0, 530, 800, 100));
 		world.addObject(new PhysicsStaticBlock(0, -100, 800, 100));
 		world.addObject(new PhysicsStaticBlock(-100, 0, 100, 600));
 		world.addObject(new PhysicsStaticBlock(800, 0, 100, 600));
 
+		PhysicsStaticBlock ground = new PhysicsStaticBlock(0, 530, 800, 100);
+		world.addObject(ground);
+		
 		// Bälle hinzufügen
 		// for (int i = 1; i< 40; i+=2) {
 		// for (int j = 1; j<30; j+=2) {
@@ -87,6 +91,9 @@ public class TestLevel extends Level {
 		
 		NailJoint joint1 = new NailJoint(bodyA.getPhysicsObject(), bodyB.getPhysicsObject(),
 								new Vec2(0, 0));
+		joint1.enableMotor(true);
+		joint1.setMotorSpeed(10);
+		joint1.setMotorTorque(10);
 		world.addJoint(joint1);
 	
 				
@@ -95,10 +102,6 @@ public class TestLevel extends Level {
 		joint2.setUpperTranslation(3f);
 		joint2.setLowerTranslation(-3f);
 		joint2.enableTransLimit(true);
-		
-		joint2.enableMotor(true);
-		joint2.setMotorForce(300f);
-		joint2.setMotorSpeed(100f);
 		world.addJoint(joint2);	
 		
 		
@@ -109,15 +112,11 @@ public class TestLevel extends Level {
 		joint3.enableTransLimit(true);
 		world.addJoint(joint3);	
 		
-		
 		NailJoint joint4 = new NailJoint(bodyG.getPhysicsObject(), bodyH.getPhysicsObject(),
 				new Vec2(0, 0));
 		world.addJoint(joint4);
-		joint4.enableMotor(true);
-		joint4.setMotorSpeed(-10);
-		joint4.setMotorTorque(10);
+	
 
-		
 		GearWheelJoint gwJoint1 = new GearWheelJoint(bodyA.getPhysicsObject(), bodyC.getPhysicsObject(),
 				joint1.getPhysicsJoint(), joint2.getPhysicsJoint(), 1f);
 		world.addJoint(gwJoint1);
@@ -131,25 +130,40 @@ public class TestLevel extends Level {
 		world.addJoint(gwJoint3);
 		
 		
-//		ArrayList<Vec2> points = new ArrayList<Vec2>();
-//		points.add(new Vec2(100, 100));
-//		points.add(new Vec2(200, 100));
-//		points.add(new Vec2(200, 450));
-//		points.add(new Vec2(450, 450));
-//		allObjects.add(new Lines(points));	
+		ArrayList<Vec2> points = new ArrayList<Vec2>();
+		points.add(new Vec2(100, 100));
+		points.add(new Vec2(200, 100));
+		points.add(new Vec2(200, 450));
+		points.add(new Vec2(450, 450));
+		allObjects.add(new Lines(points));	
+		
+
+		
+//		Rectangle rec1 = new Rectangle(30, 30, 20, 20, BodyType.DYNAMIC);
+//		Rectangle rec2 = new Rectangle(10, 50, 20, 20, BodyType.DYNAMIC);
+//		Rectangle rec3 = new Rectangle(50, 50, 20, 20, BodyType.DYNAMIC);
+//		allObjects.add(rec1);
+//		allObjects.add(rec2);
+//		allObjects.add(rec3);
+		
+//		GlueJoint glueJoint = new GlueJoint(rec1.getPhysicsObject(), rec2.getPhysicsObject());
+//		world.addJoint(glueJoint);
+//		AttritionJoint attritionJoint = new AttritionJoint(player.getPhysicsObject(), ground);
+//		world.addJoint(attritionJoint);
 		
 		
-		Rectangle rec1 = new Rectangle(10, 10, 20, 20, BodyType.DYNAMIC);
-		Rectangle rec2 = new Rectangle(30, 30, 20, 20, BodyType.DYNAMIC);
-		allObjects.add(rec1);
-		allObjects.add(rec2);
-		
-		
-		GlueJoint glueJoint = new GlueJoint(rec1.getPhysicsObject(), rec2.getPhysicsObject(),
-						new Vec2(0, 0));
-		world.addJoint(glueJoint);
-		
-		
+		GlibberJoint lJoint = new GlibberJoint();				
+		for (int i = 0; i < 40; i++) {
+			
+			int x = (int) (Math.cos(Math.PI/20 * i) * 50);
+			int y = (int) (Math.sin(Math.PI/20 * i) * 50);
+					
+			Circle circle = new Circle(200+x, 200+y, 5, BodyType.DYNAMIC);
+			
+			lJoint.addPhysicsObject(circle.getPhysicsObject());
+			allObjects.add(circle);			
+		}
+		world.addJoint(lJoint);
 		
 		world.start();
 	}

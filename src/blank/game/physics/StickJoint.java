@@ -12,7 +12,7 @@ import blank.game.Tools;
  * 
  * @author Kilian Helmenstein
  * 
- *         Mit dieser KLasse könne zwei Physic-Bodies so verbunden werden, dass
+ *         Mit dieser KLasse können zwei Physic-Bodies so verbunden werden, dass
  *         ihre Anchor-Punkte immer den gleichen Abstand zueinander haben
  *         (length).
  * 

@@ -22,7 +22,6 @@ public class PhysicsCircle extends PhysicsObject {
 		fdef.shape = c;
 		fdef.friction = 1f;
 		fdef.density = 0.1f;
-		fdef.restitution = 2f;
 	}
 
 	@Override

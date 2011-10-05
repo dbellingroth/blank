@@ -9,9 +9,11 @@ import org.jbox2d.dynamics.joints.PrismaticJointDef;
 import blank.game.Tools;
 
 /**
+ * Ein Body kann auf einer angegeben Schiene hin und her fahren.
+ * Außerdem kann ein Motor aktiviert werden: Das Objekt wird dann
+ * mit den angegebenen Werten (motorTorque, direction*motorSpeed) "gedrückt".
  * 
  * @author Kilian Helmenstein
- * 
  * 
  */
 public class PneumaticJoint extends PhysicsJoint {
