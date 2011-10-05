@@ -87,8 +87,7 @@ public class TestLevel extends Level {
 		NailJoint joint1 = new NailJoint(bodyA.getPhysicsObject(), bodyB.getPhysicsObject(),
 								new Vec2(0, 0));
 		world.addJoint(joint1);
-		
-		
+	
 				
 		PneumaticJoint joint2 = new PneumaticJoint(bodyC.getPhysicsObject(), bodyD.getPhysicsObject(),
 								new Vec2(0, 0), new Vec2(0f, -1f));
@@ -109,19 +108,21 @@ public class TestLevel extends Level {
 		NailJoint joint4 = new NailJoint(bodyG.getPhysicsObject(), bodyH.getPhysicsObject(),
 				new Vec2(0, 0));
 		world.addJoint(joint4);
-		
+		joint4.enableMotor(true);
+		joint4.setMotorSpeed(10);
+		joint4.setMotorTorque(10);
 
 		
 		GearWheelJoint gwJoint1 = new GearWheelJoint(bodyA.getPhysicsObject(), bodyC.getPhysicsObject(),
 				joint1.getPhysicsJoint(), joint2.getPhysicsJoint(), 1f);
-		world.addJoint(gwJoint1);
+//		world.addJoint(gwJoint1);
 		
 		GearWheelJoint gwJoint2 = new GearWheelJoint(bodyC.getPhysicsObject(), bodyE.getPhysicsObject(),
 				joint2.getPhysicsJoint(), joint3.getPhysicsJoint(), -1f);
 		world.addJoint(gwJoint2);
 		
 		GearWheelJoint gwJoint3 = new GearWheelJoint(bodyA.getPhysicsObject(), bodyG.getPhysicsObject(),
-				joint1.getPhysicsJoint(), joint4.getPhysicsJoint(), 10f);
+				joint1.getPhysicsJoint(), joint4.getPhysicsJoint(), 2f);
 		world.addJoint(gwJoint3);
 		
 		
