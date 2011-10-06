@@ -22,8 +22,9 @@ public class GlibberJoint extends PhysicsJoint {
 	public GlibberJoint() {
 		jointDef = new ConstantVolumeJointDef();
 		
-		jointDef.dampingRatio = 0.01f;
+		jointDef.dampingRatio = 0.1f;
 		jointDef.frequencyHz = 10;
+
 	}
 	
 	

@@ -93,7 +93,7 @@ public class TestLevel extends Level {
 								new Vec2(0, 0));
 		joint1.enableMotor(true);
 		joint1.setMotorSpeed(10);
-		joint1.setMotorTorque(10);
+		joint1.setMotorTorque(100);
 		world.addJoint(joint1);
 	
 				
@@ -119,7 +119,7 @@ public class TestLevel extends Level {
 
 		GearWheelJoint gwJoint1 = new GearWheelJoint(bodyA.getPhysicsObject(), bodyC.getPhysicsObject(),
 				joint1.getPhysicsJoint(), joint2.getPhysicsJoint(), 1f);
-		world.addJoint(gwJoint1);
+//		world.addJoint(gwJoint1);
 		
 		GearWheelJoint gwJoint2 = new GearWheelJoint(bodyC.getPhysicsObject(), bodyE.getPhysicsObject(),
 				joint2.getPhysicsJoint(), joint3.getPhysicsJoint(), -1f);
