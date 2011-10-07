@@ -51,7 +51,7 @@ public class Rectangle implements GameObject, PhysicsOwner, Drawable {
 	}
 
 	public void update(int delta) {
-		System.out.println(phys.getSpeed());
+		
 	}
 
 	public void beginCollision(CollisionData collision) {

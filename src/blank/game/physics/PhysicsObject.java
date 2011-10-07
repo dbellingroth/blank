@@ -73,7 +73,7 @@ public abstract class PhysicsObject {
 
 	public Vec2 getSpeed() {
 		PhysicsWorld.reservePhysics();
-		Vec2 result = Tools.convertVectorPhys2Pix(body.getLinearVelocity());
+		Vec2 result = Tools.convertVectorPhys2Pix(body.getLinearVelocity()).clone();
 		PhysicsWorld.releasePhysics();
 		return result;
 	}
@@ -91,27 +91,39 @@ public abstract class PhysicsObject {
 	}
 
 	public void applyAngularImpulse(float impulse) {
+		PhysicsWorld.reservePhysics();
 		body.applyAngularImpulse(impulse);
+		PhysicsWorld.releasePhysics();
 	}
 
 	public void applyTorque(float torque) {
+		PhysicsWorld.reservePhysics();
 		body.applyTorque(torque);
+		PhysicsWorld.releasePhysics();
 	}
 
 	public void applyForce(Vec2 force, Vec2 point) {
+		PhysicsWorld.reservePhysics();
 		body.applyForce(force, Tools.convertVectorPix2Phys(point));
+		PhysicsWorld.releasePhysics();
 	}
 
 	public void applyForce(Vec2 force) {
+		PhysicsWorld.reservePhysics();
 		body.applyForce(force, body.getWorldCenter());
+		PhysicsWorld.releasePhysics();
 	}
 
 	public void applyLinearImpulse(Vec2 impulse, Vec2 point) {
+		PhysicsWorld.reservePhysics();
 		body.applyLinearImpulse(impulse, Tools.convertVectorPix2Phys(point));
+		PhysicsWorld.releasePhysics();
 	}
 
 	public void applyLinearImpulse(Vec2 impulse) {
+		PhysicsWorld.reservePhysics();
 		body.applyLinearImpulse(impulse, body.getWorldCenter());
+		PhysicsWorld.releasePhysics();
 	}
 
 	public void setOwner(PhysicsOwner owner) {
@@ -119,27 +131,40 @@ public abstract class PhysicsObject {
 	}
 
 	public Vec2 getMassCenter() {
-		return Tools.convertVectorPhys2Pix(body.getLocalCenter());
+		PhysicsWorld.reservePhysics();
+		Vec2 result = Tools.convertVectorPhys2Pix(body.getLocalCenter()).clone();
+		PhysicsWorld.releasePhysics();
+		return result;
 	}
 
 	public void setMassCenter(Vec2 point) {
+		PhysicsWorld.reservePhysics();
 		MassData md = new MassData();
 		md.center.set(Tools.convertVectorPix2Phys(point));
 		md.mass = body.getMass();
 		md.I = body.getInertia();
 		body.setMassData(md);
+		PhysicsWorld.releasePhysics();
 	}
 
 	public void setMass(float mass) {
+		PhysicsWorld.reservePhysics();
 		MassData md = new MassData();
 		md.center.set(body.getLocalCenter());
 		md.mass = mass;
 		md.I = body.getInertia();
 		body.setMassData(md);
+		PhysicsWorld.releasePhysics();
+	}
+	
+	public void setBullet(boolean bullet) {
+		
 	}
 
 	public void resetMassData() {
+		PhysicsWorld.reservePhysics();
 		body.resetMassData();
+		PhysicsWorld.releasePhysics();
 	}
 
 	protected void beginCollision(final CollisionData data) {
