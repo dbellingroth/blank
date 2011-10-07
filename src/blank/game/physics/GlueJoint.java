@@ -23,13 +23,10 @@ public class GlueJoint extends PhysicsJoint {
 	
 	public GlueJoint(PhysicsObject pObjectA, PhysicsObject pObjectB) {
 				
-		
-	
-		
 		jointDef = new WeldJointDef();
-		
 		jointDef.initialize(pObjectA.getBody(), pObjectB.getBody(), 
-								pObjectA.getBody().getWorldCenter());		
+								pObjectA.getBody().getWorldCenter());	
+		
 	}
 	
 	
@@ -38,7 +35,7 @@ public class GlueJoint extends PhysicsJoint {
 		
 		joint = (WeldJoint) world.createJoint(jointDef);
 		joint.setUserData(this);
-
+	
 	}
 
 	

@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
+
+import blank.game.physics.AttritionJoint;
 import blank.game.physics.GearWheelJoint;
 import blank.game.physics.GlibberJoint;
+import blank.game.physics.GlueJoint;
 import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
@@ -139,12 +142,11 @@ public class TestLevel extends Level {
 		
 
 		
-//		Rectangle rec1 = new Rectangle(30, 30, 20, 20, BodyType.DYNAMIC);
-//		Rectangle rec2 = new Rectangle(10, 50, 20, 20, BodyType.DYNAMIC);
-//		Rectangle rec3 = new Rectangle(50, 50, 20, 20, BodyType.DYNAMIC);
-//		allObjects.add(rec1);
-//		allObjects.add(rec2);
-//		allObjects.add(rec3);
+		Rectangle rec1 = new Rectangle(30, 30, 20, 20, BodyType.DYNAMIC);
+		Rectangle rec2 = new Rectangle(10, 50, 20, 20, BodyType.DYNAMIC);
+		allObjects.add(rec1);
+		allObjects.add(rec2);
+
 		
 //		GlueJoint glueJoint = new GlueJoint(rec1.getPhysicsObject(), rec2.getPhysicsObject());
 //		world.addJoint(glueJoint);

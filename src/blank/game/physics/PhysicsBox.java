@@ -31,7 +31,7 @@ public class PhysicsBox extends PhysicsObject {
 
 		fdef.shape = shape;
 		fdef.friction = 4f;
-		fdef.density = 5f;
+		fdef.density = 3f;
 	}
 
 	public void init(World world) {

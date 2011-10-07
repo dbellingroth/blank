@@ -21,7 +21,7 @@ public class PhysicsCircle extends PhysicsObject {
 		fdef = new FixtureDef();
 		fdef.shape = c;
 		fdef.friction = 1f;
-		fdef.density = 0.1f;
+		fdef.density = 3f;
 	}
 
 	@Override
