@@ -23,15 +23,15 @@ public class GearWheelJoint extends PhysicsJoint {
 	
 	
 	public GearWheelJoint(PhysicsObject pObjectA, PhysicsObject pObjectB, 
-						Joint joint1, Joint joint2, float ratio) {
+						PhysicsJoint joint1, PhysicsJoint joint2, float ratio) {
 		
 		jointDef = new GearJointDef();
 		
 		jointDef.bodyA = pObjectA.getBody();
 		jointDef.bodyB = pObjectB.getBody();
 		
-		jointDef.joint1 = joint1;
-		jointDef.joint2 = joint2;
+		jointDef.joint1 = joint1.getPhysicsJoint();
+		jointDef.joint2 = joint2.getPhysicsJoint();
 		
 		jointDef.ratio = ratio;
 	}

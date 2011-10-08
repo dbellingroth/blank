@@ -26,8 +26,8 @@ public class PneumaticJoint extends PhysicsJoint {
 
 		jointDef = new PrismaticJointDef();
 
-		Vec2 anchorPoint = new Vec2(pObjectA.getBody().getPosition().x
-				+ Tools.convertVectorPix2Phys(anchor).x, pObjectA.getBody()
+		Vec2 anchorPoint = new Vec2(pObjectB.getBody().getPosition().x
+				+ Tools.convertVectorPix2Phys(anchor).x, pObjectB.getBody()
 				.getPosition().y + Tools.convertVectorPix2Phys(anchor).y);
 
 		jointDef.collideConnected = false;

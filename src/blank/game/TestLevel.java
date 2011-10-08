@@ -19,7 +19,7 @@ import blank.game.rendering.Sprite;
 public class TestLevel extends Level {
 
 	private Sprite test_backround;
-	private Rectangle player;
+	private Player player;
 	
 	@Override
 	protected void init() {
@@ -52,7 +52,7 @@ public class TestLevel extends Level {
 		// }
 
 		// das Test-Rechteck hinzufügen
-		player = new Rectangle(100, 300, 40, 40, BodyType.DYNAMIC);
+		player = new Player(100, 300, 40, 40, BodyType.DYNAMIC);
 		player.getPhysicsObject().setMass(10f);
 		// //left
 		// inputHandler.addKeyPressedListener(dr, 203, 1);
@@ -68,39 +68,35 @@ public class TestLevel extends Level {
 		// inputHandler.addKeyReleasedListener(dr, 208, 4);
 		allObjects.add(player);
 
-		Circle bodyA = new Circle(100, 300, 10, BodyType.STATIC);
-		Circle bodyB = new Circle(100, 300, 40, BodyType.DYNAMIC);
+
+		Circle bodyA = new Circle(100, 300, 40, BodyType.DYNAMIC);
 		
-		Circle bodyC = new Circle(300, 300, 10, BodyType.STATIC);
-		Rectangle bodyD = new Rectangle(280, 300, 40, 70, BodyType.DYNAMIC);
-		bodyD.getPhysicsObject().setMass(10);
+		Rectangle bodyB = new Rectangle(280, 300, 40, 70, BodyType.DYNAMIC);
 		
-		Circle bodyE = new Circle(500, 300, 10, BodyType.STATIC);
-		Rectangle bodyF = new Rectangle(480, 300, 40, 70, BodyType.DYNAMIC);
-		bodyD.getPhysicsObject().setMass(20);
+		Rectangle bodyC = new Rectangle(480, 300, 100, 70, BodyType.DYNAMIC);
 		
-		Circle bodyG = new Circle(700, 300, 10, BodyType.STATIC);
-		Circle bodyH = new Circle(700, 300, 40, BodyType.DYNAMIC);
+		Circle bodyD = new Circle(700, 300, 40, BodyType.DYNAMIC);
 		
 		allObjects.add(bodyA);
 		allObjects.add(bodyB);
 		allObjects.add(bodyC);
 		allObjects.add(bodyD);
-		allObjects.add(bodyE);
-		allObjects.add(bodyF);
-		allObjects.add(bodyG);
-		allObjects.add(bodyH);
 		
 		
-		NailJoint joint1 = new NailJoint(bodyA.getPhysicsObject(), bodyB.getPhysicsObject(),
+		NailJoint joint1 = new NailJoint(ground, bodyA.getPhysicsObject(),
 								new Vec2(0, 0));
 		joint1.enableMotor(true);
+<<<<<<< HEAD
 		joint1.setMotorSpeed(10);
 		joint1.setMotorTorque(100);
+=======
+		joint1.setMotorSpeed(5);
+		joint1.setMotorTorque(1000);
+>>>>>>> origin/master
 		world.addJoint(joint1);
 	
 				
-		PneumaticJoint joint2 = new PneumaticJoint(bodyC.getPhysicsObject(), bodyD.getPhysicsObject(),
+		PneumaticJoint joint2 = new PneumaticJoint(ground, bodyB.getPhysicsObject(),
 								new Vec2(0, 0), new Vec2(0f, -1f));
 		joint2.setUpperTranslation(3f);
 		joint2.setLowerTranslation(-3f);
@@ -108,37 +104,42 @@ public class TestLevel extends Level {
 		world.addJoint(joint2);	
 		
 		
-		PneumaticJoint joint3 = new PneumaticJoint(bodyE.getPhysicsObject(), bodyF.getPhysicsObject(),
+		PneumaticJoint joint3 = new PneumaticJoint(ground, bodyC.getPhysicsObject(),
 				new Vec2(0, 0), new Vec2(0f, 1f));
-		joint3.setUpperTranslation(2f);
-		joint3.setLowerTranslation(-2f);
+		joint3.setUpperTranslation(1);
+		joint3.setLowerTranslation(-1);
 		joint3.enableTransLimit(true);
 		world.addJoint(joint3);	
 		
-		NailJoint joint4 = new NailJoint(bodyG.getPhysicsObject(), bodyH.getPhysicsObject(),
+		NailJoint joint4 = new NailJoint(ground, bodyD.getPhysicsObject(),
 				new Vec2(0, 0));
 		world.addJoint(joint4);
 	
 
+<<<<<<< HEAD
 		GearWheelJoint gwJoint1 = new GearWheelJoint(bodyA.getPhysicsObject(), bodyC.getPhysicsObject(),
 				joint1.getPhysicsJoint(), joint2.getPhysicsJoint(), 1f);
+=======
+//		GearWheelJoint gwJoint1 = new GearWheelJoint(ground, ground,
+//				joint1, joint2, 3f);
+>>>>>>> origin/master
 //		world.addJoint(gwJoint1);
 		
-		GearWheelJoint gwJoint2 = new GearWheelJoint(bodyC.getPhysicsObject(), bodyE.getPhysicsObject(),
-				joint2.getPhysicsJoint(), joint3.getPhysicsJoint(), -1f);
+		GearWheelJoint gwJoint2 = new GearWheelJoint(ground, ground,
+				joint1, joint3, 3f);
 		world.addJoint(gwJoint2);
 		
-		GearWheelJoint gwJoint3 = new GearWheelJoint(bodyA.getPhysicsObject(), bodyG.getPhysicsObject(),
-				joint1.getPhysicsJoint(), joint4.getPhysicsJoint(), -2f);
-		world.addJoint(gwJoint3);
+//		GearWheelJoint gwJoint3 = new GearWheelJoint(ground, ground,
+//				joint1, joint4, 1f);
+//		world.addJoint(gwJoint3);
 		
 		
-		ArrayList<Vec2> points = new ArrayList<Vec2>();
-		points.add(new Vec2(100, 100));
-		points.add(new Vec2(200, 100));
-		points.add(new Vec2(200, 450));
-		points.add(new Vec2(450, 450));
-		allObjects.add(new Lines(points));	
+//		ArrayList<Vec2> points = new ArrayList<Vec2>();
+//		points.add(new Vec2(100, 100));
+//		points.add(new Vec2(200, 100));
+//		points.add(new Vec2(200, 450));
+//		points.add(new Vec2(450, 450));
+//		allObjects.add(new Lines(points));	
 		
 
 		
@@ -154,18 +155,18 @@ public class TestLevel extends Level {
 //		world.addJoint(attritionJoint);
 		
 		
-		GlibberJoint lJoint = new GlibberJoint();				
-		for (int i = 0; i < 40; i++) {
-			
-			int x = (int) (Math.cos(Math.PI/20 * i) * 50);
-			int y = (int) (Math.sin(Math.PI/20 * i) * 50);
-					
-			Circle circle = new Circle(200+x, 200+y, 5, BodyType.DYNAMIC);
-			
-			lJoint.addPhysicsObject(circle.getPhysicsObject());
-			allObjects.add(circle);			
-		}
-		world.addJoint(lJoint);
+//		GlibberJoint lJoint = new GlibberJoint();				
+//		for (int i = 0; i < 40; i++) {
+//			
+//			int x = (int) (Math.cos(Math.PI/20 * i) * 50);
+//			int y = (int) (Math.sin(Math.PI/20 * i) * 50);
+//					
+//			Circle circle = new Circle(200+x, 200+y, 5, BodyType.DYNAMIC);
+//			
+//			lJoint.addPhysicsObject(circle.getPhysicsObject());
+//			allObjects.add(circle);			
+//		}
+//		world.addJoint(lJoint);
 		
 		world.start();
 	}
