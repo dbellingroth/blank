@@ -86,13 +86,10 @@ public class TestLevel extends Level {
 		NailJoint joint1 = new NailJoint(ground, bodyA.getPhysicsObject(),
 								new Vec2(0, 0));
 		joint1.enableMotor(true);
-<<<<<<< HEAD
 		joint1.setMotorSpeed(10);
 		joint1.setMotorTorque(100);
-=======
 		joint1.setMotorSpeed(5);
 		joint1.setMotorTorque(1000);
->>>>>>> origin/master
 		world.addJoint(joint1);
 	
 				
@@ -116,22 +113,17 @@ public class TestLevel extends Level {
 		world.addJoint(joint4);
 	
 
-<<<<<<< HEAD
-		GearWheelJoint gwJoint1 = new GearWheelJoint(bodyA.getPhysicsObject(), bodyC.getPhysicsObject(),
-				joint1.getPhysicsJoint(), joint2.getPhysicsJoint(), 1f);
-=======
-//		GearWheelJoint gwJoint1 = new GearWheelJoint(ground, ground,
-//				joint1, joint2, 3f);
->>>>>>> origin/master
-//		world.addJoint(gwJoint1);
+
+
+		GearWheelJoint gwJoint1 = new GearWheelJoint(ground, ground,
+							joint1, joint2, 3f);
+		world.addJoint(gwJoint1);
+		
 		
 		GearWheelJoint gwJoint2 = new GearWheelJoint(ground, ground,
 				joint1, joint3, 3f);
 		world.addJoint(gwJoint2);
 		
-//		GearWheelJoint gwJoint3 = new GearWheelJoint(ground, ground,
-//				joint1, joint4, 1f);
-//		world.addJoint(gwJoint3);
 		
 		
 //		ArrayList<Vec2> points = new ArrayList<Vec2>();
@@ -144,7 +136,7 @@ public class TestLevel extends Level {
 
 		
 		Rectangle rec1 = new Rectangle(30, 30, 20, 20, BodyType.DYNAMIC);
-		Rectangle rec2 = new Rectangle(10, 50, 20, 20, BodyType.DYNAMIC);
+		Rectangle rec2 = new Rectangle(100, 100, 20, 20, BodyType.DYNAMIC);
 		allObjects.add(rec1);
 		allObjects.add(rec2);
 
