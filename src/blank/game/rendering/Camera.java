@@ -1,5 +1,6 @@
 package blank.game.rendering;
 
+import org.jbox2d.common.Vec2;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
@@ -15,9 +16,9 @@ public class Camera {
 	private float rotation = 0f;
 	private double zoomfactor = 1;
 
-	public Camera(int x, int y) {
-		setX(x);
-		setY(y);
+	public Camera(Vec2 position) {
+		setX(position.x);
+		setY(position.y);
 	}
 
 	public void apply() {
@@ -58,6 +59,13 @@ public class Camera {
 	public void setY(double y) {
 		this.y = y;
 	}
+	
+	
+	public void setPosition(Vec2 position) {
+		setX(position.x);
+		setY(position.y);
+	}
+	
 
 	public float getRotation() {
 		return rotation;

@@ -137,6 +137,12 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 			right = false;
 	}
 
+	public PhysicsObject getPhys() {
+		return phys;		
+	}
+	
+	
+	
 	public void mousePressed(int button) {
 
 	}

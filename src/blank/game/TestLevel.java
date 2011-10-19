@@ -14,12 +14,15 @@ import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
 import blank.game.physics.PneumaticJoint;
+import blank.game.rendering.Camera;
 import blank.game.rendering.Sprite;
 
 public class TestLevel extends Level {
 
 	private Sprite test_backround;
 	private Player player;
+	PhysicsStaticBlock ground;
+	private Camera cam;
 	
 	@Override
 	protected void init() {
@@ -33,8 +36,9 @@ public class TestLevel extends Level {
 		world.addObject(new PhysicsStaticBlock(-100, 0, 100, 600));
 		world.addObject(new PhysicsStaticBlock(800, 0, 100, 600));
 
-		PhysicsStaticBlock ground = new PhysicsStaticBlock(0, 530, 800, 100);
+		ground = new PhysicsStaticBlock(0, 530, 800, 100);
 		world.addObject(ground);
+		
 		
 		// Bälle hinzufügen
 		// for (int i = 1; i< 40; i+=2) {
@@ -68,7 +72,53 @@ public class TestLevel extends Level {
 		// inputHandler.addKeyReleasedListener(dr, 208, 4);
 		allObjects.add(player);
 
+		cam = new Camera(player.getPhys().getPosition());
+		
+		world.start();
+	}
+	
+	@Override
+	public void update(int delta) {
+		super.update(delta);
+	}
+	
+	@Override
+	public void render() {
+		cam.setPosition(player.getPhys().getPosition());
+		cam.apply();
+		test_backround.draw();
+		super.render();
+	}
+	
+	public void keyPressed(int key) {
+		player.keyPressed(key);
+	}
 
+	public void keyReleased(int key) {
+		player.keyReleased(key);
+	}
+
+	public void mousePressed(int button) {
+
+	}
+
+	public void mouseReleased(int button) {
+
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private void jointTest() {
 		Circle bodyA = new Circle(100, 300, 40, BodyType.DYNAMIC);
 		
 		Rectangle bodyB = new Rectangle(280, 300, 40, 70, BodyType.DYNAMIC);
@@ -160,34 +210,16 @@ public class TestLevel extends Level {
 //		}
 //		world.addJoint(lJoint);
 		
-		world.start();
 	}
 	
-	@Override
-	public void update(int delta) {
-		super.update(delta);
-	}
 	
-	@Override
-	public void render() {
-		test_backround.draw();
-		super.render();
-	}
 	
-	public void keyPressed(int key) {
-		player.keyPressed(key);
-	}
-
-	public void keyReleased(int key) {
-		player.keyReleased(key);
-	}
-
-	public void mousePressed(int button) {
-
-	}
-
-	public void mouseReleased(int button) {
-
-	}
-
+	
+	
+	
+	
+	
+	
+	
+	
 }
