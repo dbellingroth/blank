@@ -12,9 +12,9 @@ import org.lwjgl.opengl.GL11;
  */
 public class Camera {
 
-	private double x, y;
+	private Vec2 position;
 	private float rotation = 0f;
-	private double zoomfactor = 1;
+	private double zoomfactor = 1f;
 
 	public Camera(Vec2 position) {
 		setX(position.x);
@@ -39,25 +39,25 @@ public class Camera {
 					-Display.getDisplayMode().getHeight() / 2, 0);
 		}
 
-		GL11.glTranslated(-x + Display.getDisplayMode().getWidth() / 2, -y
+		GL11.glTranslated(-position.x + Display.getDisplayMode().getWidth() / 2, -position.y
 				+ Display.getDisplayMode().getHeight() / 2, 0);
 
 	}
 
 	public double getX() {
-		return x;
+		return position.x;
 	}
 
-	public void setX(double x) {
-		this.x = x;
+	public void setX(float x) {
+		this.position.x = x;
 	}
 
 	public double getY() {
-		return y;
+		return position.y;
 	}
 
-	public void setY(double y) {
-		this.y = y;
+	public void setY(float y) {
+		this.position.y = y;
 	}
 	
 	
