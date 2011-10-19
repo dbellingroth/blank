@@ -25,7 +25,7 @@ public class PhysicsWorld implements Runnable, ContactListener {
 	}
 
 	public PhysicsWorld() {
-		this(new Vec2(0, 0f));
+		this(new Vec2(0, 10f));
 	}
 
 	@Override

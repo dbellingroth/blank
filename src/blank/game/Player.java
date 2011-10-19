@@ -5,7 +5,6 @@ import org.jbox2d.dynamics.BodyType;
 
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsBox;
-import blank.game.physics.PhysicsCircle;
 import blank.game.physics.PhysicsObject;
 import blank.game.physics.PhysicsOwner;
 import blank.game.rendering.Drawable;
@@ -26,7 +25,7 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 			BodyType bodyType) {
 		this.width = width;
 		this.height = height;
-		phys = new PhysicsCircle(x+width, y+height, width/2, bodyType);
+		phys = new PhysicsBox(x, y, width, height, bodyType);
 		phys.setOwner(this);
 		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);
 
@@ -36,7 +35,7 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 		// g2d.fillRect(0, 0, (int) width, (int) height);
 		// sprite.update();
 
-		sprite = new Sprite("res/player_two.png");
+		sprite = new Sprite("res/player_sil.png");
 	}
 
 	@Override
@@ -58,22 +57,18 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 		// ((600-Mouse.getY())-phys.getPosition().y)*100), new
 		// Vec2(width/2,height/2));
 		// phys.stop();
-		
-		if (left) phys.setAngle(phys.getAngle()-1);
-		if (right) phys.setAngle(phys.getAngle()+1);
-		
-		if (phys.getSpeed().x > 50 && phys.getSpeed().y > 50) {
-			phys.setSpeed(new Vec2(50, 50));
-		} else if (phys.getSpeed().x < -50 && phys.getSpeed().y < -50) {
-			phys.setSpeed(new Vec2(-50, -50));
-		}
-		
-		
-		if (up) phys.applyForce(new Vec2((float) -(5*Math.sin(Math.toRadians(-phys.getAngle()))), 
-												(float) -(5*Math.cos(Math.toRadians(-phys.getAngle())))));
-	
-		if (!up) phys.setSpeed(new Vec2(0, 0));
-		if (!right && !left) phys.setAngularSpeed(0);
+
+		if (up)
+			phys.applyForce(new Vec2(0, -4000f));
+		up = false;
+		// if (down) phys.applyForce(new Vec2(0, 40f), new
+		// Vec2(width/2,height/2));
+		if (left && phys.getAngularSpeed() > -6)
+			phys.applyTorque(-50);
+		if (right && phys.getAngularSpeed() < 6)
+			phys.applyTorque(50);
+		if (down) phys.applyForce(new Vec2(0, 500f));
+
 	}
 
 	public void beginCollision(CollisionData collision) {
