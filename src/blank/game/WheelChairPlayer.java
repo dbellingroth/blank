@@ -19,7 +19,7 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	private int zIndex;
 	private boolean visible;
 	boolean up, down, left, right;
-	
+	Vec2 direction;
 	
 	public WheelChairPlayer(float x, float y, float width, float height,
 		BodyType bodyType) {
@@ -46,25 +46,33 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	}
 	
 	public void update(int delta) {
-		Vec2 direction = new Vec2(Mouse.getX() - 400,  Mouse.getY() - 300);
+		direction = new Vec2(Mouse.getX() - 400,  Mouse.getY() - 300);
 		
-		if (up) {
-			phys.applyForce(new Vec2(direction.x, -direction.y), new Vec2(0, 0));
-			System.out.println(direction);
-			up = false;
-		}
-		if (down) {
-			phys.applyForce(new Vec2(-direction.x, direction.y), new Vec2(0, 0));
-			
-			down = false;
-		}	
-				
+		
 		Vec2 ref = new Vec2(0, -1);
 		float scalar_product = (direction.x * ref.x) + (direction.y * ref.y);
 		double values_product = Math.sqrt(Math.pow(direction.x, 2) + Math.pow(direction.y, 2))
 										* Math.sqrt(Math.pow(ref.x, 2) + Math.pow(ref.y, 2));
 		double alpha = Math.toDegrees(Math.acos(scalar_product / values_product));
 		phys.setAngle(Mouse.getX() < 400 ? alpha-180 : 180-alpha);
+		
+		double speed = Math.sqrt(Math.pow(phys.getSpeed().x, 2) + Math.pow(phys.getSpeed().y, 2));
+		if (speed > 110) speed = 110;
+		phys.setSpeed(new Vec2((float) ((Mouse.getX() < 400 ? -1 : 1) * Math.toDegrees(Math.sin(Math.toRadians(alpha))) * speed/55), 
+									(float) (Math.toDegrees(Math.cos(Math.toRadians(alpha))) * speed/55)));
+				
+		if (up) {
+			phys.applyForce(new Vec2(direction.x, -direction.y), new Vec2(0, 0));
+
+			up = false;
+		}
+		if (down) {
+			phys.applyForce(new Vec2(-direction.x, direction.y), new Vec2(0, 0));
+			
+			down = false;
+		}
+		
+		
 			
 	}
 	

@@ -27,7 +27,7 @@ public class WheelChairIdea extends Level {
 		allObjects = new AllObjectsList();
 
 		// das Test-Rechteck hinzufügen
-		player = new WheelChairPlayer(100, 300, 40, 40, BodyType.DYNAMIC);
+		player = new WheelChairPlayer(100, 300, 30, 30, BodyType.DYNAMIC);
 		player.getPhysicsObject().setMass(10f);
 		allObjects.add(player);
 
