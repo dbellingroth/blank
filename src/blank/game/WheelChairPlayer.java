@@ -19,7 +19,7 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	private int zIndex;
 	private boolean visible;
 	boolean up, down, left, right;
-	int key_up = 200, key_down = 208, key_left = 203, key_right = 205;
+	
 	
 	public WheelChairPlayer(float x, float y, float width, float height,
 		BodyType bodyType) {
@@ -35,9 +35,8 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	
 	public void draw() {
 		
-		sprite.setTranslate(new Vec2(phys.getPosition().x - width / 2, phys
-				.getPosition().y - height / 2));
-		
+		sprite.setTranslate(new Vec2(phys.getPosition().x - width / 2, 
+												phys.getPosition().y - height / 2));
 		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
 		sprite.setRotationAngle(phys.getAngle());
 		sprite.setScaleFactor(new Vec2(width / sprite.getWidth(), height
@@ -47,22 +46,34 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	}
 	
 	public void update(int delta) {
+		Vec2 direction = new Vec2((Mouse.getX() - (phys.getPosition().x-width/2)), 
+												Mouse.getY() - (phys.getPosition().y-height/2));
+		
+		
+		Vec2 ref = new Vec2(0, -1);
+		float scalar_product = (direction.x * ref.x) + (direction.y * ref.y);
+		double values_product = Math.sqrt(Math.pow(direction.x, 2) + Math.pow(direction.y, 2))
+										* Math.sqrt(Math.pow(ref.x, 2) + Math.pow(ref.y, 2));
+		double alpha = Math.toDegrees(Math.acos(scalar_product / values_product));
+		phys.setAngle(Mouse.getX() < phys.getPosition().x-width/2 ? alpha+180 : 180-alpha);
+	
 		
 		if (up) {
-			phys.applyForce(new Vec2((Mouse.getX()-phys.getPosition().x)*100,
-			((600-Mouse.getY())-phys.getPosition().y)*100), new
-			Vec2(width/2,height/2));
-			phys.stop();
+			phys.applyForce(direction, new Vec2((phys.getPosition().x-width/2), (phys.getPosition().y-height/2)));
+			
+			up = false;
 		}
 		
-		// if (down) phys.applyForce(new Vec2(0, 40f), new
-		// Vec2(width/2,height/2));
-		if (left && phys.getAngularSpeed() > -6)
-			phys.applyTorque(-50);
-		if (right && phys.getAngularSpeed() < 6)
-			phys.applyTorque(50);
-		if (down) phys.applyForce(new Vec2(0, 500f));
-	
+		
+		if (down) {
+			phys.applyForce(new Vec2(-direction.x, -direction.y), 
+						new Vec2((phys.getPosition().x-width/2), (phys.getPosition().y-height/2)));
+			
+			down = false;
+		}	
+		
+
+		
 	}
 	
 	public void beginCollision(CollisionData collision) {
@@ -97,52 +108,38 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	
 	}
 	
+	
 	public void keyPressed(int key) {
-		// if (key == 1) left = true;
-		// if (key == 2) right = true;
-		//
-		// if (key == 3) up = true;
-		// if (key == 4) down = true;
-		if (key == key_up)
-			up = true;
-		if (key == key_down)
-			down = true;
-		if (key == key_left)
-			left = true;
-		if (key == key_right)
-			right = true;
+		
+		
 	}
+	
 	
 	public void keyReleased(int key) {
 		
-		// if (key == 1) left = false;
-		// if (key == 2) right = false;
-		//
-		// if (key == 3) up = false;
-		// if (key == 4) down = false;
 		
-		if (key == key_up)
-			up = false;
-		if (key == key_down)
-			down = false;
-		if (key == key_left)
-			left = false;
-		if (key == key_right)
-			right = false;
 	}
-	
-	public PhysicsObject getPhys() {
-	return phys;		
-	}
-	
 	
 	
 	public void mousePressed(int button) {
-	
+		
+		
 	}
+	
 	
 	public void mouseReleased(int button) {
 	
+		
+	}
+	
+	public void mouseWheel(int direction) {
+		if (direction > 0) up = true;
+		else if (direction < 0) down = true;
+	}
+	
+	
+	public PhysicsObject getPhys() {
+		return phys;		
 	}
 
 }

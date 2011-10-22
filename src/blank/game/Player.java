@@ -150,5 +150,9 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 	public void mouseReleased(int button) {
 
 	}
+	
+	public void mouseWheel(int direction) {
+		
+	}
 
 }

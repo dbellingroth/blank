@@ -24,7 +24,7 @@ public class Camera {
 		this.position = position;
 		lower_limit = new Vec2(400, 300);
 		upper_limit = new Vec2(1400, 600);
-		enableLimit = true;
+		enableLimit = false;
 		
 		setX(position.x);
 		setY(position.y);

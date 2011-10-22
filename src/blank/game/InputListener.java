@@ -9,5 +9,7 @@ public interface InputListener {
 	public void mousePressed(int button);
 
 	public void mouseReleased(int button);
+	
+	public void mouseWheel(int direction);
 
 }

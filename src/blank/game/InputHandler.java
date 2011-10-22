@@ -149,4 +149,10 @@ public class InputHandler implements InputListener {
 		}
 
 	}
+
+	@Override
+	public void mouseWheel(int direction) {
+		// TODO Auto-generated method stub
+		
+	}
 }
