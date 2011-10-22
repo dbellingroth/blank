@@ -34,9 +34,9 @@ public class TestLevel extends Level {
 
 		world.addObject(new PhysicsStaticBlock(0, -100, 800, 100));
 		world.addObject(new PhysicsStaticBlock(-100, 0, 100, 600));
-		world.addObject(new PhysicsStaticBlock(800, 0, 100, 600));
+		world.addObject(new PhysicsStaticBlock(1600, 0, 100, 600));
 
-		ground = new PhysicsStaticBlock(0, 530, 800, 100);
+		ground = new PhysicsStaticBlock(0, 530, 1600, 100);
 		world.addObject(ground);
 		
 		
@@ -87,6 +87,9 @@ public class TestLevel extends Level {
 		cam.setPosition(player.getPhys().getPosition());
 		cam.apply();
 		test_backround.draw();
+		test_backround.setTranslate(new Vec2(test_backround.getWidth()-2, 0));
+		test_backround.draw();
+		test_backround.setTranslate(new Vec2(0, 0));
 		super.render();
 	}
 	

@@ -1,5 +1,7 @@
 package blank.game.rendering;
 
+import java.awt.event.MouseWheelEvent;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
@@ -145,10 +147,15 @@ public class Window {
 		while (Mouse.next()) {
 			if (Mouse.getEventButtonState() && Mouse.getEventButton() >= 0)
 				parent.mousePressed(Mouse.getEventButton());
-			else if (Mouse.getEventButton() >= 0)
+			else if (Mouse.getEventButton() >= 0) {
 				parent.mouseReleased(Mouse.getEventButton());
-		}
-
+			}
+			
+			if (Mouse.hasWheel()) {
+				parent.mouseWheel((int) Mouse.getDWheel());
+			}
+		}	
+		
 	}
 
 }
