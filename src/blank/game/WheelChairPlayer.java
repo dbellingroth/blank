@@ -46,34 +46,26 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	}
 	
 	public void update(int delta) {
-		Vec2 direction = new Vec2((Mouse.getX() - (phys.getPosition().x-width/2)), 
-												Mouse.getY() - (phys.getPosition().y-height/2));
+		Vec2 direction = new Vec2(Mouse.getX() - 400,  Mouse.getY() - 300);
 		
-		
+		if (up) {
+			phys.applyForce(new Vec2(direction.x, -direction.y), new Vec2(0, 0));
+			System.out.println(direction);
+			up = false;
+		}
+		if (down) {
+			phys.applyForce(new Vec2(-direction.x, direction.y), new Vec2(0, 0));
+			
+			down = false;
+		}	
+				
 		Vec2 ref = new Vec2(0, -1);
 		float scalar_product = (direction.x * ref.x) + (direction.y * ref.y);
 		double values_product = Math.sqrt(Math.pow(direction.x, 2) + Math.pow(direction.y, 2))
 										* Math.sqrt(Math.pow(ref.x, 2) + Math.pow(ref.y, 2));
 		double alpha = Math.toDegrees(Math.acos(scalar_product / values_product));
-		phys.setAngle(Mouse.getX() < phys.getPosition().x-width/2 ? alpha+180 : 180-alpha);
-	
-		
-		if (up) {
-			phys.applyForce(direction, new Vec2((phys.getPosition().x-width/2), (phys.getPosition().y-height/2)));
+		phys.setAngle(Mouse.getX() < 400 ? alpha-180 : 180-alpha);
 			
-			up = false;
-		}
-		
-		
-		if (down) {
-			phys.applyForce(new Vec2(-direction.x, -direction.y), 
-						new Vec2((phys.getPosition().x-width/2), (phys.getPosition().y-height/2)));
-			
-			down = false;
-		}	
-		
-
-		
 	}
 	
 	public void beginCollision(CollisionData collision) {

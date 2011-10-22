@@ -31,7 +31,7 @@ public class WheelChairIdea extends Level {
 		player.getPhysicsObject().setMass(10f);
 		allObjects.add(player);
 
-//		cam = new Camera(player.getPhys().getPosition());
+		cam = new Camera(player.getPhys().getPosition());
 		
 		world.start();
 	}
@@ -43,8 +43,8 @@ public class WheelChairIdea extends Level {
 	
 	@Override
 	public void render() {
-//		cam.setPosition(player.getPhys().getPosition());
-//		cam.apply();
+		cam.setPosition(player.getPhys().getPosition());
+		cam.apply();
 		backround.draw();
 		super.render();
 	}
