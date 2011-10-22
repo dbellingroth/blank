@@ -25,7 +25,7 @@ public class Game {
 	 * @throws InterruptedException
 	 */
 	public void init() {
-		loadLevel(new TestLevel());
+		loadLevel(new WheelChairIdea());
 	}
 
 	/**
@@ -61,6 +61,10 @@ public class Game {
 
 	public void mouseReleased(int button) {
 		currentLevel.mouseReleased(button);
+	}
+	
+	public void mouseWheel(int direction) {
+		currentLevel.mouseWheel(direction);
 	}
 	
 	public static Level getCurrentLevel() {
