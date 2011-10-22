@@ -22,7 +22,7 @@ public class Camera {
 
 	public Camera(Vec2 position) {
 		this.position = position;
-		lower_limit = new Vec2(200, 100);
+		lower_limit = new Vec2(400, 300);
 		upper_limit = new Vec2(1400, 600);
 		enableLimit = true;
 		
