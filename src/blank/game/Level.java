@@ -54,7 +54,10 @@ public abstract class Level implements GameObject {
 	public void mouseReleased(int button) {
 
 	}
-	
+
+	public void mouseWheel(int direction) {
+		
+	}
 	
 	public void addAction(Executor action) {
 		try {
