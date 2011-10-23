@@ -3,6 +3,8 @@ package blank.game;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
 
+import blank.game.levelEnviroment.House1;
+import blank.game.levelEnviroment.Street;
 import blank.game.physics.GearWheelJoint;
 import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
@@ -20,23 +22,35 @@ public class WheelChairIdea extends Level {
 	
 	@Override
 	protected void init() {
-		backround = new Sprite("res/streets.png");
+		backround = new Sprite("res/default_backround.png");
 
 		world = new PhysicsWorld(new Vec2(0f, 0f));
 
 		allObjects = new AllObjectsList();
 
 		// das Test-Rechteck hinzufügen
-		player = new WheelChairPlayer(100, 300, 30, 30, BodyType.DYNAMIC);
+		player = new WheelChairPlayer(100, 300, 90, 80, BodyType.DYNAMIC);
 		player.getPhysicsObject().setMass(10f);
 		allObjects.add(player);
 
 		cam = new Camera(player.getPhys().getPosition());
 		
-		world.start();
+		generateLevel();
+		
+		world.start();		
 	}
 	
-	@Override
+	
+	private void generateLevel() {
+		
+		allObjects.add(new House1(0, 0, 500, 600, 0));
+		allObjects.add(new Street(0, 500, 500, 350, 0));
+		
+	}
+	
+	
+	
+	
 	public void update(int delta) {
 		super.update(delta);
 	}
@@ -70,4 +84,5 @@ public class WheelChairIdea extends Level {
 	public void mouseWheel(int direction) {
 		player.mouseWheel(direction);
 	}
+	
 }

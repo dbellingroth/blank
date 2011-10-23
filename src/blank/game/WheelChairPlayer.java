@@ -16,10 +16,15 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	private PhysicsObject phys;
 	private Sprite sprite;
 	public float width, height;
-	private int zIndex;
+	private int zIndex = 1;
 	private boolean visible;
 	boolean up, down, left, right;
-	Vec2 direction;
+	private Vec2 direction; 
+	private Vec2 ref = new Vec2(0, -1);
+	float value_direction;
+	float scalarproduct_direction;
+	double values_product, alpha, speed, value_speed;
+	int back_or_for = 1;
 	
 	public WheelChairPlayer(float x, float y, float width, float height,
 		BodyType bodyType) {
@@ -29,7 +34,9 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 		phys.setOwner(this);
 		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);
 
-		sprite = new Sprite("res/old_wheelchair.png");
+		sprite = new Sprite("res/army_wheelchair.png");
+		
+		speed = 200;
 	}
 	
 	
@@ -46,35 +53,63 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	}
 	
 	public void update(int delta) {
-		direction = new Vec2(Mouse.getX() - 400,  Mouse.getY() - 300);
+
+		movement(delta);
+			
+	}
+	
+	
+	
+	private void movement(int delta) {
 		
+		value_direction = (float) Math.sqrt(Math.pow(Mouse.getX() - 400, 2) + Math.pow(Mouse.getY() - 300, 2));
+		//Der Betrag des Richtungsvektors
+		direction = new Vec2((Mouse.getX() - 400),  (Mouse.getY() - 300));
+		//Der Einheitsvektor der Richtung
 		
-		Vec2 ref = new Vec2(0, -1);
-		float scalar_product = (direction.x * ref.x) + (direction.y * ref.y);
-		double values_product = Math.sqrt(Math.pow(direction.x, 2) + Math.pow(direction.y, 2))
-										* Math.sqrt(Math.pow(ref.x, 2) + Math.pow(ref.y, 2));
-		double alpha = Math.toDegrees(Math.acos(scalar_product / values_product));
+		if (direction.x != 0 && direction.y != 0) scalarproduct_direction = (direction.x * ref.x) + (direction.y * ref.y);
+		//Das Skalar-Produkt der beiden Vektoren Richtung und Referenz
+		if (value_direction != 0) values_product = value_direction * (Math.sqrt(Math.pow(ref.x, 2) + Math.pow(ref.y, 2)));
+		//Der Produkt der beiden Beträge der zuvor genannten Vektoren
+		if (values_product != 0 && scalarproduct_direction != 0) alpha = Math.toDegrees(Math.acos(scalarproduct_direction / values_product));
+		//Der Winkel zwischen den beiden Vektoren
 		phys.setAngle(Mouse.getX() < 400 ? alpha-180 : 180-alpha);
 		
-		double speed = Math.sqrt(Math.pow(phys.getSpeed().x, 2) + Math.pow(phys.getSpeed().y, 2));
-		if (speed > 110) speed = 110;
-		phys.setSpeed(new Vec2((float) ((Mouse.getX() < 400 ? -1 : 1) * Math.toDegrees(Math.sin(Math.toRadians(alpha))) * speed/55), 
-									(float) (Math.toDegrees(Math.cos(Math.toRadians(alpha))) * speed/55)));
+		
+		value_speed = back_or_for * Math.sqrt(Math.pow(phys.getSpeed().x, 2) + Math.pow(phys.getSpeed().y, 2));
+		//Der Betrag des Geschw.-Vektors
 				
+		
+		if (value_direction != 0 && (direction.x != 0 || direction.y != 0)) phys.setSpeed(new Vec2(
+				(float) ((direction.x/value_direction) * value_speed), 
+				(float) -((direction.y/value_direction) * value_speed)));
+				
+		
 		if (up) {
-			phys.applyForce(new Vec2(direction.x, -direction.y), new Vec2(0, 0));
+			phys.applyForce(new Vec2((float) ((direction.x/value_direction) * speed), (float) ((-direction.y/value_direction) * speed)), 
+								new Vec2(phys.getPosition().x-width/2, phys.getPosition().y-height/2));
 
 			up = false;
 		}
 		if (down) {
-			phys.applyForce(new Vec2(-direction.x, direction.y), new Vec2(0, 0));
+			phys.applyForce(new Vec2((float) ((-direction.x/value_direction) * speed), (float) ((direction.y/value_direction) * speed)), 
+								new Vec2(phys.getPosition().x-width/2, phys.getPosition().y-height/2));
 			
+
 			down = false;
 		}
 		
 		
-			
+		phys.setSpeed(new Vec2(phys.getSpeed().x + (phys.getSpeed().x*-0.01f), 			/////////
+									phys.getSpeed().y + (phys.getSpeed().y*-0.01f)));	//Reibung
+		
+		
+		
 	}
+	
+	
+	
+	
 	
 	public void beginCollision(CollisionData collision) {
 	
