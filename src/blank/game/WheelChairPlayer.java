@@ -26,15 +26,14 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	double values_product, alpha, speed, value_speed;
 	int back_or_for = 1;
 	
-	public WheelChairPlayer(float x, float y, float width, float height,
-		BodyType bodyType) {
+	public WheelChairPlayer(float x, float y, float width, float height) {
 		this.width = width;
 		this.height = height;
-		phys = new PhysicsBox(x, y, width, height, bodyType);
+		phys = new PhysicsBox(x, y, width, height, BodyType.DYNAMIC);
 		phys.setOwner(this);
 		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);
 
-		sprite = new Sprite("res/army_wheelchair.png");
+		sprite = new Sprite("res/old_wheelchair.png");
 		
 		speed = 200;
 	}
@@ -64,7 +63,7 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 		
 		value_direction = (float) Math.sqrt(Math.pow(Mouse.getX() - 400, 2) + Math.pow(Mouse.getY() - 300, 2));
 		//Der Betrag des Richtungsvektors
-		direction = new Vec2((Mouse.getX() - 400),  (Mouse.getY() - 300));
+		if (Mouse.getX() != 0 && Mouse.getY() != 0)direction = new Vec2((Mouse.getX() - 400),  (Mouse.getY() - 300));
 		//Der Einheitsvektor der Richtung
 		
 		if (direction.x != 0 && direction.y != 0) scalarproduct_direction = (direction.x * ref.x) + (direction.y * ref.y);
@@ -85,13 +84,13 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 				(float) -((direction.y/value_direction) * value_speed)));
 				
 		
-		if (up) {
+		if (up && value_direction != 0) {
 			phys.applyForce(new Vec2((float) ((direction.x/value_direction) * speed), (float) ((-direction.y/value_direction) * speed)), 
 								new Vec2(phys.getPosition().x-width/2, phys.getPosition().y-height/2));
 
 			up = false;
 		}
-		if (down) {
+		if (down && value_direction != 0) {
 			phys.applyForce(new Vec2((float) ((-direction.x/value_direction) * speed), (float) ((direction.y/value_direction) * speed)), 
 								new Vec2(phys.getPosition().x-width/2, phys.getPosition().y-height/2));
 			
@@ -102,7 +101,7 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 		
 		phys.setSpeed(new Vec2(phys.getSpeed().x + (phys.getSpeed().x*-0.01f), 			/////////
 									phys.getSpeed().y + (phys.getSpeed().y*-0.01f)));	//Reibung
-		
+		if (value_speed < 1) phys.setSpeed(new Vec2(0, 0));
 		
 		
 	}

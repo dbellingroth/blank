@@ -5,14 +5,9 @@ import org.jbox2d.dynamics.BodyType;
 
 import blank.game.levelEnviroment.House1;
 import blank.game.levelEnviroment.Street;
-import blank.game.physics.GearWheelJoint;
-import blank.game.physics.NailJoint;
-import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
-import blank.game.physics.PneumaticJoint;
 import blank.game.rendering.Camera;
 import blank.game.rendering.Sprite;
-
 public class WheelChairIdea extends Level {
 
 
@@ -29,7 +24,7 @@ public class WheelChairIdea extends Level {
 		allObjects = new AllObjectsList();
 
 		// das Test-Rechteck hinzufügen
-		player = new WheelChairPlayer(100, 300, 90, 80, BodyType.DYNAMIC);
+		player = new WheelChairPlayer(100, 300, 90, 80);
 		player.getPhysicsObject().setMass(10f);
 		allObjects.add(player);
 
