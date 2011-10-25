@@ -11,12 +11,12 @@ public class Lines implements GameObject, Drawable {
 	private ArrayList<Line> lines;
 	
 	
-	public Lines(ArrayList<Vec2> points) {
+	public Lines(ArrayList<Vec2> points, boolean visible) {
 		
 		lines = new ArrayList<Line>();
 		
 		for (int p = 0; p < points.size()-1; p++) {
-			lines.add(new Line(points.get(p), points.get(p+1)));
+			lines.add(new Line(points.get(p), points.get(p+1), visible));
 		}
 		
 	}

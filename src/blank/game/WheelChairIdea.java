@@ -1,8 +1,6 @@
 package blank.game;
 
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.BodyType;
-
 import blank.game.levelEnviroment.House1;
 import blank.game.levelEnviroment.Street;
 import blank.game.physics.PhysicsWorld;

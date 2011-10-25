@@ -1,15 +1,9 @@
 package blank.game;
 
 
-import java.util.ArrayList;
-
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
-
-import blank.game.physics.AttritionJoint;
 import blank.game.physics.GearWheelJoint;
-import blank.game.physics.GlibberJoint;
-import blank.game.physics.GlueJoint;
 import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
@@ -109,18 +103,8 @@ public class TestLevel extends Level {
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@SuppressWarnings("unused")
 	private void jointTest() {
 		Circle bodyA = new Circle(100, 300, 40, BodyType.DYNAMIC);
 		

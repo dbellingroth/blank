@@ -26,6 +26,10 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	double values_product, alpha, speed, value_speed;
 	int back_or_for = 1;
 	
+	//Rollstuhl-Simulation:
+	float rolling_friction = 0.01f;
+	float rotating_speed = 1f;
+	
 	public WheelChairPlayer(float x, float y, float width, float height) {
 		this.width = width;
 		this.height = height;
@@ -60,29 +64,49 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 	
 	
 	private void movement(int delta) {
-		
+		//Der Betrag des Richtungsvektors:
 		value_direction = (float) Math.sqrt(Math.pow(Mouse.getX() - 400, 2) + Math.pow(Mouse.getY() - 300, 2));
-		//Der Betrag des Richtungsvektors
+		
+		//Der Einheitsvektor der Richtung:
 		if (Mouse.getX() != 0 && Mouse.getY() != 0)direction = new Vec2((Mouse.getX() - 400),  (Mouse.getY() - 300));
-		//Der Einheitsvektor der Richtung
 		
+		//Das Skalar-Produkt der beiden Vektoren Richtung und Referenz:
 		if (direction.x != 0 && direction.y != 0) scalarproduct_direction = (direction.x * ref.x) + (direction.y * ref.y);
-		//Das Skalar-Produkt der beiden Vektoren Richtung und Referenz
+		
+		//Der Produkt der beiden Beträge der zuvor genannten Vektoren:
 		if (value_direction != 0) values_product = value_direction * (Math.sqrt(Math.pow(ref.x, 2) + Math.pow(ref.y, 2)));
-		//Der Produkt der beiden Beträge der zuvor genannten Vektoren
+		
+		//Der Winkel zwischen den beiden Vektoren:
 		if (values_product != 0 && scalarproduct_direction != 0) alpha = Math.toDegrees(Math.acos(scalarproduct_direction / values_product));
-		//Der Winkel zwischen den beiden Vektoren
-		phys.setAngle(Mouse.getX() < 400 ? alpha-180 : 180-alpha);
 		
+		//In welche Richtung soll der Spieler sich drehen? (1 oder -1):
+		int bwg = ((phys.getAngle()-(Mouse.getX() < 400 ? (alpha-180) : (180-alpha))) > 0 ? -1 : 1);
 		
+		//Bei einem Winkel von über 360°, sollte wieder auf 0° gesetzt werden...sonst gibts Probleme...im Progrmam
+		if (phys.getAngle() > 359.9) phys.setAngle(0);
+		
+		if ((Math.abs((phys.getAngle()-(alpha-180))) < 0.5) || (Math.abs((phys.getAngle()-(180-alpha))) < 0.5))  
+			phys.setAngle(Mouse.getX() < 400 ? (alpha-180) : (180-alpha));
+		else
+			phys.setAngle(phys.getAngle() + (bwg * rotating_speed));
+
+
+		//Der Betrag des Geschw.-Vektors:
 		value_speed = back_or_for * Math.sqrt(Math.pow(phys.getSpeed().x, 2) + Math.pow(phys.getSpeed().y, 2));
-		//Der Betrag des Geschw.-Vektors
-				
 		
-		if (value_direction != 0 && (direction.x != 0 || direction.y != 0)) phys.setSpeed(new Vec2(
-				(float) ((direction.x/value_direction) * value_speed), 
-				(float) -((direction.y/value_direction) * value_speed)));
-				
+		
+		if (value_direction != 0) {	
+			if (Mouse.getX() > 400)  {
+				phys.setSpeed(new Vec2(
+						(float) (Math.cos(phys.getAngle()) * value_speed), 
+						(float) -(Math.sin(phys.getAngle()) * value_speed)));
+			} else {
+				phys.setSpeed(new Vec2(
+						(float) -(Math.cos(phys.getAngle()) * value_speed), 
+						(float) (Math.sin(phys.getAngle()) * value_speed)));
+			}
+		}
+		
 		
 		if (up && value_direction != 0) {
 			phys.applyForce(new Vec2((float) ((direction.x/value_direction) * speed), (float) ((-direction.y/value_direction) * speed)), 
@@ -99,10 +123,11 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 		}
 		
 		
-		phys.setSpeed(new Vec2(phys.getSpeed().x + (phys.getSpeed().x*-0.01f), 			/////////
-									phys.getSpeed().y + (phys.getSpeed().y*-0.01f)));	//Reibung
-		if (value_speed < 1) phys.setSpeed(new Vec2(0, 0));
+		phys.setSpeed(new Vec2(phys.getSpeed().x + (phys.getSpeed().x*-rolling_friction), 			/////////
+									phys.getSpeed().y + (phys.getSpeed().y*-rolling_friction)));	//Reibung
 		
+		
+		if (value_speed < 1) phys.setSpeed(new Vec2(0, 0));
 		
 	}
 	

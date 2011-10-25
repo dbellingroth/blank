@@ -21,7 +21,7 @@ public class Line implements GameObject, PhysicsOwner, Drawable {
 	boolean up, down, left, right; // nur zum testen...
 	int key_up = 200, key_down = 208, key_left = 203, key_right = 205;
 
-	public Line(Vec2 p1, Vec2 p2) {
+	public Line(Vec2 p1, Vec2 p2, boolean visible) {
 
 		phys = new PhysicsLine(p1, p2, BodyType.STATIC);
 		phys.setOwner(this);
@@ -36,21 +36,25 @@ public class Line implements GameObject, PhysicsOwner, Drawable {
 		Vec2 localPosP1 = new Vec2(p1.x <= p2.x ? 0 : width, p1.y <= p2.y ? 0 : height);	
 		Vec2 localPosP2 = new Vec2(p2.x < p1.x ? 0 : width, p2.y < p1.y ? 0 : height);	
 		
-//		
-//		sprite = new Sprite((int) width+1, (int) height+1);
-//		Graphics2D g2d = sprite.getGraphics2D();
-//		g2d.setColor(Color.BLACK);
-//		g2d.drawLine((int) localPosP1.x, (int) localPosP1.y, 
-//				(int) localPosP2.x, (int) localPosP2.y);
-//
-//		sprite.update();
+		this.visible = visible;
+		
+		sprite = new Sprite((int) width+1, (int) height+1);
+		Graphics2D g2d = sprite.getGraphics2D();
+		g2d.setColor(Color.BLACK);
+		g2d.drawLine((int) localPosP1.x, (int) localPosP1.y, 
+				(int) localPosP2.x, (int) localPosP2.y);
+	
+		sprite.update();
+		
 	}
 
 	public void draw() {
 
-//		sprite.setTranslate(new Vec2(x, y));
-//		sprite.draw();
-
+		if (visible) {
+			sprite.setTranslate(new Vec2(x, y));
+			sprite.draw();
+		}
+		
 	}
 
 	public void update(int delta) {
