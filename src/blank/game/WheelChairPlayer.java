@@ -78,35 +78,21 @@ public class WheelChairPlayer  implements GameObject, PhysicsOwner, Drawable, In
 		
 		//Der Winkel zwischen den beiden Vektoren:
 		if (values_product != 0 && scalarproduct_direction != 0) alpha = Math.toDegrees(Math.acos(scalarproduct_direction / values_product));
+	
+		float rf = (float) ((Math.abs(alpha-phys.getAngle())>180)?-(alpha-phys.getAngle()):alpha-phys.getAngle());
+		phys.stop();
+		phys.applyTorque(rf/10);
 		
-		//In welche Richtung soll der Spieler sich drehen? (1 oder -1):
-		int bwg = ((phys.getAngle()-(Mouse.getX() < 400 ? (alpha-180) : (180-alpha))) > 0 ? -1 : 1);
+		System.out.println("alpha: "+alpha+" spieler: "+phys.getAngle()+" rf: "+ rf);
 		
-		//Bei einem Winkel von über 360°, sollte wieder auf 0° gesetzt werden...sonst gibts Probleme...im Progrmam
-		if (phys.getAngle() > 359.9) phys.setAngle(0);
-		
-		if ((Math.abs((phys.getAngle()-(alpha-180))) < 0.5) || (Math.abs((phys.getAngle()-(180-alpha))) < 0.5))  
-			phys.setAngle(Mouse.getX() < 400 ? (alpha-180) : (180-alpha));
-		else
-			phys.setAngle(phys.getAngle() + (bwg * rotating_speed));
-
-
 		//Der Betrag des Geschw.-Vektors:
-		value_speed = back_or_for * Math.sqrt(Math.pow(phys.getSpeed().x, 2) + Math.pow(phys.getSpeed().y, 2));
+		value_speed = Math.sqrt(Math.pow(phys.getSpeed().x, 2) + Math.pow(phys.getSpeed().y, 2));
 		
 		
-		if (value_direction != 0) {	
-			if (Mouse.getX() > 400)  {
-				phys.setSpeed(new Vec2(
-						(float) (Math.cos(phys.getAngle()) * value_speed), 
-						(float) -(Math.sin(phys.getAngle()) * value_speed)));
-			} else {
-				phys.setSpeed(new Vec2(
-						(float) -(Math.cos(phys.getAngle()) * value_speed), 
-						(float) (Math.sin(phys.getAngle()) * value_speed)));
-			}
-		}
-		
+		phys.setSpeed(new Vec2(
+				(float) (Math.cos(phys.getAngle()) * value_speed), 
+				(float) -(Math.sin(phys.getAngle()) * value_speed)));
+
 		
 		if (up && value_direction != 0) {
 			phys.applyForce(new Vec2((float) ((direction.x/value_direction) * speed), (float) ((-direction.y/value_direction) * speed)), 

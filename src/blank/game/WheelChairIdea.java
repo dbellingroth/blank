@@ -25,7 +25,7 @@ public class WheelChairIdea extends Level {
 		player = new WheelChairPlayer(100, 300, 90, 80);
 		player.getPhysicsObject().setMass(10f);
 		allObjects.add(player);
-
+		
 		cam = new Camera(player.getPhys().getPosition());
 		
 		generateLevel();
@@ -36,7 +36,7 @@ public class WheelChairIdea extends Level {
 	
 	private void generateLevel() {
 		
-		allObjects.add(new House1(0, 0, 500, 600, 0));
+//		allObjects.add(new House1(0, 0, 500, 600, 0));
 		allObjects.add(new Street(0, 500, 500, 350, 0));
 		
 	}
