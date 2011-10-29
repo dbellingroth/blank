@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<LEVEL>
+ 	<LEVEL_INFORMATION>
+ 	<NAME>TestLevel</NAME>
+ 	<AUTHOR>Kilian Helmenstein</AUTHOR>
+ </LEVEL_INFORMATION>
+  <LEVEL_OBJECTS>
+    <LEVEL_OBJECT>
+      <TYPE>house1</TYPE>
+      <POSITION_X>0</POSITION_X>
+      <POSITION_Y>0</POSITION_Y>
+      <WIDTH>100</WIDTH>
+      <HEIGHT>100</HEIGHT>
+      <ANLGE>0</ANLGE>
+    </LEVEL_OBJECT>
+    <LEVEL_OBJECT>
+    <TYPE>house1</TYPE>
+      <POSITION_X>250</POSITION_X>
+      <POSITION_Y>250</POSITION_Y>
+      <WIDTH>300</WIDTH>
+      <HEIGHT>300</HEIGHT>
+      <ANLGE>45</ANLGE>
+    </LEVEL_OBJECT>
+  </LEVEL_OBJECTS>
+</LEVEL>

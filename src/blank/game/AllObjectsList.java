@@ -43,6 +43,12 @@ public class AllObjectsList {
 		}
 
 	}
+	
+	
+	public int size() {
+		return gameObjects.size();
+	}
+	
 
 	public void update(int delta) {
 

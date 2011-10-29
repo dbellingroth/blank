@@ -9,7 +9,7 @@ import blank.game.physics.PhysicsOwner;
 import blank.game.rendering.Drawable;
 import blank.game.rendering.Sprite;
 
-abstract class LevelObject implements GameObject, Drawable, PhysicsOwner {
+public abstract class LevelObject implements GameObject, Drawable, PhysicsOwner {
 
 	protected PhysicsObject phys;
 	protected Sprite sprite;
@@ -17,8 +17,7 @@ abstract class LevelObject implements GameObject, Drawable, PhysicsOwner {
 	protected int zIndex;
 	protected boolean visible;
 	
-	
-	
+
 	public LevelObject(float x, float y, float width, float height, float angle) {
 		this.x = x;
 		this.y = y;

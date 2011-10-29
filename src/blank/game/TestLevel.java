@@ -3,6 +3,7 @@ package blank.game;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
+
 import blank.game.physics.GearWheelJoint;
 import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
@@ -17,6 +18,7 @@ public class TestLevel extends Level {
 	private Player player;
 	PhysicsStaticBlock ground;
 	private Camera cam;
+
 	
 	@Override
 	protected void init() {
@@ -25,7 +27,7 @@ public class TestLevel extends Level {
 		world = new PhysicsWorld();
 
 		allObjects = new AllObjectsList();
-
+		
 		world.addObject(new PhysicsStaticBlock(0, -100, 800, 100));
 		world.addObject(new PhysicsStaticBlock(-100, 0, 100, 600));
 		world.addObject(new PhysicsStaticBlock(1600, 0, 100, 600));
