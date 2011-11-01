@@ -1,15 +1,10 @@
 package blank.game;
 
 
-import java.util.ArrayList;
-
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
 
-import blank.game.physics.AttritionJoint;
 import blank.game.physics.GearWheelJoint;
-import blank.game.physics.GlibberJoint;
-import blank.game.physics.GlueJoint;
 import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
 import blank.game.physics.PhysicsWorld;
@@ -23,6 +18,7 @@ public class TestLevel extends Level {
 	private Player player;
 	PhysicsStaticBlock ground;
 	private Camera cam;
+
 	
 	@Override
 	protected void init() {
@@ -31,7 +27,7 @@ public class TestLevel extends Level {
 		world = new PhysicsWorld();
 
 		allObjects = new AllObjectsList();
-
+		
 		world.addObject(new PhysicsStaticBlock(0, -100, 800, 100));
 		world.addObject(new PhysicsStaticBlock(-100, 0, 100, 600));
 		world.addObject(new PhysicsStaticBlock(1600, 0, 100, 600));
@@ -109,18 +105,8 @@ public class TestLevel extends Level {
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@SuppressWarnings("unused")
 	private void jointTest() {
 		Circle bodyA = new Circle(100, 300, 40, BodyType.DYNAMIC);
 		

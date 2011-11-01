@@ -19,7 +19,6 @@ public class Street extends LevelObject {
 	public void update(int delta) {
 	
 		
-
 	}
 
 }

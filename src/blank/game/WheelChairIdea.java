@@ -1,8 +1,8 @@
 package blank.game;
 
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.BodyType;
 
+import XML.LevelCreator;
 import blank.game.levelEnviroment.House1;
 import blank.game.levelEnviroment.Street;
 import blank.game.physics.PhysicsWorld;
@@ -14,6 +14,7 @@ public class WheelChairIdea extends Level {
 	private Sprite backround;
 	private WheelChairPlayer player;
 	private Camera cam;
+	LevelStructure levelStructure;
 	
 	@Override
 	protected void init() {
@@ -21,13 +22,16 @@ public class WheelChairIdea extends Level {
 
 		world = new PhysicsWorld(new Vec2(0f, 0f));
 
-		allObjects = new AllObjectsList();
+		levelStructure = LevelCreator.createLevel("src/res/levelXMLs/TestLevel.xml");
+		allObjects = levelStructure.getList();
+		System.out.println("Level " + levelStructure.getName() + " von " + levelStructure.getAuthor() + " wurde geladen!");
+		System.out.println(allObjects.size());
+		
 
-		// das Test-Rechteck hinzufügen
 		player = new WheelChairPlayer(100, 300, 90, 80);
 		player.getPhysicsObject().setMass(10f);
 		allObjects.add(player);
-
+		
 		cam = new Camera(player.getPhys().getPosition());
 		
 		generateLevel();
@@ -38,8 +42,8 @@ public class WheelChairIdea extends Level {
 	
 	private void generateLevel() {
 		
-		allObjects.add(new House1(0, 0, 500, 600, 0));
-		allObjects.add(new Street(0, 500, 500, 350, 0));
+//		allObjects.add(new House1(0, 0, 500, 600, 0));
+//		allObjects.add(new Street(0, 500, 500, 350, 0));
 		
 	}
 	

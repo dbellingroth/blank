@@ -156,6 +156,20 @@ public class Tools {
 		if (x==1) return 1;
 		else return x*fak(x-1);
 	}
+	
+	
+	public static float getValue(Vec2 vector) {
+		return (float) Math.sqrt(Math.pow(vector.x,2)+Math.pow(vector.y,2));		
+	}
+
+	
+	public static float getScalarProduct(Vec2 vec1, Vec2 vec2) {
+		return  ( vec1.x*vec2.x + vec1.y*vec2.y );
+	}
+	
+	
+	
+	
 
 }
 

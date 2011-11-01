@@ -14,9 +14,9 @@ public abstract class Level implements GameObject {
 	protected Semaphore actionSem = new Semaphore(1);
 	protected AllObjectsList allObjects;
 	
+	
 	public Level() {
 		world = new PhysicsWorld();
-		allObjects = new AllObjectsList();
 	}
 	
 	public PhysicsWorld getPhysicsWorld() {
