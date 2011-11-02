@@ -2,7 +2,6 @@ package blank.game;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
-
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsBox;
 import blank.game.physics.PhysicsObject;
@@ -32,16 +31,12 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 		sprite = new Sprite("res/player_sil.png");
 	}
 
-	@Override
+
 	public void draw() {
-
-		sprite.setTranslate(new Vec2(phys.getPosition().x - width / 2, phys
-				.getPosition().y - height / 2));
-
+		sprite.setTranslate(new Vec2(phys.getPosition().x - width / 2, phys.getPosition().y - height / 2));
 		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
 		sprite.setRotationAngle(phys.getAngle());
-		sprite.setScaleFactor(new Vec2(width / sprite.getWidth(), height
-				/ sprite.getHeight()));
+		sprite.setScaleFactor(new Vec2(width / sprite.getWidth(), height / sprite.getHeight()));
 		sprite.draw();
 
 	}

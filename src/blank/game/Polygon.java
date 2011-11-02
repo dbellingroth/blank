@@ -31,8 +31,7 @@ public class Polygon implements GameObject, PhysicsOwner, Drawable {
 			height = (pos.y > height ? pos.y : height);
 		}
 
-		phys = new PhysicsPolygon(x, y, (int) width, (int) height, positions,
-				bodyType);
+		phys = new PhysicsPolygon(x, y, positions, bodyType);
 		phys.setOwner(this);
 		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);
 
@@ -51,15 +50,14 @@ public class Polygon implements GameObject, PhysicsOwner, Drawable {
 
 		// CenterX, CenterY berechnen
 
+		@SuppressWarnings("unused")
 		int sum_xPoints = 0;
 		@SuppressWarnings("unused")
 		int sum_yPoints = 0;
 		for (int i = 0; i < positions.size(); i++) {
-			sum_xPoints = +(int) positions.get(i).x;
-			sum_yPoints = +(int) positions.get(i).y;
+			sum_xPoints += (int) positions.get(i).x;
+			sum_yPoints += (int) positions.get(i).y;
 		}
-		centerX = sum_xPoints / positions.size();
-		centerX = sum_xPoints / positions.size();
 
 		g2d.fillPolygon(xPoints, yPoints, positions.size());
 		sprite.update();

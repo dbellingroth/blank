@@ -1,9 +1,9 @@
 package blank.game;
 
+import java.util.ArrayList;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
-
 import blank.game.physics.GearWheelJoint;
 import blank.game.physics.NailJoint;
 import blank.game.physics.PhysicsStaticBlock;
@@ -20,7 +20,7 @@ public class TestLevel extends Level {
 	private Camera cam;
 
 	
-	@Override
+
 	protected void init() {
 		test_backround = new Sprite("res/backround_test.png");
 
@@ -31,45 +31,29 @@ public class TestLevel extends Level {
 		world.addObject(new PhysicsStaticBlock(0, -100, 800, 100));
 		world.addObject(new PhysicsStaticBlock(-100, 0, 100, 600));
 		world.addObject(new PhysicsStaticBlock(1600, 0, 100, 600));
-
 		ground = new PhysicsStaticBlock(0, 530, 1600, 100);
 		world.addObject(ground);
-		
-		
-		// Bälle hinzufügen
-		// for (int i = 1; i< 40; i+=2) {
-		// for (int j = 1; j<30; j+=2) {
-		// allObjects.add(new Ball(i*20, j*20,(int)(Math.random()*12+4)));
-		//
-		// ArrayList<Vec2> positions = new ArrayList<Vec2>();
-		// positions.add(new Vec2(0, 0));
-		// positions.add(new Vec2((float)Math.random()*70+5,
-		// (float)Math.random()*70+5));
-		// positions.add(new Vec2(0, (float)Math.random()*70+5));
-		//
-		// allObjects.add(new DynamicPolygon(i*20, j*20, positions));
-		// }
-		// }
 
 		// das Test-Rechteck hinzufügen
-		player = new Player(100, 300, 40, 40, BodyType.DYNAMIC);
+		player = new Player(100, 0, 40, 40, BodyType.DYNAMIC);
 		player.getPhysicsObject().setMass(10f);
-		// //left
-		// inputHandler.addKeyPressedListener(dr, 203, 1);
-		// inputHandler.addKeyReleasedListener(dr, 203, 1);
-		// //right
-		// inputHandler.addKeyPressedListener(dr, 205, 2);
-		// inputHandler.addKeyReleasedListener(dr, 205, 2);
-		// //up
-		// inputHandler.addKeyPressedListener(dr, 200, 3);
-		// inputHandler.addKeyReleasedListener(dr, 200, 3);
-		// //down
-		// inputHandler.addKeyPressedListener(dr, 208, 4);
-		// inputHandler.addKeyReleasedListener(dr, 208, 4);
 		allObjects.add(player);
-
+		
+		allObjects.add(new Circle(100, 100, 30, BodyType.DYNAMIC));
+		allObjects.add(new BadlyOctagon(500, 100, 50, 50, BodyType.DYNAMIC));
+		
+		
 		cam = new Camera(player.getPhys().getPosition());
 		
+//		ArrayList<Vec2> line_points = new ArrayList<Vec2>(); 
+//		for (int x=0 ; x < 500 ; x+=50) {
+//			
+//			float px = (float) ((Math.random()*50) + x);
+//			float py = (float) (Math.random()*300) + 100;
+//			
+//			line_points.add(new Vec2(px, py));			
+//		}
+//		allObjects.add(new Lines(line_points, true));
 		world.start();
 	}
 	

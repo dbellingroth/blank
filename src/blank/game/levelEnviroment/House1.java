@@ -12,8 +12,6 @@ public class House1 extends LevelObject {
 		
 		super(x, y, width, height, angle);
 		
-		this.width = width;
-		this.height = height;
 		phys = new PhysicsBox(x+width/9f, y+height/9f, width-width/4.5f, height-height/4.5f, BodyType.STATIC);
 		phys.setOwner(this);
 		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);

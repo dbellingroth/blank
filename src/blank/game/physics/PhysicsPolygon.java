@@ -13,7 +13,8 @@ import blank.game.Tools;
 
 /**
  * 
- * @author Kilian Helmenstein Ein Dynamisches Polygon das aus beliebig vielen
+ * @author Kilian Helmenstein 
+ * Ein Dynamisches Polygon das aus beliebig vielen
  *         Punkten bestehen kann
  */
 public class PhysicsPolygon extends PhysicsObject {
@@ -21,12 +22,12 @@ public class PhysicsPolygon extends PhysicsObject {
 	private BodyDef def;
 	private FixtureDef fdef;
 
-	public PhysicsPolygon(int x, int y, int width, int height,
-			ArrayList<Vec2> positions, BodyType bodyType) {
+	public PhysicsPolygon(float x, float y, ArrayList<Vec2> positions, BodyType bodyType) {
 
 		def = new BodyDef();
 		def.position.set(x / PhysicsWorld.pixelsPerMeter, +y
 				/ PhysicsWorld.pixelsPerMeter);
+		def.bullet = true;
 		def.type = bodyType;
 
 		PolygonShape shape = new PolygonShape();

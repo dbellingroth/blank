@@ -62,13 +62,11 @@ public class LevelCreator {
 		
 		Element levelElement = document.getDocumentElement();	//Das erste Elemnt in der xml-Datei (<LEVEL>)
 		
-		
-		NodeList level_information = levelElement.getElementsByTagName("LEVEL_INFORMATION");
-		level.setName(((Element) level_information.item(0)).getElementsByTagName("NAME").item(0).getTextContent().trim());
-		level.setAuthor(((Element) level_information.item(0)).getElementsByTagName("AUTHOR").item(0).getTextContent().trim());
+		Element level_information = ((Element) levelElement.getElementsByTagName("LEVEL_INFORMATION").item(0));
+		level.setName(level_information.getElementsByTagName("NAME").item(0).getTextContent().trim());
+		level.setAuthor(level_information.getElementsByTagName("AUTHOR").item(0).getTextContent().trim());
 
 		Element levelObjectsElement = ((Element) levelElement.getElementsByTagName("LEVEL_OBJECTS").item(0));
-
 		NodeList levelObjectsList = levelObjectsElement.getElementsByTagName("LEVEL_OBJECT");
 		
 		for (int i = 0 ; i < levelObjectsList.getLength() ; i++) {	

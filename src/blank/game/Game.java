@@ -25,7 +25,7 @@ public class Game {
 	 * @throws InterruptedException
 	 */
 	public void init() {
-		loadLevel(new WheelChairIdea());
+		loadLevel(new TestLevel());
 	}
 
 	/**

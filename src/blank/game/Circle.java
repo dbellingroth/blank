@@ -1,7 +1,5 @@
 package blank.game;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
 
@@ -19,8 +17,7 @@ public class Circle implements GameObject, PhysicsOwner, Drawable {
 	private int r;
 	private int zIndex;
 	private boolean visible;
-	@SuppressWarnings("unused")
-	private long time;
+
 
 	public Circle(float x, float y, int r, BodyType bodyType) {
 		this.r = r;
@@ -28,36 +25,25 @@ public class Circle implements GameObject, PhysicsOwner, Drawable {
 		phys.setOwner(this);
 		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);
 
-		sprite = new Sprite(r * 2, r * 2);
-		Graphics2D g2d = sprite.getGraphics2D();
-//		g2d.setColor(new Color((float) Math.random(), (float) Math.random(),
-//				(float) Math.random()));
-		g2d.setColor(new Color(0, 0, 0));
-		g2d.fillOval(0, 0, r * 2, r * 2);
-//		g2d.setColor(new Color((float) Math.random(), (float) Math.random(),
-//				(float) Math.random()));
-		g2d.setColor(new Color(255, 255, 255));
-		g2d.drawLine(r, 0, r, r * 2);
-		g2d.drawLine(0, r, r * 2, r);
-		sprite.update();
-		time = System.currentTimeMillis();
+		sprite = new Sprite("res/smiley.png");
+		
 	}
 
-	@Override
+
 	public void draw() {
-		sprite.setTranslate(new Vec2(phys.getPosition().x - r, phys
-				.getPosition().y - r));
+		sprite.setTranslate(new Vec2(phys.getPosition().x - r, phys.getPosition().y - r));
 		sprite.setRotationPoint(new Vec2(r, r));
 		sprite.setRotationAngle(phys.getAngle());
+		sprite.setScaleFactor(new Vec2(2*r / ((float) sprite.getWidth()), 2*r / ((float) sprite.getHeight())));		
 		sprite.draw();
 	}
 
-	@Override
-	public void update(int delta) {
 
+	public void update(int delta) {
+		phys.applyTorque(-10f);
 	}
 
-	@Override
+
 	public void beginCollision(CollisionData collision) {
 
 		// if (collision.getImpulse() > 10/*collision.getSecondObject()
@@ -69,7 +55,7 @@ public class Circle implements GameObject, PhysicsOwner, Drawable {
 		// }
 	}
 
-	@Override
+
 	public void endCollision(CollisionData collision) {
 
 	}

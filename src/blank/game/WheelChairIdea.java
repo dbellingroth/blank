@@ -1,10 +1,7 @@
 package blank.game;
 
 import org.jbox2d.common.Vec2;
-
 import XML.LevelCreator;
-import blank.game.levelEnviroment.House1;
-import blank.game.levelEnviroment.Street;
 import blank.game.physics.PhysicsWorld;
 import blank.game.rendering.Camera;
 import blank.game.rendering.Sprite;
@@ -25,7 +22,6 @@ public class WheelChairIdea extends Level {
 		levelStructure = LevelCreator.createLevel("src/res/levelXMLs/TestLevel.xml");
 		allObjects = levelStructure.getList();
 		System.out.println("Level " + levelStructure.getName() + " von " + levelStructure.getAuthor() + " wurde geladen!");
-		System.out.println(allObjects.size());
 		
 
 		player = new WheelChairPlayer(100, 300, 90, 80);
