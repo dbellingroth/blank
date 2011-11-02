@@ -152,6 +152,10 @@ public class Tools {
 				/ PhysicsWorld.pixelsPerMeter);
 	}
 	
+	public int fak(int x) {
+		if (x==1) return 1;
+		else return x*fak(x-1);
+	}
 	
 	
 	public static float getValue(Vec2 vector) {
@@ -168,3 +172,5 @@ public class Tools {
 	
 
 }
+
+	
