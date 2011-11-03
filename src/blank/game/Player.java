@@ -50,6 +50,7 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 		// Vec2(width/2,height/2));
 		// phys.stop();
 
+		
 		if (up)
 			phys.applyForce(new Vec2(0, -4000f));
 		up = false;
