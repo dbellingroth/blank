@@ -71,6 +71,8 @@ public class ByteTest {
 		 ByteBuffer buf = ByteBuffer.allocate(8);
          buf.put(toByte(12324.4343f));
          System.out.println(buf.getFloat(0));
+         
+         System.out.print(toByte(1));
 	}
 
 }
