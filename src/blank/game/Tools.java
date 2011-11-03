@@ -152,7 +152,7 @@ public class Tools {
 				/ PhysicsWorld.pixelsPerMeter);
 	}
 	
-	public int fak(int x) {
+	public static int fak(int x) {
 		if (x==1) return 1;
 		else return x*fak(x-1);
 	}

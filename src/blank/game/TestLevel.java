@@ -14,16 +14,15 @@ import blank.game.rendering.Sprite;
 
 public class TestLevel extends Level {
 
-	private Sprite test_backround;
+	private Sprite test_backround, test_ground;
 	private Player player;
 	PhysicsStaticBlock ground;
 	private Camera cam;
 
-	
-
 	protected void init() {
 		test_backround = new Sprite("res/backround_test.png");
-
+		test_ground = new Sprite("res/ground_test.png");
+			
 		world = new PhysicsWorld();
 
 		allObjects = new AllObjectsList();
@@ -57,7 +56,7 @@ public class TestLevel extends Level {
 		world.start();
 	}
 	
-	@Override
+
 	public void update(int delta) {
 		super.update(delta);
 	}
@@ -65,11 +64,21 @@ public class TestLevel extends Level {
 	@Override
 	public void render() {
 		cam.setPosition(player.getPhys().getPosition());
+		player.positionOnDisplay = new Vec2(player.getPhys().getPosition().x-cam.getX()+400,
+												player.getPhys().getPosition().y-cam.getY()+300);
 		cam.apply();
 		test_backround.draw();
-		test_backround.setTranslate(new Vec2(test_backround.getWidth()-2, 0));
+		test_backround.setTranslate(new Vec2(test_backround.getWidth()-2 + cam.getX()*0.2f, 0));
 		test_backround.draw();
-		test_backround.setTranslate(new Vec2(0, 0));
+		test_backround.setTranslate(new Vec2(cam.getX()*0.2f, 0));
+		test_backround.draw();
+		test_backround.setTranslate(new Vec2(-795 + cam.getX()*0.2f, 0));
+		
+		
+		test_ground.setTranslate(new Vec2(800, 330));
+		test_ground.draw();
+		test_ground.setTranslate(new Vec2(-10, 330));
+		test_ground.draw();
 		super.render();
 	}
 	
@@ -82,11 +91,11 @@ public class TestLevel extends Level {
 	}
 
 	public void mousePressed(int button) {
-
+		player.mousePressed(button);
 	}
 
 	public void mouseReleased(int button) {
-
+		player.mouseReleased(button);
 	}
 
 
