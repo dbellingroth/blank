@@ -33,7 +33,6 @@ public class BadlyOctagon implements GameObject, PhysicsOwner, Drawable, InputLi
 		points.add(new Vec2(1f/3f*height, height));
 		points.add(new Vec2(0, 2f/3f*height));
 		points.add(new Vec2(0, 1f/3f*height));
-		System.out.println(points);
 		
 		phys = new PhysicsPolygon(x, y, points, bodyType);
 		phys.setOwner(this);
