@@ -2,6 +2,8 @@ package blank.game;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
+import org.lwjgl.input.Mouse;
+
 import blank.game.physics.CollisionData;
 import blank.game.physics.PhysicsBox;
 import blank.game.physics.PhysicsObject;
@@ -17,9 +19,10 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 	public float width, height;
 	private int zIndex;
 	private boolean visible;
-	boolean up, down, left, right; // nur zum testen...
+	boolean up, down, left, right, m_pressed, m_released; // nur zum testen...
 	int key_up = 200, key_down = 208, key_left = 203, key_right = 205;
-
+	Vec2 positionOnDisplay, click_pos;
+	
 	public Player(float x, float y, float width, float height,
 			BodyType bodyType) {
 		this.width = width;
@@ -57,6 +60,22 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 		if (right && phys.getAngularSpeed() < 6)
 			phys.applyTorque(50);
 		if (down) phys.applyForce(new Vec2(0, 500f));
+		
+		if (m_pressed) {
+			
+			click_pos = new Vec2(Mouse.getX(), 600-Mouse.getY());
+			m_pressed = false;
+			
+		} else if (m_released) {
+			
+			if (click_pos.x > positionOnDisplay.x-width && click_pos.x < positionOnDisplay.x+width 
+					&& click_pos.y > positionOnDisplay.y-height && click_pos.y < positionOnDisplay.y+height) {
+			
+			phys.applyForce(new Vec2(40 *(Mouse.getX()-positionOnDisplay.x), 40 * (600-Mouse.getY()-positionOnDisplay.y)));
+			phys.applyForce(new Vec2(0.1f*(Mouse.getX()-positionOnDisplay.x), 0.1f*(600-Mouse.getY()-positionOnDisplay.y)), click_pos);
+			m_released = false;
+			}
+		}
 
 	}
 
@@ -133,11 +152,11 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 	
 	
 	public void mousePressed(int button) {
-
+		m_pressed = true;
 	}
 
 	public void mouseReleased(int button) {
-
+		m_released = true;
 	}
 	
 	public void mouseWheel(int direction) {
