@@ -53,7 +53,7 @@ public class Camera {
 
 	}
 
-	public double getX() {
+	public float getX() {
 		return position.x;
 	}
 
@@ -61,7 +61,7 @@ public class Camera {
 		this.position.x = x;
 	}
 
-	public double getY() {
+	public float getY() {
 		return position.y;
 	}
 
@@ -89,6 +89,9 @@ public class Camera {
 	}
 	
 
+	public Vec2 getPosition() {
+		return position;
+	}
 	
 	public void enableLimit(boolean enableLimit) {
 		this.enableLimit = enableLimit;
