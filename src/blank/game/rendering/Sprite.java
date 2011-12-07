@@ -6,14 +6,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.ByteBuffer;
-
 import javax.imageio.ImageIO;
-
+import org.jbox2d.common.Vec2;
 import org.lwjgl.opengl.GL11;
-
 import blank.game.Tools;
 
-//import org.lwjgl.opengl.GL30;
 
 public class Sprite extends Transformable {
 
@@ -25,12 +22,17 @@ public class Sprite extends Transformable {
 	private int width, height, twidth, theight;
 	private float wfac, hfac;
 
+	
 	public Sprite(int width, int height) {
 
 		this.width = width;
 		this.height = height;
 		init(new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB));
 
+	}
+	
+	public Sprite(BufferedImage image) {
+		init(image);
 	}
 
 	public Sprite(String imagePath) {
@@ -42,6 +44,30 @@ public class Sprite extends Transformable {
 		} catch (IOException e) {
 		}
 	}
+	
+	/*
+	 * Schneidet aus dem angegeben Image ein Unterbild aus...
+	 */
+	public Sprite(String imagePath, Vec2 pos, Vec2 size) {
+		
+		BufferedImage source = null;
+		
+		URL image_url = getClass().getClassLoader().getResource(imagePath);
+
+		try {
+			source = ImageIO.read(image_url);
+		} catch (IOException e) {}
+				
+		image = source.getSubimage((int) pos.x, (int) pos.y, (int) size.x, (int) size.y);
+		
+		try {
+			BufferedImage image = ImageIO.read(image_url);
+			init(image);
+		} catch (IOException e) {}		
+		
+		update();
+	}
+	
 
 	private void init(BufferedImage image) {
 		this.width = image.getWidth();

@@ -20,7 +20,7 @@ public class PhysicsBox extends PhysicsObject {
 				+ (height / (PhysicsWorld.pixelsPerMeter * 2)));
 		def.type = bodyType;
 		def.bullet = true;
-//		def.fixedRotation = true;
+		def.fixedRotation = true;
 
 		PolygonShape shape = new PolygonShape();
 

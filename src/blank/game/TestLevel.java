@@ -9,6 +9,8 @@ import blank.game.physics.PhysicsWorld;
 import blank.game.physics.PneumaticJoint;
 import blank.game.rendering.Camera;
 import blank.game.rendering.Sprite;
+import blank.game.rendering.SpriteArray;
+import blank.game.rendering.SpriteLib;
 
 public class TestLevel extends Level {
 
@@ -16,15 +18,20 @@ public class TestLevel extends Level {
 	private Player player;
 	PhysicsStaticBlock ground;
 	private Camera cam;
-
+	public SpriteLib spriteLib;
+	
 	protected void init() {
+		
+
 		test_backround = new Sprite("res/backround_test.png");
 		test_ground = new Sprite("res/ground_test.png");
-			
+
 		world = new PhysicsWorld();
 
 		allObjects = new AllObjectsList();
 		
+		spriteLib = new SpriteLib();
+				
 		world.addObject(new PhysicsStaticBlock(0, -100, 800, 100));
 		world.addObject(new PhysicsStaticBlock(-100, 0, 100, 600));
 		world.addObject(new PhysicsStaticBlock(1600, 0, 100, 600));
@@ -32,26 +39,30 @@ public class TestLevel extends Level {
 		world.addObject(ground);
 
 		// das Test-Rechteck hinzufügen
-		player = new Player(100, 0, 40, 40, BodyType.DYNAMIC);
+		player = new Player(spriteLib.getSpriteArray("res/walking.png", 5, 1), 100, 100, 80, 220, BodyType.DYNAMIC);
 		player.getPhysicsObject().setMass(10f);
 		allObjects.add(player);
 		
 		allObjects.add(new Circle(100, 100, 30, BodyType.DYNAMIC));
 		allObjects.add(new BadlyOctagon(500, 100, 50, 50, BodyType.DYNAMIC));
-		
+		allObjects.add(new Hexagon(300, 300, 107, 75, BodyType.DYNAMIC));
 		
 		cam = new Camera(player.getPhys().getPosition());
+		cam.setLowerLimit(new Vec2(400, 300));
+		cam.setUpperLimit(new Vec2(401, 301));
+		cam.enableLimit(true);
 		
-//		ArrayList<Vec2> line_points = new ArrayList<Vec2>(); 
-//		for (int x=0 ; x < 500 ; x+=50) {
-//			
-//			float px = (float) ((Math.random()*50) + x);
-//			float py = (float) (Math.random()*300) + 100;
-//			
-//			line_points.add(new Vec2(px, py));			
-//		}
-//		allObjects.add(new Lines(line_points, true));
 		world.start();
+		
+		Sprite sprite = spriteLib.getSprite("res/snow.png");
+		for (int i = 0 ; i < 100; i++) {
+			
+			allObjects.add(new Snow(sprite, new Vec2((float) (Math.random()*800), (float) (Math.random()*600)),
+					(float) (Math.random()*3 + 1), (float) Math.random()*1 + 0.5f));
+			
+			
+		}
+		
 	}
 	
 
@@ -59,25 +70,16 @@ public class TestLevel extends Level {
 		super.update(delta);
 	}
 	
-	@Override
+	
 	public void render() {
 		cam.setPosition(player.getPhys().getPosition());
 		player.positionOnDisplay = new Vec2(player.getPhys().getPosition().x-cam.getX()+400,
 												player.getPhys().getPosition().y-cam.getY()+300);
 		cam.apply();
 		test_backround.draw();
-		test_backround.setTranslate(new Vec2(test_backround.getWidth()-2 + cam.getX()*0.2f, 0));
-		test_backround.draw();
-		test_backround.setTranslate(new Vec2(cam.getX()*0.2f, 0));
-		test_backround.draw();
-		test_backround.setTranslate(new Vec2(-795 + cam.getX()*0.2f, 0));
 		
-		
-		test_ground.setTranslate(new Vec2(800, 330));
-		test_ground.draw();
-		test_ground.setTranslate(new Vec2(-10, 330));
-		test_ground.draw();
 		super.render();
+		
 	}
 	
 	public void keyPressed(int key) {

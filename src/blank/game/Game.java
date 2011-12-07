@@ -15,7 +15,7 @@ public class Game {
 
 
 	public static void main(String args[]) {
-		new Window(new Game(), 800, 600);
+		new Window(new Game(), 800, 600, "Game");
 	}
 
 
@@ -25,8 +25,13 @@ public class Game {
 	 * @throws InterruptedException
 	 */
 	public void init() {
+		
 		loadLevel(new TestLevel());
+		
 	}
+	
+	
+	
 
 	/**
 	 * Wird vom Window einmal pro Frame ausgeführt

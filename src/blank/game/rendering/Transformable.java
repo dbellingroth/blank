@@ -12,10 +12,10 @@ import org.lwjgl.opengl.GL11;
  */
 public abstract class Transformable implements Drawable {
 
-	private Vec2 translate = new Vec2(0, 0);
-	private Vec2 rotationPoint = new Vec2(0, 0);
-	private double rotationAngle = 0;
-	private Vec2 scaleFactor = new Vec2(1, 1);
+	protected Vec2 translate = new Vec2(0, 0);
+	protected Vec2 rotationPoint = new Vec2(0, 0);
+	protected double rotationAngle = 0;
+	protected Vec2 scaleFactor = new Vec2(1, 1);
 
 	public Vec2 getTranslate() {
 		return translate;

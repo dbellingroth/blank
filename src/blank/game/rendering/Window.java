@@ -11,14 +11,8 @@ import org.lwjgl.opengl.PixelFormat;
 
 import blank.game.Game;
 
-/**
- * Das Spielfenster, welches den OpenGL Kontext initialisiert und die
- * eigentliche Mainloop innehat. Es ruft einmal pro Frame die Update Methode von
- * Game auf...
- * 
- * @author David Bellingroth
- * 
- */
+
+
 public class Window {
 
 	private int width, height;
@@ -26,7 +20,7 @@ public class Window {
 	private int delta;
 	private Game parent;
 
-	public Window(Game parent, int width, int height) {
+	public Window(Game parent, int width, int height, String title) {
 		try {
 			this.parent = parent;
 			this.width = width;
@@ -34,7 +28,7 @@ public class Window {
 			Display.setDisplayMode(new DisplayMode(width, height));
 			// Display.setFullscreen(true);
 			// Display.setVSyncEnabled(true);
-			Display.setTitle("Misery Block");
+			Display.setTitle(title);
 			PixelFormat pix = new PixelFormat(org.lwjgl.opengl.Display.getDisplayMode().getBitsPerPixel(),
 				     8,   // alpha
 				    24,   // depth buffer

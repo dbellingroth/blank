@@ -10,12 +10,13 @@ import blank.game.physics.PhysicsObject;
 import blank.game.physics.PhysicsOwner;
 import blank.game.rendering.Drawable;
 import blank.game.rendering.Sprite;
+import blank.game.rendering.SpriteArray;
 
 public class Player implements GameObject, PhysicsOwner, Drawable,
 		InputListener {
 
 	private PhysicsObject phys;
-	private Sprite sprite;
+	private SpriteArray sprites;
 	public float width, height;
 	private int zIndex;
 	private boolean visible;
@@ -23,7 +24,7 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 	int key_up = 200, key_down = 208, key_left = 203, key_right = 205;
 	Vec2 positionOnDisplay, click_pos;
 	
-	public Player(float x, float y, float width, float height,
+	public Player(SpriteArray sprites, float x, float y, float width, float height,
 			BodyType bodyType) {
 		this.width = width;
 		this.height = height;
@@ -31,17 +32,18 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 		phys.setOwner(this);
 		Game.getCurrentLevel().getPhysicsWorld().addObject(phys);
 
-		sprite = new Sprite("res/player_sil.png");
+		this.sprites = sprites;
 	}
 
 
 	public void draw() {
-		sprite.setTranslate(new Vec2(phys.getPosition().x - width / 2, phys.getPosition().y - height / 2));
-		sprite.setRotationPoint(new Vec2(width / 2, height / 2));
-		sprite.setRotationAngle(phys.getAngle());
-		sprite.setScaleFactor(new Vec2(width / sprite.getWidth(), height / sprite.getHeight()));
-		sprite.draw();
-
+		
+		sprites.setTranslate(new Vec2(phys.getPosition().x - width / 2, phys.getPosition().y - height / 2));
+		sprites.setRotationPoint(new Vec2(width / 2, height / 2));
+		sprites.setRotationAngle(phys.getAngle());
+		sprites.setScaleFactor(new Vec2(width / sprites.getWidth(), height / sprites.getHeight()));
+		sprites.draw();
+		
 	}
 
 	public void update(int delta) {
@@ -51,16 +53,13 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 		// phys.stop();
 
 		
-		if (up)
-			phys.applyForce(new Vec2(0, -4000f));
-		up = false;
-		// if (down) phys.applyForce(new Vec2(0, 40f), new
-		// Vec2(width/2,height/2));
-		if (left && phys.getAngularSpeed() > -6)
-			phys.applyTorque(-50);
-		if (right && phys.getAngularSpeed() < 6)
-			phys.applyTorque(50);
-		if (down) phys.applyForce(new Vec2(0, 500f));
+		if (up)	{}		
+		if (left) {}
+		if (right) {
+			phys.applyForce(new Vec2(1000, 0));
+			sprites.animationMode(0.1f, 1, 4);
+		}
+			if (down)
 		
 		if (m_pressed) {
 			
@@ -72,12 +71,13 @@ public class Player implements GameObject, PhysicsOwner, Drawable,
 			if (click_pos.x > positionOnDisplay.x-width && click_pos.x < positionOnDisplay.x+width 
 					&& click_pos.y > positionOnDisplay.y-height && click_pos.y < positionOnDisplay.y+height) {
 			
-			phys.applyForce(new Vec2(40 *(Mouse.getX()-positionOnDisplay.x), 40 * (600-Mouse.getY()-positionOnDisplay.y)));
-			phys.applyForce(new Vec2(0.1f*(Mouse.getX()-positionOnDisplay.x), 0.1f*(600-Mouse.getY()-positionOnDisplay.y)), click_pos);
+			phys.applyForce(new Vec2(40 * (Mouse.getX()-positionOnDisplay.x), 40 * (600-Mouse.getY()-positionOnDisplay.y)));
+			phys.applyForce(new Vec2(0.05f*(Mouse.getX()-positionOnDisplay.x), 0.05f*(600-Mouse.getY()-positionOnDisplay.y)), click_pos);
 			m_released = false;
 			}
 		}
 
+		sprites.update(delta);
 	}
 
 	public void beginCollision(CollisionData collision) {

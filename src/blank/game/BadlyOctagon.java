@@ -11,7 +11,7 @@ import blank.game.physics.PhysicsPolygon;
 import blank.game.rendering.Drawable;
 import blank.game.rendering.Sprite;
 
-public class BadlyOctagon implements GameObject, PhysicsOwner, Drawable, InputListener {
+public class BadlyOctagon implements GameObject, PhysicsOwner, Drawable {
 
 	private PhysicsObject phys;
 	private Sprite sprite;
@@ -20,6 +20,7 @@ public class BadlyOctagon implements GameObject, PhysicsOwner, Drawable, InputLi
 	private boolean visible;
 
 	public BadlyOctagon(float x, float y, float width, float height, BodyType bodyType) {
+		
 		this.width = width;
 		this.height = height;
 		
@@ -56,37 +57,7 @@ public class BadlyOctagon implements GameObject, PhysicsOwner, Drawable, InputLi
 	}
 
 	
-	@Override
-	public void keyPressed(int key) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(int key) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(int button) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(int button) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseWheel(int direction) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
+	
 
 	public int getZIndex() {
 		return zIndex;
